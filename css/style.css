@@ -1,0 +1,153 @@
+
+body {
+
+  background: #f2f2f2;
+  font-size: 1.5em;
+
+}
+
+#phritz {
+
+  color: #2f2f2f;
+
+  font-family:'Jost', sans-serif;
+  font-weight: 400;
+  font-size: 1.5em;
+
+  animation-name: fade-in;
+  animation-duration: 2s;
+
+  margin-left: 40px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  letter-spacing: -1.5px;
+
+}
+
+#announcements {
+
+
+    color: #2f2f2f;
+
+    font-family:'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 0.5em;
+
+    animation-name: fade-in;
+    animation-duration: 3s;
+
+    margin-left: 40px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    letter-spacing: 1px;
+
+
+}
+
+/* #phritz:hover {
+
+  color: #c2c2c2;
+  transition: 0.2s;
+
+} */
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+#bgimage {
+
+/* 0.1830985915 */
+/* 175.77464784 */
+
+  width: 100%;
+  padding-top: 66.7%;
+  background: url("../imgs/bgimage.jpg") no-repeat center;
+  background-size: contain;
+
+  animation-name: fade-in-3;
+  animation-duration: 2s;
+
+}
+
+.hyperlinks {
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+
+}
+
+#socials {
+
+  margin: 40px;
+
+}
+
+#social-links {
+
+   text-decoration: none;
+}
+
+#icons {
+
+  color: #2f2f2f;
+  transform: scale(0.6);
+
+  animation-name: fade-in-2;
+  animation-duration: 3.5s;
+
+  transition: all 300ms ease-in-out;
+
+}
+
+#icons:hover {
+
+  color: #c2c2c2;
+  transform: scale(0.65);
+
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+@keyframes fade-in-2 {
+  0% {
+    opacity: 0%;
+  }
+  /* 50% {
+    opacity: 0%;
+  } */
+  100% {
+    opacity: 100%;
+  }
+}
+
+@keyframes fade-in-3 {
+  0% {
+    opacity: 0%;
+  }
+  50% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
