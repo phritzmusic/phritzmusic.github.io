@@ -25,6 +25,8 @@ body {
   justify-content: center;
 
   letter-spacing: -1.5px;
+  
+  text-decoration: none;
 
 }
 
@@ -50,6 +52,12 @@ body {
     letter-spacing: 1px;
 
 
+}
+
+.announcement-link {
+  
+  text-decoration: none;
+  
 }
 
 /* #phritz:hover {
