@@ -150,3 +150,10 @@ body {
     opacity: 100%;
   }
 }
+
+@media (max-width: 1024px)
+body, html {
+  overflow: auto;
+  max-height: 100%;
+}
+
