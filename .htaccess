@@ -5,4 +5,4 @@
 
 RewriteEngine on
 RewriteCond %{HTTP_HOST} ^www\.
-RewriteRule ^(.*)$ http://phritzmusic.com/$1 [R=301,L]
+RewriteRule ^(.*)$ http://www.phritzmusic.com/$1 [R=301,L]
