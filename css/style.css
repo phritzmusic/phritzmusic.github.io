@@ -71,6 +71,19 @@ body {
   margin: 0 auto;
 }
 
+#headerimg {
+
+  text-align: center;
+  height: 100px;
+
+  top: 0%;
+  /* content: ""; */
+  animation-name: fade-in-3;
+  animation-duration: 2s;
+  transform: scale(0.03, 0.03);
+
+}
+
 #bgimage {
 
 /* 0.1830985915 */
