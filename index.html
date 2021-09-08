@@ -29,7 +29,7 @@
         <a href="https://ecotonerecords.com/summit/"><img src="imgs/2021logo.png" alt="" /></a>
       </div>
 
-      <div class="container">
+      <div class="container" id="containerbtn">
           <a href="https://ecotonerecords.com/summit/" target="_blank">
             <div id="bgimage">
             <!-- <img src="./imgs/pic2021.jpg" alt="phritz sat in snowy region"> -->
@@ -50,10 +50,18 @@
           </div>
 
 
+          <div class="btn" id="menubtn">
+            <span id="icons" onclick="openNav()">⋮</span>
+          </div>
 
-          <div class="sidebar">
+
+          <div class="sidebar" id="menu">
 
             <div class="hyperlinks">
+
+              <div id="socials" style="order: 0;">
+                  <i id="icons" id="minus">-</i>
+              </div>
 
               <div id="socials" style="order: 3;">
                 <a href="https://twitter.com/PhritzMusic" target="_blank" id="social-links" >
@@ -86,7 +94,7 @@
               </div>
 
               <div id="socials" style="order: 4;">
-                <a href="https://www.instagram.com/phritzmusic/" target="_blank" id="social-links" >
+                <a href="https://www.instagram.com/phritz_music/" target="_blank" id="social-links" >
                   <i class="fab fa-instagram fs-xs" id="icons"></i>
                 </a>
               </div>
@@ -119,6 +127,24 @@
     </main>
     <footer>
     </footer>
+
+    <script>
+
+      document.getElementById("menu").addEventListener('click', closeNav);
+
+      function openNav() {
+        document.getElementById("menu").style.width = "60px";
+        document.getElementById("menubtn").style.opacity = "0";
+        document.getElementById("menubtn").style.marginLeft = "60px";
+      }
+
+      function closeNav() {
+        document.getElementById("menu").style.width = "0";
+        document.getElementById("menubtn").style.opacity = "1";
+        document.getElementById("menubtn").style.marginLeft = "0";
+      }
+
+  </script>
 
   </body>
 </html>
