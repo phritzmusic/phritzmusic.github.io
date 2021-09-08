@@ -1,7 +1,7 @@
 
 body {
 
-  /* background: #f2f2f2; */
+  background: #f2f2f2;
   /* background-image: url("../imgs/pic2021.jpg") no-repeat center;
   background-size: contain; */
   font-size: 2em;
@@ -41,6 +41,7 @@ body {
 
 #announcements {
 
+    margin: 0;
 
     color: #2f2f2f;
 
@@ -48,19 +49,24 @@ body {
     font-weight: 200;
     font-size: 0.5em;
 
+    letter-spacing: 1px;
+
+    text-align: center;
+
     animation-name: fade-in;
     animation-duration: 3s;
 
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
 
     letter-spacing: 1px;
 
     text-align: center;
 
-    padding-top: 20px;
+    padding-top: 20px; */
 
 
 }
@@ -87,19 +93,56 @@ body {
 .container {
   /* max-width: 960px;
   margin: 0 auto; */
-  width: 100%;
   height: 100vh;
+  width: 100%;
   background: url("../imgs/pic2021opt.jpg");
   background-size: cover;
   padding-right: 20px;
 }
 
-#headerimg {
+.container-2 {
+  /* max-width: 960px;
+  margin: 0 auto; */
+  width: 100%;
+  height: 100vh;
+  background: url("../imgs/pic2021-2.jpg");
+  background-size: cover;
+  padding-right: 20px;
+}
 
-  text-align: center;
+.container-3 {
+  /* max-width: 960px;
+   */
+  margin: 0;
+  height: 100vh;
+  background-color: #f2f2f2;
+  background-size: cover;
+}
+
+.updates {
+
+  padding-right: 2%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center
+
+}
+
+.center {
+  margin: auto;
+}
+
+.headerimg {
+
+  display: block;
+  position: fixed;
+  inset: 0;
+  /* margin: auto; */
+  /* text-align: center; */
   height: 100px;
 
-  top: -100%;
+  /* top: -100%; */
   /* content: ""; */
   animation-name: fade-in-3;
   animation-duration: 2s;
