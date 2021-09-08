@@ -27,6 +27,7 @@ body {
   /* margin-left: 40px; */
 
   display: flex;
+  display: -webkit-flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
@@ -124,6 +125,7 @@ body {
   padding-right: 2%;
   height: 100vh;
   display: flex;
+  display: -webkit-flex;
   align-items: center;
   justify-content: center
 
