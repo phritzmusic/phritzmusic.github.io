@@ -146,7 +146,7 @@ body {
   /* content: ""; */
   animation-name: fade-in-3;
   animation-duration: 2s;
-  transform: scale(0.03, 0.03);
+  -webkit-transform: scale(0.03, 0.03);
 
 }
 
@@ -178,7 +178,7 @@ body {
   /* content: ""; */
   animation-name: fade-in-3;
   animation-duration: 2s;
-  transition: 0.5s;
+  -webkit-transition: 0.5s;
 
 }
 
@@ -193,7 +193,7 @@ body {
   background-color: rgba(242, 242, 242, 0.3);
   overflow-x: hidden;
   padding-top: 20px;
-  transition: 0.5s;
+  -webkit-transition: 0.5s;
 
 }
 
@@ -231,14 +231,14 @@ body {
   animation-name: fade-in-2;
   animation-duration: 3.5s;
 
-  transition: all 300ms ease-in-out;
+  -webkit-transition: all 300ms ease-in-out;
 
 }
 
 #icons:hover {
 
   color: #d2d2d2;
-  transform: scale(0.95);
+  -webkit-transform: scale(0.95);
   cursor: pointer;
 
 }
