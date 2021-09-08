@@ -26,7 +26,7 @@ body {
 
   /* margin-left: 40px; */
 
-  display: -webkit-flex;
+  display:-webkit-flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
@@ -165,10 +165,27 @@ body {
 
 }
 
+.btn {
+
+  display: block;
+  position: fixed;
+  padding-left: 30px;
+  padding-top: 39px;
+  /* margin: auto; */
+  /* text-align: center; */
+
+  /* top: -100%; */
+  /* content: ""; */
+  animation-name: fade-in-3;
+  animation-duration: 2s;
+  transition: 0.5s;
+
+}
+
 .sidebar {
 
   height: 100%;
-  width: 80px;
+  width: 0;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -176,6 +193,7 @@ body {
   background-color: rgba(242, 242, 242, 0.3);
   overflow-x: hidden;
   padding-top: 20px;
+  transition: 0.5s;
 
 }
 
@@ -186,6 +204,12 @@ body {
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
+
+}
+
+#minus {
+
+  scale: 0.6;
 
 }
 
@@ -215,6 +239,7 @@ body {
 
   color: #d2d2d2;
   transform: scale(0.95);
+  cursor: pointer;
 
 }
 
