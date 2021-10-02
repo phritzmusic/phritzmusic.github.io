@@ -4,7 +4,7 @@ body {
   /* background-image: url("../imgs/pic2021.jpg") no-repeat center;
   background-size: contain; */
   font-size: 2em;
-
+  height: 100%;
 }
 
 *{
@@ -90,8 +90,7 @@ body {
 } */
 
 .container {
-  /* max-width: 960px;
-  margin: 0 auto; */
+  margin: 0 auto;
   height: 100vh;
   width: 100%;
   background: url("../imgs/pic2021opt.jpg");
@@ -111,19 +110,21 @@ body {
 
   display: grid;
   justify-content: center;
-  height: 110vh;
-  grid-template-rows: repeat(auto-fit, minmax(80px, 100px));
-  grid-template-columns: repeat(auto-fit, minmax(80px, 100px));
-  grid-gap: 50px;
+  grid-template-rows: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-gap: 80px;
   padding-top: 200px;
-  overflow: auto;
-
+  height: 100vh;
+  padding-left: 60px;
+  padding-right: 5%;
+  padding-bottom: 18%;
 }
 
 .coverart {
 
   display: -webkit-flex;
-  justify-content: center;
+  width: 150px;
+  height: 150px;
   align-items: center;
   filter: drop-shadow(3px 3px 10px rgb(140, 140,140, 0.6));
   transform: translateZ(0);
@@ -131,7 +132,7 @@ body {
 
 }
 
-@media (min-device-width: 1000px) {
+/* @media (min-device-width: 1000px) {
 
   .portfolio {
 
@@ -173,7 +174,7 @@ body {
     padding-top: 200px;
   }
 
-}
+} */
 
 
 .click {
