@@ -1,4 +1,3 @@
-
 body {
 
   background: #f2f2f2;
@@ -100,22 +99,130 @@ body {
   padding-right: 20px;
 }
 
-.container-2 {
-  /* max-width: 960px;
-  margin: 0 auto; */
-  width: 100%;
-  height: 100vh;
-  background: url("../imgs/pic2021-2.jpg");
-  background-size: cover;
-  padding-right: 20px;
-}
-
-.container-3 {
-  /* max-width: 960px;
-   */
+/* .container-3 {
   margin: 0;
   height: 100vh;
   background-color: #f2f2f2;
+  background-size: cover;
+  overflow: auto;
+} */
+
+.portfolio {
+
+  display: grid;
+  justify-content: center;
+  height: 110vh;
+  grid-template-rows: repeat(auto-fit, minmax(80px, 100px));
+  grid-template-columns: repeat(auto-fit, minmax(80px, 100px));
+  grid-gap: 50px;
+  padding-top: 200px;
+  overflow: auto;
+
+}
+
+.coverart {
+
+  display: -webkit-flex;
+  justify-content: center;
+  align-items: center;
+  filter: drop-shadow(3px 3px 10px rgb(140, 140,140, 0.6));
+  transform: translateZ(0);
+  transition: opacity 0.3s;
+
+}
+
+@media (min-device-width: 1000px) {
+
+  .portfolio {
+
+    grid-template-rows: repeat(auto-fit, 150px);
+    grid-template-columns: repeat(auto-fit, 150px);
+    padding-top: 240px;
+  }
+
+}
+
+@media (max-device-height: 640px) {
+
+  .portfolio {
+
+    grid-template-rows: repeat(auto-fit, 80px);
+    grid-template-columns: repeat(auto-fit, 80px);
+    padding-top: 200px;
+  }
+
+}
+
+@media (min-device-height: 1000px) {
+
+  .portfolio {
+
+    grid-template-rows: repeat(auto-fit, 150px);
+    grid-template-columns: repeat(auto-fit, 150px);
+    padding-top: 400px;
+  }
+
+}
+
+@media (max-device-width: 700px) {
+
+  .portfolio {
+
+    grid-template-rows: repeat(auto-fit, 100px);
+    grid-template-columns: repeat(auto-fit, 100px);
+    padding-top: 200px;
+  }
+
+}
+
+
+.click {
+
+  display: block;
+  width: 100%;
+  height: 100%;
+
+}
+
+.one {
+
+  background-image: url("../imgs/upset.jpg");
+  background-size: cover;
+}
+
+.two {
+
+  background-image: url("../imgs/blossom.jpg");
+  background-size: cover;
+}
+
+.three {
+
+  background-image: url("../imgs/figure.jpg");
+  background-size: cover;
+}
+
+.four {
+
+  background-image: url("../imgs/summit.png");
+  background-size: cover;
+}
+
+.five {
+
+  background-image: url("../imgs/changemymind.jpg");
+  background-size: cover;
+}
+
+.six {
+
+  background-image: url("../imgs/everyoneelse.jpg");
+  background-size: cover;
+}
+
+.seven {
+
+  background-image: url("../imgs/longwayhome.jpg");
   background-size: cover;
 }
 
@@ -124,7 +231,7 @@ body {
   padding-right: 2%;
   height: 100vh;
   display: -webkit-flex;
-  align-items: center;
+  text-align: center;
   justify-content: center
 
 }
@@ -146,7 +253,8 @@ body {
   /* content: ""; */
   animation-name: fade-in-3;
   animation-duration: 2s;
-  -webkit-transform: scale(0.03, 0.03);
+  transform: scale(0.03, 0.03);
+  z-index: 1;
 
 }
 
@@ -178,7 +286,7 @@ body {
   /* content: ""; */
   animation-name: fade-in-3;
   animation-duration: 2s;
-  -webkit-transition: 0.5s;
+  transition: 0.5s;
 
 }
 
@@ -193,7 +301,7 @@ body {
   background-color: rgba(242, 242, 242, 0.3);
   overflow-x: hidden;
   padding-top: 20px;
-  -webkit-transition: 0.5s;
+  transition: 0.5s;
 
 }
 
@@ -206,6 +314,7 @@ body {
   align-items: center;
 
 }
+
 
 #minus {
 
@@ -231,14 +340,14 @@ body {
   animation-name: fade-in-2;
   animation-duration: 3.5s;
 
-  -webkit-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
 
 }
 
 #icons:hover {
 
   color: #d2d2d2;
-  -webkit-transform: scale(0.95);
+  transform: scale(0.95);
   cursor: pointer;
 
 }
