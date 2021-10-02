@@ -30,7 +30,7 @@
       </div>
 
       <div class="container" id="containerbtn">
-          <a href="https://ecotonerecords.com/summit/" target="_blank">
+
             <div id="bgimage">
             <!-- <img src="./imgs/pic2021.jpg" alt="phritz sat in snowy region"> -->
             </div>
@@ -53,7 +53,6 @@
           <div class="btn" id="menubtn">
             <span id="icons" onclick="openNav()">⋮</span>
           </div>
-
 
           <div class="sidebar" id="menu">
 
@@ -94,7 +93,7 @@
               </div>
 
               <div id="socials" style="order: 4;">
-                <a href="https://www.instagram.com/phritzmusic/" target="_blank" id="social-links" >
+                <a href="https://www.instagram.com/phritz_music/" target="_blank" id="social-links" >
                   <i class="fab fa-instagram fs-xs" id="icons"></i>
                 </a>
               </div>
@@ -116,11 +115,45 @@
                 </div>
           </div> -->
 
-          <div class="container-3">
+              <div class="portfolio">
 
-            <div class="updates" id="announcements">
-              <p>@phritzmusic</p>
-            </div>
+                <div class="coverart one scale" id="portfolio-items">
+                  <a class="click" href="https://yumo.lnk.to/upset">
+                  </a>
+                </div>
+
+                <div class="coverart two scale" id="portfolio-items">
+                  <a class="click" href="https://proximity.ffm.to/blossom">
+                  </a>
+                </div>
+
+                <div class="coverart three scale" id="portfolio-items">
+                  <a class="click" href="https://vtz.fanlink.to/figure-phritz-toto">
+                  </a>
+                </div>
+
+                <div class="coverart four scale" id="portfolio-items">
+                  <a class="click" href="https://ecotonerecords.com/summit/">
+                  </a>
+                </div>
+
+                <div class="coverart five scale" id="portfolio-items">
+                  <a class="click" href="https://distrokid.com/hyperfollow/phritz/change-my-mind-2">
+                  </a>
+                </div>
+
+                <div class="coverart six scale" id="portfolio-items">
+                  <a class="click" href="https://distrokid.com/hyperfollow/phritz/everyone-else">
+                  </a>
+                </div>
+
+                <div class="coverart seven scale" id="portfolio-items">
+                  <a class="click" href="https://www.gate.fm/PfdxNdL">
+                  </a>
+                </div>
+
+
+
           </div>
 
 
@@ -131,6 +164,9 @@
     <script>
 
       document.getElementById("menu").addEventListener('click', closeNav);
+
+      const checkpoint = 400;
+
 
       function openNav() {
         document.getElementById("menu").style.width = "60px";
@@ -143,6 +179,21 @@
         document.getElementById("menubtn").style.opacity = "1";
         document.getElementById("menubtn").style.marginLeft = "0";
       }
+
+
+    window.addEventListener("scroll", () => {
+      const currentScroll = window.pageYOffset;
+      if (currentScroll <= checkpoint) {
+        opacity = 0 - currentScroll / checkpoint;
+      } else {
+        opacity = 1;
+      }
+      document.querySelector(".one").style.opacity = opacity;
+      document.querySelector(".two").style.opacity = opacity;
+      document.querySelector(".three").style.opacity = opacity;
+      document.querySelector(".four").style.opacity = opacity;
+      document.querySelector(".five").style.opacity = opacity;
+    });
 
   </script>
 
