@@ -191,6 +191,23 @@ body {
 
 }
 
+.min2 {
+
+  background-image: url("../imgs/1020.jpg");
+  background-size: cover;
+}
+
+.min1 {
+
+  background-image: url("../imgs/1015.jpg");
+  background-size: cover;
+}
+
+.zero {
+
+  background-image: url("../imgs/1013.jpg");
+  background-size: cover;
+}
 .one {
 
   background-image: url("../imgs/upset.jpg");
