@@ -199,13 +199,13 @@ body {
 
 .min1 {
 
-  background-image: url("../imgs/1015.jpg");
+  background-image: url("../imgs/gf4.jpg");
   background-size: cover;
 }
 
 .zero {
 
-  background-image: url("../imgs/1013.jpg");
+  background-image: url("../imgs/grayscale.jpg");
   background-size: cover;
 }
 .one {
@@ -326,6 +326,7 @@ body {
   overflow-x: hidden;
   padding-top: 20px;
   transition: 0.5s;
+  transform: translateZ(0);
 
 }
 
