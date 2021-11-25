@@ -191,6 +191,12 @@ body {
 
 }
 
+.min3 {
+
+  background-image: url("../imgs/waitasecond.jpg");
+  background-size: cover;
+}
+
 .min2 {
 
   background-image: url("../imgs/loveride.jpg");
