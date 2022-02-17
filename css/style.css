@@ -191,6 +191,12 @@ body {
 
 }
 
+.min4 {
+
+  background-image: url("../imgs/limeadecloseenough.png");
+  background-size: cover;
+}
+
 .min3 {
 
   background-image: url("../imgs/waitasecond.jpg");
