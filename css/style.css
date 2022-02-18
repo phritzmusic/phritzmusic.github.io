@@ -289,7 +289,7 @@ body {
   /* content: ""; */
   animation-name: fade-in-3;
   animation-duration: 2s;
-  transform: scale(0.03, 0.03);
+  transform: scale(0.04, 0.04);
   z-index: 1;
 
 }
