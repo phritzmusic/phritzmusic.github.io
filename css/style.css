@@ -62,7 +62,7 @@ body {
   width: 100vw;
   transition: all 1s;
   animation-name: fade-in-3;
-  z-index: 2;
+  z-index: 10;
 }
 
 .loaded {
@@ -75,7 +75,9 @@ img.logoload {
   position: absolute;
   top: 0; bottom: 10%; left: 0; right: 0;
   margin: auto;
-  transform: scale(0.08);
+  width: 60px;
+  height: calc(width/625*1789);
+  /*625∶1789*/
 }
 
 
@@ -85,13 +87,21 @@ img.logoload {
   position: fixed;
   inset: 0;
   height: 100px;
-
-  /* top: -100%; */
-  /* content: ""; */
   animation-name: fade-in-3;
   animation-duration: 2s;
-  transform: scale(0.04, 0.04);
   z-index: 1;
+  padding-left: 120px;
+
+}
+
+img.headerlogo {
+
+  display: block;
+  position: absolute;
+  top: 100px; bottom: 10%; left: 0; right: 0;
+  margin: auto;
+  width: 30px;
+  height: calc(width/625*1789);
 
 }
 
@@ -274,6 +284,7 @@ img.logoload {
   animation-name: fade-in-3;
   animation-duration: 2s;
   transition: 0.5s;
+  z-index: 2;
 
 }
 
@@ -408,7 +419,7 @@ img.logoload {
 }
 
 
-@media (max-width: 414px) {
+@media (max-width: 400px) {
 
   body {
     font-size: 2em;
@@ -417,8 +428,8 @@ img.logoload {
 }
 
 
-@media (min-height: 1366px) {
+@media (min-width: 1366px) {
 
   body {
-    font-size: 2.5em;
+    font-size: 2.4em;
   }
