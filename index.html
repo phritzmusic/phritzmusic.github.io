@@ -7,6 +7,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="phritz website">
+    <meta property="og:image" content="imgs/2021logo.png" />
+    <meta name="twitter:image" content="imgs/2021logo.png" />
 
 <link rel="apple-touch-icon" sizes="180x180" href="imgs/logo2021/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="imgs/logo2021/favicon-32x32.png">
@@ -25,8 +27,12 @@
 
     <main>
 
-      <div class="headerimg" id="header">
-        <a href="https://www.phritzmusic.com"><img src="imgs/2021logo.png" alt="" /></a>
+      <div id="load">
+          <img class="logoload" src="imgs/2021logo.png" alt="">
+      </div>
+
+      <div class="headerimg">
+        <a href="https://www.phritzmusic.com"><img src="imgs/2021logo.png" alt=""></a>
       </div>
 
       <div class="container" id="containerbtn">
@@ -102,12 +108,12 @@
           </div>
 
               <div class="portfolio">
-                
+
                 <div class="coverart min4 scale" id="portfolio-items">
                   <a class="click" href="https://go.halcyon.fm/lmedeclseengh">
                   </a>
                 </div>
-                
+
                 <div class="coverart min3 scale" id="portfolio-items">
                   <a class="click" href="https://share.amuse.io/track/charlie-wait-a-second">
                   </a>
@@ -178,6 +184,10 @@
 
       const checkpoint = 400;
 
+      window.onload = function() {
+          const load = document.getElementById('load');
+          load.classList.add('loaded');
+      }
 
       function openNav() {
         document.getElementById("menu").style.width = "60px";
