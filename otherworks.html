@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://kit.fontawesome.com/80e356ee4f.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/otherworks.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="phritz website">
+    <meta property="og:image" content="imgs/2021logo.png" />
+    <meta name="twitter:image" content="imgs/2021logo.png" />
+
+<link rel="apple-touch-icon" sizes="180x180" href="imgs/logo2021/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="imgs/logo2021/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="imgs/logo2021/favicon-16x16.png">
+<link rel="manifest" href="imgs/logo2021/site.webmanifest">
+<link rel="mask-icon" href="imgs/logo2021/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="imgs/logo2021/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="imgs/logo2021/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+    <title>phritz</title>
+
+  </head>
+  <body>
+
+    <main>
+
+      <div id="load">
+          <img class="logoload" src="imgs/2021logo.png" alt="">
+      </div>
+
+      <div class="headerimg">
+        <a href="https://www.phritzmusic.com"><img class="headerlogo" src="imgs/2021logo.png" alt=""></a>
+      </div>
+
+      <div class="container" id="containerbtn">
+
+            <div id="bgimage">
+            <!-- <img src="./imgs/pic2021.jpg" alt="phritz sat in snowy region"> -->
+            </div>
+          </a>
+
+          <div class="btn" id="menubtn">
+            <span id="icons" onclick="openNav()">⋮</span>
+          </div>
+
+          <div class="sidebar" id="menu">
+
+            <div class="hyperlinks">
+
+              <div id="socials" style="order: 0;">
+                  <i id="icons" id="minus">-</i>
+              </div>
+
+              <div id="socials" style="order: 3;">
+                <a href="https://twitter.com/PhritzMusic" target="_blank" id="social-links" >
+                  <i class="fab fa-twitter fa-xs" id="icons"></i>
+                </a>
+              </div>
+
+              <div id="socials" style="order: 2;">
+                <a href="https://music.apple.com/jp/artist/phritz/1449826368?l=en" target="_blank" id="social-links" >
+                  <i class="fab fa-apple fa-xs" id="icons"></i>
+                </a>
+              </div>
+
+              <div id="socials" style="order: 1;">
+                <a href="https://open.spotify.com/artist/4pVTHC0fGP57HJ7Wy6cbtt" target="_blank" id="social-links" >
+                  <i class="fab fa-spotify fa-xs" id="icons"></i>
+                </a>
+              </div>
+
+              <div id="socials" style="order: 10;">
+                 <a href="mailto:official.phritz@gmail.com" target="_blank" id="social-links" >
+                  <i class="fas fa-envelope fa-xs" id="icons"></i>
+                </a>
+              </div>
+
+              <div id="socials" style="order: 7;">
+                <a href="https://www.patreon.com/phritzmusic?fan_landing=true" target="_blank" id="social-links" >
+                  <i class="fab fa-patreon fa-xs" id="icons"></i>
+                </a>
+              </div>
+
+              <div id="socials" style="order: 4;">
+                <a href="https://www.instagram.com/phritzmusic/" target="_blank" id="social-links" >
+                  <i class="fab fa-instagram fs-xs" id="icons"></i>
+                </a>
+              </div>
+
+              <div id="socials" style="order: 5;">
+                <a href="https://www.youtube.com/channel/UCYFa5RIwwfcvLRHhEVW5xsA" target="_blank" id="social-links" >
+                  <i class="fab fa-youtube fa-xs" id="icons"></i>
+                </a>
+              </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+            <div class="blank">
+            </div>
+
+            <div class="blank2">
+            </div>
+
+            <div class="clientheader">
+              <p id="client">client work</p>
+              <div class="vl"></div>
+            </div>
+
+            <div class="work">
+              <div class="media-container">
+                  <iframe class="video" width="100%" height="100%" src="https://www.youtube.com/embed/3kKjYxlitfg?modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+
+                  <p id="info">Panasonic 衣類スチーマー (music production)</p>
+
+            </div>
+
+            <div class="work">
+                <div class="media-container">
+                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/rWlZP9o1o8k?modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                    <p id="info">Cumuloworks SHOWREEL 2021 (music production)</p>
+                </div>
+            </div>
+
+    </main>
+    <footer>
+    </footer>
+
+    <script>
+
+      document.getElementById("menu").addEventListener('click', closeNav);
+
+      const checkpoint = 400;
+
+      window.onload = function() {
+          const load = document.getElementById('load');
+          load.classList.add('loaded');
+      }
+
+      function openNav() {
+        document.getElementById("menu").style.width = "60px";
+        document.getElementById("menubtn").style.opacity = "0";
+        document.getElementById("menubtn").style.marginLeft = "60px";
+      }
+
+      function closeNav() {
+        document.getElementById("menu").style.width = "0";
+        document.getElementById("menubtn").style.opacity = "1";
+        document.getElementById("menubtn").style.marginLeft = "0";
+      }
+
+  </script>
+
+  </body>
+</html>
