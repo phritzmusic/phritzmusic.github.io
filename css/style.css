@@ -241,6 +241,12 @@ img.headerlogo {
   background-size: cover;
 }
 
+.eight {
+
+  background-image: url("../imgs/other.png");
+  background-size: cover;
+}
+
 .updates {
 
   padding-right: 2%;
