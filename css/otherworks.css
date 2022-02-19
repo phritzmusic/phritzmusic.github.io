@@ -138,6 +138,7 @@ p {
 
 p#info {
   padding-left: 12px;
+  font-size: 14px;
 }
 
 .work {
@@ -148,8 +149,8 @@ p#info {
 .media-container {
 
     display: -webkit-flex;
-    width: 500px;
-    height: 281.25px;;
+    width: 400px;
+    height: 225px;;
     justify-content: center;
     filter: drop-shadow(3px 3px 10px rgb(140, 140,140, 0.6));
     margin: 100px 10px 20px 10px;
