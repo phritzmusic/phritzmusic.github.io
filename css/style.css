@@ -170,6 +170,12 @@ img.headerlogo {
 
 }
 
+.min5 {
+  
+  background-image: url("../imgs/carrefour.jpg");
+  background-size: cover;
+}
+
 .min4 {
 
   background-image: url("../imgs/limeadecloseenough.png");
