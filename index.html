@@ -55,49 +55,70 @@
 
             <div class="hyperlinks">
 
-              <div id="socials" style="order: 0;">
-                  <i id="icons" id="minus">-</i>
-              </div>
-
-              <div id="socials" style="order: 3;">
-                <a href="https://twitter.com/PhritzMusic" target="_blank" id="social-links" >
-                  <i class="fab fa-twitter fa-xs" id="icons"></i>
-                </a>
-              </div>
-
-              <div id="socials" style="order: 2;">
-                <a href="https://music.apple.com/jp/artist/phritz/1449826368?l=en" target="_blank" id="social-links" >
-                  <i class="fab fa-apple fa-xs" id="icons"></i>
-                </a>
+              <div id="socials" class="minus" style="order: 0;">
+                  <i id="icons">-</i>
               </div>
 
               <div id="socials" style="order: 1;">
                 <a href="https://open.spotify.com/artist/4pVTHC0fGP57HJ7Wy6cbtt" target="_blank" id="social-links" >
-                  <i class="fab fa-spotify fa-xs" id="icons"></i>
+                  <div id="icons">
+                  <i class="fab fa-spotify fa-xs"></i>
+                  <h5 id="menufont">_spotify</h5>
+                </div>
                 </a>
               </div>
 
+              <div id="socials" style="order: 3;">
+                <a href="https://twitter.com/PhritzMusic" target="_blank" id="social-links" >
+                  <div id="icons">
+                  <i class="fab fa-twitter fa-xs"></i>
+                  <h5 id="menufont">_twitter</h5>
+                </div>
+                </a>
+              </div>
+
+              <!-- <div id="socials" style="order: 2;">
+                <a href="https://music.apple.com/jp/artist/phritz/1449826368?l=en" target="_blank" id="social-links" >
+                  <div id="icons">
+                  <i class="fab fa-apple fa-xs"></i>
+                  <h5 id="menufont">_apple</h5>
+                </div>
+                </a>
+              </div> -->
+
               <div id="socials" style="order: 10;">
                  <a href="mailto:official.phritz@gmail.com" target="_blank" id="social-links" >
-                  <i class="fas fa-envelope fa-xs" id="icons"></i>
+                   <div id="icons">
+                  <i class="fas fa-envelope fa-xs"></i>
+                  <h5 id="menufont">_contact me</h5>
+                </div>
                 </a>
               </div>
 
               <div id="socials" style="order: 7;">
                 <a href="https://www.patreon.com/phritzmusic?fan_landing=true" target="_blank" id="social-links" >
-                  <i class="fab fa-patreon fa-xs" id="icons"></i>
+                  <div id="icons">
+                  <i class="fab fa-patreon fa-xs"></i>
+                  <h5 id="menufont">_patreon</h5>
+                </div>
                 </a>
               </div>
 
               <div id="socials" style="order: 4;">
                 <a href="https://www.instagram.com/phritzmusic/" target="_blank" id="social-links" >
-                  <i class="fab fa-instagram fs-xs" id="icons"></i>
+                  <div id="icons">
+                  <i class="fab fa-instagram fs-xs"></i>
+                  <h5 id="menufont">_instagram</h5>
+                </div>
                 </a>
               </div>
 
               <div id="socials" style="order: 5;">
                 <a href="https://www.youtube.com/channel/UCYFa5RIwwfcvLRHhEVW5xsA" target="_blank" id="social-links" >
-                  <i class="fab fa-youtube fa-xs" id="icons"></i>
+                  <div id="icons">
+                  <i class="fab fa-youtube fa-xs"></i>
+                  <h5 id="menufont">_youtube</h5>
+                </div>
                 </a>
               </div>
 
@@ -108,7 +129,7 @@
           </div>
 
               <div class="portfolio">
-                
+
                 <div class="coverart min5 scale" id="portfolio-items">
                   <a class="click" href="https://distrokid.com/hyperfollow/phritz/carrefour">
                   </a>
@@ -173,7 +194,7 @@
                   <a class="click" href="https://www.gate.fm/PfdxNdL">
                   </a>
                 </div>
-                  
+
                  <div class="coverart eight scale" id="portfolio-items">
                   <a class="click" href="https://www.phritzmusic.com/otherworks">
                   </a>
@@ -200,9 +221,9 @@
       }
 
       function openNav() {
-        document.getElementById("menu").style.width = "60px";
+        document.getElementById("menu").style.width = "400px";
         document.getElementById("menubtn").style.opacity = "0";
-        document.getElementById("menubtn").style.marginLeft = "60px";
+        document.getElementById("menubtn").style.marginLeft = "400px";
       }
 
       function closeNav() {
