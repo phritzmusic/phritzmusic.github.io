@@ -284,6 +284,8 @@ p#info {
   transition: 0.5s;
   transform: translateZ(0);
 
+}
+
 .hyperlinks {
 
   display: flex;
@@ -293,7 +295,6 @@ p#info {
   align-items: left;
 
 }
-
 
 #socials.minus {
 
@@ -329,7 +330,6 @@ p#info {
 
   width: 100%;
   height: 70%;
-
 }
 
 #icons:hover {
