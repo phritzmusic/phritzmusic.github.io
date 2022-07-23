@@ -179,6 +179,12 @@ img.headerlogo {
 
 }
 
+.min6 {
+
+  background-image: url("../imgs/betweenbroken.png");
+  background-size: cover;
+}
+
 .min5 {
 
   background-image: url("../imgs/carrefour.jpg");
