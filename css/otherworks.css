@@ -11,6 +11,7 @@ body {
     box-sizing: border-box;
     font-family:'Jost', sans-serif;
     font-weight: 200;
+    letter-spacing: 0.4px;
 
 }
 
@@ -80,7 +81,7 @@ img.logoload {
   position: absolute;
   top: 0; bottom: 10%; left: 0; right: 0;
   margin: auto;
-  width: 45px;
+  width: 30px;
   height: calc(width/625*1789);
   /*625∶1789*/
 }
@@ -309,6 +310,10 @@ p#info {
   margin-left: 30px;
   align-items: center;
 
+}
+
+#socials.minus {
+  margin-top: 20px;
 }
 
 #social-links {
