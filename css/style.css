@@ -1,3 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
 body {
 
   background: #f2f2f2;
@@ -9,6 +13,12 @@ body {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    text-decoration: none;
+}
+
+a, a:hover, a:focus, a:active {
+      text-decoration: none;
+      color: inherit;
 }
 
 #phritz {
@@ -37,7 +47,7 @@ body {
 }
 
 #menufont {
-  font-family:'Helvetica', san-serif;
+  font-family:'Jost', san-serif;
   font-size: 10px;
   font-weight: lighter;
   letter-spacing: 2px;
@@ -84,7 +94,7 @@ img.logoload {
   position: absolute;
   top: 0; bottom: 10%; left: 0; right: 0;
   margin: auto;
-  width: 45px;
+  width: 30px;
   height: calc(width/625*1789);
   /*625∶1789*/
 }
@@ -96,8 +106,8 @@ img.logoload {
   position: fixed;
   inset: 0;
   height: 100px;
-  animation-name: fade-in-3;
-  animation-duration: 2s;
+  /* animation-name: fade-in-3;
+  animation-duration: 2s; */
   z-index: 1;
   padding-left: 120px;
 
@@ -127,6 +137,78 @@ img.headerlogo {
   background: url("../imgs/pic2021opt.jpg");
   background-size: cover;
   padding-right: 20px;
+}
+
+.about {
+  margin: 0 auto;
+  height: 540px;
+  width: 100%;
+  padding-right: 20px;
+}
+
+.description {
+  padding-top: 180px;
+  margin: auto;
+}
+
+.navlist {
+  padding-top: 30px;
+}
+
+.navlist br {
+  line-height: 0.4;
+}
+
+.underline {
+  display: inline-block;
+  position: relative;
+}
+
+.underline:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 0.6px;
+  bottom: 0;
+  left: 0;
+  background-color: #363636;
+  transform-origin: center;
+  transition: transform 0.2s ease-out;
+}
+
+.underline:hover:after {
+  transform: scaleX(1);
+  transform-origin: center;
+}
+
+#des-font {
+  font-family:'Jost', san-serif;
+  font-weight: 300;
+  letter-spacing: normal;
+  text-align: center;
+}
+
+#tz {
+  font-size: 26px;
+  font-weight: 400;
+  letter-spacing: 0.4px;
+}
+
+#p {
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+#nav {
+  position: relative;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+#nav a:hover {
+  transform: scale(0.8);
+  opacity: 0.4;
 }
 
 .portfolio {
@@ -264,7 +346,7 @@ img.headerlogo {
 
 .eight {
 
-  background-image: url("../imgs/other.png");
+  background-image: url("../imgs/backtotop.png");
   background-size: cover;
 }
 
@@ -313,6 +395,10 @@ img.headerlogo {
   transition: 0.5s;
   z-index: 2;
 
+}
+
+#menubtn {
+  opacity: 1;
 }
 
 .sidebar {
