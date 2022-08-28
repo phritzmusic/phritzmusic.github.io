@@ -130,7 +130,7 @@
             </div>
 
             <div class="clientheader">
-              <p id="client">client work</p>
+              <p id="client">other work</p>
               <div class="vl"></div>
             </div>
 
@@ -160,11 +160,22 @@
       document.getElementById("menu").addEventListener('click', closeNav);
 
       const checkpoint = 400;
+      const checkpoint2 = 200;
 
       window.onload = function() {
           const load = document.getElementById('load');
           load.classList.add('loaded');
       }
+
+      window.addEventListener("scroll", () => {
+        const currentScroll = window.pageYOffset;
+        if (currentScroll <= checkpoint2) {
+          opacity = 1 - currentScroll / checkpoint2;
+        } else {
+          opacity = 0;
+        }
+        document.querySelector(".headerimg").style.opacity = opacity;
+      });
 
       function openNav() {
         document.getElementById("menu").style.width = "400px";
