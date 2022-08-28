@@ -42,9 +42,8 @@ p {
 }
 
 #menufont {
-  font-family:'Helvetica', san-serif;
+  font-family:'Jost', san-serif;
   font-size: 10px;
-  font-weight: lighter;
   letter-spacing: 2px;
   padding-left: 10px;
   margin-top: 8px;
