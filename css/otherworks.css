@@ -96,8 +96,8 @@ img.logoload {
   position: fixed;
   inset: 0;
   height: 100px;
-  animation-name: fade-in-3;
-  animation-duration: 2s;
+/*   animation-name: fade-in-3;
+  animation-duration: 2s; */
   z-index: 1;
   padding-left: 120px;
 
