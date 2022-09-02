@@ -1,7 +1,7 @@
 body {
 
   background: #f2f2f2;
-  /* font-size: 2em; */
+  font-size: 2em;
 
 }
 
@@ -441,11 +441,9 @@ p#info {
 
 @media (max-width: 360px) {
 
-  /* body {
-    font-size: 0.2em;
-  } */
-
-
+  body {
+    font-size: 2em;
+  }
 
   .media-container {
       width: 250px;
