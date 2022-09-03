@@ -29,6 +29,11 @@
 
       <div id="load">
           <img class="logoload" src="imgs/2021logo.png" alt="">
+          <div class="progress">
+            <div class="progressbar">
+              <div class="progressbar_loaded"></div>
+            </div>
+          </div>
       </div>
 
       <div class="headerimg">
@@ -165,6 +170,10 @@
     </footer>
 
     <script>
+      
+      function updateProgressBar(progressBar, value) {
+        progressBar.querySelector(".progressbar_loaded").style.width = `${value}%`;
+      }
 
       document.getElementById("menu").addEventListener('click', closeNav);
 
