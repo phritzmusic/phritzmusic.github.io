@@ -14,6 +14,8 @@ body {
     margin: 0;
     box-sizing: border-box;
     text-decoration: none;
+    font-family:'Jost', sans-serif;
+    font-weight: 300;
 }
 
 a, a:hover, a:focus, a:active {
@@ -44,6 +46,37 @@ a, a:hover, a:focus, a:active {
 
   padding-top: 30px;
 
+}
+
+.progress {
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-top: 120px;
+}
+
+.progressbar {
+  width: 96px;
+  height: 1px;
+  border-radius: 20px;
+  z-index: 11;
+  /* position: fixed; */
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.progressbar_loaded {
+  width: 100%;
+  height: 100%;
+  background-color: #2f2f2f;
 }
 
 #menufont {
@@ -91,7 +124,7 @@ a, a:hover, a:focus, a:active {
 img.logoload {
   display: block;
   position: absolute;
-  top: 0; bottom: 10%; left: 0; right: 0;
+  top: 0; bottom: 10%; left: 1.2%; right: 0;
   margin: auto;
   width: 30px;
   height: calc(width/625*1789);
