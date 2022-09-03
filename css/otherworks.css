@@ -41,6 +41,37 @@ p {
 
 }
 
+.progress {
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding-top: 120px;
+}
+
+.progressbar {
+  width: 96px;
+  height: 1px;
+  border-radius: 20px;
+  z-index: 11;
+  /* position: fixed; */
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.progressbar_loaded {
+  width: 100%;
+  height: 100%;
+  background-color: #2f2f2f;
+}
+
 #menufont {
   font-family:'Helvetica', san-serif;
   font-size: 10px;
