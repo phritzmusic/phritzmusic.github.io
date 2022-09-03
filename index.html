@@ -30,6 +30,11 @@
 
       <div id="load">
           <img class="logoload" src="imgs/2021logo.png" alt="">
+          <div class="progress">
+            <div class="progressbar">
+              <div class="progressbar_loaded"></div>
+            </div>
+          </div>
       </div>
 
       <div class="headerimg">
@@ -132,7 +137,7 @@
             <div class="about">
               <div class="description" id="des-font">
                 <p id="tz"> phritz </p> <br>
-                <p id="p"> music producer based in japan </p>
+                <p id="p"> music producer based / located in japan </p>
 
                 <div class="navlist">
                   <a href="#port" id="nav" class="underline"> discography </a><br>
@@ -230,6 +235,10 @@
 
     <script>
 
+      function updateProgressBar(progressBar, value) {
+        progressBar.querySelector(".progressbar_loaded").style.width = `${value}%`;
+      }
+
       document.getElementById("menu").addEventListener('click', closeNav);
 
       const checkpoint = 800;
@@ -264,9 +273,9 @@
       }
 
       function closeNav() {
-        document.getElementById("menu").style.width = "0";
-        document.getElementById("menubtn").style.opacity = "1";
-        document.getElementById("menubtn").style.marginLeft = "0";
+            document.getElementById("menu").style.width = "0";
+            document.getElementById("menubtn").style.opacity = "1";
+            document.getElementById("menubtn").style.marginLeft = "0";
       }
 
       window.addEventListener("scroll", () => {
