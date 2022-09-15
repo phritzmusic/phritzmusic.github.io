@@ -293,6 +293,12 @@ img.headerlogo {
 
 }
 
+.min7 {
+
+  background-image: url("../imgs/shiribetsu2.png");
+  background-size: cover;
+}
+
 .min6 {
 
   background-image: url("../imgs/betweenbroken.png");
