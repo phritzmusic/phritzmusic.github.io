@@ -159,7 +159,7 @@ img.headerlogo {
 
 .clientheader{
   float: left;
-  height: 100vh;
+  height: 200vh;
   padding-left: 12px;
 }
 
@@ -171,7 +171,7 @@ h6 {
 
 .vl {
   border-left: 1px solid #4d4d4d;
-  height: 800px;
+  height: 100%;
   position: relative;
   top: 20px;
 }
@@ -179,6 +179,12 @@ h6 {
 p#info {
   padding-left: 12px;
   font-size: 12px;
+}
+
+p#info-2 {
+  padding-left: 12px;
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .work {
@@ -194,6 +200,14 @@ p#info {
     justify-content: center;
     filter: drop-shadow(3px 3px 10px rgb(140, 140,140, 0.6));
     margin: 100px 10px 20px 10px;
+}
+
+.media-container-2 {
+
+    display: -webkit-flex;
+    width: 400px;
+    height: 20px;;
+    margin: 60px 10px 20px 10px;
 }
 
 .info-container {
@@ -455,12 +469,9 @@ p#info {
       margin: 80px 0px 20px 0px;
   }
 
-  .clientheader {
-    height: 0px;
-  }
-
   .vl {
     display: none;
+    height: 1000px;
   }
 
   p#info {
@@ -480,10 +491,6 @@ p#info {
       width: 250px;
       height: 140.625px;
       margin: 80px 0px 20px 0px;
-  }
-
-  .clientheader {
-    height: 0px;
   }
 
   .vl, .blank2 {
