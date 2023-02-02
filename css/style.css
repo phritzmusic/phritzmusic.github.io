@@ -293,6 +293,18 @@ img.headerlogo {
 
 }
 
+.min9 {
+
+  background-image: url("https://m.media-amazon.com/images/I/41Jntok3XDL._SX354_SY354_BL0_QL100__UXNaN_FMjpg_QL85_.jpg");
+  background-size: cover;
+}
+
+.min8 {
+
+  background-image: url("https://www.tunecore.co.jp/s3pna/tcj-image-production/u114240/r962706/itd962706.jpg");
+  background-size: cover;
+}
+
 .min7 {
 
   background-image: url("../imgs/shiribetsu2.jpg");
