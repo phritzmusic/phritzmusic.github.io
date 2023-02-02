@@ -144,8 +144,19 @@
 
             </div>
 
+
           <div class="portfolio" id="port">
-            
+
+            <div class="coverart min9 scale" id="portfolio-items">
+              <a class="click" href="https://distrokid.com/hyperfollow/phritz/look-at-the-sky">
+              </a>
+            </div>
+
+            <div class="coverart min8 scale" id="portfolio-items">
+              <a class="click" href="https://linkco.re/MdT2mSyn?lang=ja">
+              </a>
+            </div>
+
             <div class="coverart min7 scale" id="portfolio-items">
               <a class="click" href="https://distrokid.com/hyperfollow/phritz/by-the-banks-of-shiribetsu">
               </a>
@@ -306,6 +317,8 @@
       } else {
         opacity = 1;
       }
+      document.querySelector(".min9").style.opacity = opacity;
+      document.querySelector(".min8").style.opacity = opacity;
       document.querySelector(".min7").style.opacity = opacity;
       document.querySelector(".min6").style.opacity = opacity;
       document.querySelector(".min5").style.opacity = opacity;
