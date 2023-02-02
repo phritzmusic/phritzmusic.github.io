@@ -1,3 +1,7 @@
+html, body, main {
+  height: 100%;
+}
+
 body {
 
   background: #f2f2f2;
@@ -39,37 +43,6 @@ p {
 
   padding-top: 30px;
 
-}
-
-.progress {
-  margin: auto;
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding-top: 120px;
-}
-
-.progressbar {
-  width: 96px;
-  height: 1px;
-  border-radius: 20px;
-  z-index: 11;
-  /* position: fixed; */
-  margin: auto;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.progressbar_loaded {
-  width: 100%;
-  height: 100%;
-  background-color: #2f2f2f;
 }
 
 #menufont {
@@ -151,29 +124,34 @@ img.headerlogo {
   height: 200px
 }
 
-.blank2 {
+/* .blank2 {
   float:left;
   width: 13vw;
-  height: 100vh;
-}
+  height: 100%;
+} */
 
 .clientheader{
   float: left;
-  height: 200vh;
-  padding-left: 12px;
+  padding-top: 30px;
+  width: 100%;
+  text-align: center;
+}
+
+.vl {
+  border-left: 1px dotted #4d4d4d;
+  height: 10px;
+  width: 100%;
+  float: left;
+  position: relative;
+  left: 50%;
+  top: 20px;
+  margin: 0 auto;
 }
 
 h6 {
 
   color: #4d4d4d;
   vertical-align: middle;position:
-}
-
-.vl {
-  border-left: 1px solid #4d4d4d;
-  height: 100%;
-  position: relative;
-  top: 20px;
 }
 
 p#info {
@@ -187,9 +165,44 @@ p#info-2 {
   color: rgba(0, 0, 0, 0.5);
 }
 
+
+.table {
+  float: left;
+  margin: auto;
+  text-align: center;
+}
+
+.btm-blank {
+  float: left;
+  height: 100px;
+}
+
+.btm-blank p {
+  margin: 0;
+  text-align: center;
+}
+
 .work {
-    float: left;
-    padding-left: 12px;
+    display: inline-block;
+    text-align: left;
+    padding: 25px;
+}
+
+.work p {
+  text-align: center;
+}
+
+.work-2 {
+  height: 100px;
+  display: block;
+  margin: auto;
+  padding: 55px;
+  text-align: center;
+}
+
+.btm-blank {
+    height: 200px;
+    width: 100%;
 }
 
 .media-container {
@@ -388,6 +401,9 @@ p#info-2 {
   cursor: pointer;
 
 }
+
+
+/* animations */
 
 @keyframes fade-in {
   0% {
