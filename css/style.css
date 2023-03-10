@@ -293,6 +293,12 @@ img.headerlogo {
 
 }
 
+.min10 {
+
+  background-image: url("https://yonige.net/s3/skiyaki/uploads/image/file/148934/Panikhida_D_01_s.jpg");
+  background-size: cover;
+}
+
 .min9 {
 
   background-image: url("https://m.media-amazon.com/images/I/41Jntok3XDL._SX354_SY354_BL0_QL100__UXNaN_FMjpg_QL85_.jpg");
