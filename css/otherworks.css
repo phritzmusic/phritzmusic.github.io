@@ -16,6 +16,11 @@ body {
     font-family:'Jost', sans-serif;
 }
 
+a, a:hover, a:focus, a:active {
+      text-decoration: none;
+      color: inherit;
+}
+
 p {
   font-weight: 300;
   letter-spacing: 1px;
