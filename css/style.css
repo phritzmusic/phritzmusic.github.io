@@ -1,15 +1,10 @@
 html {
   scroll-behavior: smooth;
-  min-height: -webkit-fill-available;
+  background-color: #f2f2f2;
 }
 
 body {
-
-  background-color: #f2f2f2;
   font-size: 2em;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-
 }
 
 *{
@@ -134,30 +129,31 @@ img.headerlogo {
 
 }
 
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  width: 100%;
+.ap {
   background: url("../imgs/pic2023opt.jpg");
   background-size: cover;
   background-position: center center;
-  /* background-attachment: fixed; */
   background-repeat: no-repeat;
+  margin: 0 auto;
+  /* min-height: 100vh;
+  min-height: 100dvh; */
+  height: 100vh;
+  height: 100dvh;
+  width: 100vw;
   padding-right: 20px;
+  position: fixed;
+  z-index: -1;
 }
 
-@supports (-webkit-touch-callout: none) {
-  html{
-    min-height: -webkit-fill-available;
-}
-  body {
-    min-height: 100vh;
-    min-height: -webkit-fill-available;
-  }
-  .container {
-    min-height: -webkit-fill-available;
-  }
+.ap-blank {
+  margin: 0 auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100vw;
+  padding-right: 20px;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 }
 
 .about {
@@ -165,6 +161,7 @@ img.headerlogo {
   height: 540px;
   width: 100%;
   padding-right: 20px;
+  background-color: #f2f2f2;
 }
 
 .description {
@@ -245,6 +242,7 @@ img.headerlogo {
   padding-right: 5%;
   padding-bottom: 18%;
   overflow: auto;
+  background-color: #f2f2f2;
 }
 
 .coverart {
