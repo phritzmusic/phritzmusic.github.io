@@ -502,7 +502,6 @@ img.headerlogo {
   display: inline;
   margin: 12px;
   color: #2f2f2f;
-  mix-blend-mode: difference;
 
   animation-name: fade-in-2;
   animation-duration: 3.5s;
