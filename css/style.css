@@ -1,11 +1,14 @@
 html {
   scroll-behavior: smooth;
+  min-height: -webkit-fill-available;
 }
 
 body {
 
   background: #f2f2f2;
   font-size: 2em;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
 
 }
 
@@ -134,7 +137,7 @@ img.headerlogo {
 .container {
   margin: 0 auto;
   min-height: 100vh;
-  min-height: -webkit-fill-available;
+  /* min-height: -webkit-fill-available; */
   width: 100%;
   background: url("../imgs/pic2023opt.jpg");
   background-size: cover;
@@ -145,9 +148,14 @@ img.headerlogo {
 }
 
 @supports (-webkit-touch-callout: none) {
+  html{
+    height: -webkit-fill-available;
+}
   body {
+    min-height: 100vh;
     height: -webkit-fill-available;
   }
+  .container
 }
 
 .about {
