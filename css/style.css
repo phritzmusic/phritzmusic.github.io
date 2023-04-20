@@ -133,14 +133,21 @@ img.headerlogo {
 
 .container {
   margin: 0 auto;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
   width: 100%;
   background: url("../imgs/pic2023opt.jpg");
   background-size: cover;
   background-position: center center;
+  /* background-attachment: fixed; */
   background-repeat: no-repeat;
-/*   background-attachment: fixed; */
   padding-right: 20px;
+}
+
+@supports (-webkit-touch-callout: none) {
+  body {
+    height: -webkit-fill-available;
+  }
 }
 
 .about {
