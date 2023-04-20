@@ -48,37 +48,6 @@ a, a:hover, a:focus, a:active {
 
 }
 
-.progress {
-  margin: auto;
-  width: 100px;
-  height: 100px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding-top: 120px;
-}
-
-.progressbar {
-  width: 96px;
-  height: 1px;
-  border-radius: 20px;
-  z-index: 11;
-  /* position: fixed; */
-  margin: auto;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.progressbar_loaded {
-  width: 100%;
-  height: 100%;
-  background-color: #2f2f2f;
-}
-
 #menufont {
   font-family:'Jost', san-serif;
   font-size: 10px;
@@ -166,7 +135,7 @@ img.headerlogo {
   margin: 0 auto;
   height: 100vh;
   width: 100%;
-  background: url("../imgs/pic2021opt.jpg");
+  background: url("../imgs/pic2023opt.jpg");
   background-size: cover;
   padding-right: 20px;
 }
@@ -319,7 +288,7 @@ img.headerlogo {
 
 .min6 {
 
-  background-image: url("../imgs/betweenbroken.png");
+  background-image: url("../imgs/betweenbroken.jpg");
   background-size: cover;
 }
 
@@ -331,7 +300,7 @@ img.headerlogo {
 
 .min4 {
 
-  background-image: url("../imgs/limeadecloseenough.png");
+  background-image: url("../imgs/limeadecloseenough.jpg");
   background-size: cover;
 }
 
@@ -378,7 +347,7 @@ img.headerlogo {
 
 .four {
 
-  background-image: url("../imgs/summit.png");
+  background-image: url("../imgs/summit.jpg");
   background-size: cover;
 }
 
@@ -515,6 +484,7 @@ img.headerlogo {
   display: inline;
   margin: 12px;
   color: #2f2f2f;
+  mix-blend-mode: difference;
 
   animation-name: fade-in-2;
   animation-duration: 3.5s;
