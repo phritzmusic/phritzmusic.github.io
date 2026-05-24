@@ -145,19 +145,22 @@ img {
   pointer-events: none;
 }
 
-/* ── X (Twitter) SVG icon ────────────────────────────────────── */
-.social-x-icon {
+/* ── X (Twitter) + Patreon inline SVG icons ─────────────────── */
+.social-x-icon,
+.social-patreon-icon {
   fill: currentColor;
   display: block;
   flex-shrink: 0;
 }
 
-.social-float .social-x-icon {
+.social-float .social-x-icon,
+.social-float .social-patreon-icon {
   width: 14.3px;
   height: 14.3px;
 }
 
-.social-menu-links li a .social-x-icon {
+.social-menu-links li a .social-x-icon,
+.social-menu-links li a .social-patreon-icon {
   width: 18px;
   height: 18px;
   fill: var(--text-muted);
