@@ -101,7 +101,13 @@ function initDiscography() {
   let activeProject = 'all';
 
   if (filterBar) {
+    const PROJECT_ORDER = ['phritz', 'tai hirose', 'tiny pool centennial'];
     const usedProjects = [...new Set(releases.map(r => r.project))];
+    usedProjects.sort((a, b) => {
+      const ai = PROJECT_ORDER.indexOf(a);
+      const bi = PROJECT_ORDER.indexOf(b);
+      return (ai < 0 ? 99 : ai) - (bi < 0 ? 99 : bi);
+    });
     const labels = ['all', ...usedProjects];
     const btns = labels.map((label, i) => {
       const btn = document.createElement('button');

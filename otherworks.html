@@ -1,297 +1,283 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <script src="https://kit.fontawesome.com/80e356ee4f.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/otherworks.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="phritz website">
-    <meta property="og:image" content="imgs/2021logo.png" />
-    <meta name="twitter:image" content="imgs/2021logo.png" />
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="phritz — other works">
 
-<link rel="apple-touch-icon" sizes="180x180" href="imgs/logo2021/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="imgs/logo2021/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="imgs/logo2021/favicon-16x16.png">
-<link rel="manifest" href="imgs/logo2021/site.webmanifest">
-<link rel="mask-icon" href="imgs/logo2021/safari-pinned-tab.svg" color="#5bbad5">
-<link rel="shortcut icon" href="imgs/logo2021/favicon.ico">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="msapplication-config" content="imgs/logo2021/browserconfig.xml">
-<meta name="theme-color" content="#ffffff">
+  <meta property="og:title" content="phritz — other works">
+  <meta property="og:description" content="music producer based in japan">
+  <meta property="og:image" content="imgs/2021logo.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="imgs/2021logo.png">
 
-    <title>phritz</title>
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="imgs/logo2021/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="imgs/logo2021/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="imgs/logo2021/favicon-16x16.png">
+  <link rel="manifest" href="imgs/logo2021/site.webmanifest">
+  <link rel="mask-icon" href="imgs/logo2021/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="imgs/logo2021/favicon.ico">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-config" content="imgs/logo2021/browserconfig.xml">
+  <meta name="theme-color" content="#f4f3f0">
 
-  </head>
-  <body>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 
-    <main>
+  <!-- Icons -->
+  <script src="https://kit.fontawesome.com/80e356ee4f.js" crossorigin="anonymous"></script>
 
-      <div id="load">
-          <img class="logoload" src="imgs/2021logo.png" alt="">
-      </div>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/otherworks.css">
+  <title>phritz — other works</title>
+</head>
+<body>
 
-      <div class="headerimg">
-        <a href="https://www.phritzmusic.com"><img class="headerlogo" src="imgs/2021logo.png" alt=""></a>
-      </div>
+  <!-- ── Loader ────────────────────────────────────────────── -->
+  <div id="loader" aria-hidden="true">
+    <img class="loader-logo" src="imgs/2021logo.png" alt="">
+  </div>
 
-            <div id="bgimage">
-            <!-- <img src="./imgs/pic2021.jpg" alt="phritz sat in snowy region"> -->
-            </div>
-          </a>
+  <!-- ── Floating header ───────────────────────────────────── -->
+  <header class="site-header" id="site-header">
+    <a href="https://phritzmusic.com" class="header-logo" aria-label="phritz home">
+      <img src="imgs/2021logo.png" alt="phritz">
+    </a>
+    <nav class="social-float" aria-label="Social links">
+      <a href="https://open.spotify.com/artist/4pVTHC0fGP57HJ7Wy6cbtt" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
+        <i class="fab fa-spotify" aria-hidden="true"></i>
+      </a>
+      <a href="https://twitter.com/PhritzMusic" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+        <i class="fab fa-twitter" aria-hidden="true"></i>
+      </a>
+      <a href="https://www.instagram.com/phritzmusic/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="fab fa-instagram" aria-hidden="true"></i>
+      </a>
+      <a href="https://www.youtube.com/channel/UCYFa5RIwwfcvLRHhEVW5xsA" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <i class="fab fa-youtube" aria-hidden="true"></i>
+      </a>
+      <a href="https://www.patreon.com/phritzmusic" target="_blank" rel="noopener noreferrer" aria-label="Patreon">
+        <i class="fab fa-patreon" aria-hidden="true"></i>
+      </a>
+      <a href="mailto:contact@phritzmusic.com" aria-label="Email">
+        <i class="fas fa-envelope" aria-hidden="true"></i>
+      </a>
+    </nav>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false">&#8942;</button>
+  </header>
 
-          <div class="btn" id="menubtn">
-            <span id="icons" onclick="openNav()">⋮</span>
+  <!-- ── Main ─────────────────────────────────────────────── -->
+  <main id="main">
+
+    <!-- Page title -->
+    <section class="page-intro fade-in" aria-label="Page header">
+      <h1 class="page-title">other works</h1>
+      <a href="/" class="back-link">← discography</a>
+    </section>
+
+    <!-- Works grid -->
+    <section class="works-section fade-in" aria-label="Other works">
+      <div class="works-grid">
+
+        <div class="work-item">
+          <div class="work-media">
+            <iframe src="https://www.youtube.com/embed/kX03U4GVRr4?modestbranding=1"
+              title="サンドリオン - 天体図" loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
-
-          <div class="sidebar" id="menu">
-
-            <div class="hyperlinks">
-
-              <div id="socials" class="minus" style="order: 0;">
-                  <i id="icons">-</i>
-              </div>
-
-              <div id="socials" style="order: 1;">
-                <a href="https://open.spotify.com/artist/4pVTHC0fGP57HJ7Wy6cbtt" target="_blank" id="social-links" >
-                  <div id="icons">
-                  <i class="fab fa-spotify fa-xs"></i>
-                  <h5 id="menufont">_spotify</h5>
-                </div>
-                </a>
-              </div>
-
-              <div id="socials" style="order: 3;">
-                <a href="https://twitter.com/PhritzMusic" target="_blank" id="social-links" >
-                  <div id="icons">
-                  <i class="fab fa-twitter fa-xs"></i>
-                  <h5 id="menufont">_twitter</h5>
-                </div>
-                </a>
-              </div>
-
-              <div id="socials" style="order: 2;">
-                <a href="https://music.apple.com/jp/artist/phritz/1449826368?l=en" target="_blank" id="social-links" >
-                  <div id="icons">
-                  <i class="fab fa-apple fa-xs"></i>
-                  <h5 id="menufont">_apple</h5>
-                </div>
-                </a>
-              </div>
-
-              <div id="socials" style="order: 10;">
-                 <a href="mailto:official.phritz@gmail.com" target="_blank" id="social-links" >
-                   <div id="icons">
-                  <i class="fas fa-envelope fa-xs"></i>
-                  <h5 id="menufont">_contact me</h5>
-                </div>
-                </a>
-              </div>
-
-              <div id="socials" style="order: 7;">
-                <a href="https://www.patreon.com/phritzmusic?fan_landing=true" target="_blank" id="social-links" >
-                  <div id="icons">
-                  <i class="fab fa-patreon fa-xs"></i>
-                  <h5 id="menufont">_patreon</h5>
-                </div>
-                </a>
-              </div>
-
-              <div id="socials" style="order: 4;">
-                <a href="https://www.instagram.com/phritzmusic/" target="_blank" id="social-links" >
-                  <div id="icons">
-                  <i class="fab fa-instagram fs-xs"></i>
-                  <h5 id="menufont">_instagram</h5>
-                </div>
-                </a>
-              </div>
-
-              <div id="socials" style="order: 5;">
-                <a href="https://www.youtube.com/channel/UCYFa5RIwwfcvLRHhEVW5xsA" target="_blank" id="social-links" >
-                  <div id="icons">
-                  <i class="fab fa-youtube fa-xs"></i>
-                  <h5 id="menufont">_youtube</h5>
-                </div>
-                </a>
-              </div>
-
-              </div>
-
-            </div>
-
-          <div class="blank">
-          </div>
-
-          <!-- <div class="blank2">
-          </div> -->
-
-          <div class="clientheader">
-            <p id="client">other works</p>
-          </div>
-          <div class="vl"></div>
-
-
-
-          <div class="table">
-
-            <div class="work">
-              <div class="media-container">
-                  <iframe class="video" width=100% height=100% src="https://www.youtube.com/embed/kX03U4GVRr4?modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              </div>
-                  <p id="info" style="font-size: 0.28em;">サンドリオン - 天体図 (TVアニメ『星屑テレパス』ED主題歌) (co-write, co-prod)</p>
-            </div>
-
-            <div class="work">
-              <div class="media-container">
-                  <a href="https://splice.com/sounds/packs/moment/resonance-botanica-a-phritz-moment/samples" target="_blank" rel="noopener noreferrer"> <img src="https://splice-res.cloudinary.com/image/upload/f_auto,q_auto,w_auto/c_limit,w_450/v1691607059/n3aisgp0x1cljfshzanh.jpg" width=100% height=100%></a>
-              </div>
-                  <p id="info" style="font-size: 0.35em;">Splice Moment 'Resonance Botanica' (sample pack sound production)</p>
-            </div>
-
-             <div class="work">
-              <div class="media-container">
-                  <a href="https://twitter.com/mizui_kakeru/status/1660438464649912325?s=20" target="_blank" rel="noopener noreferrer"> <img src="https://pbs.twimg.com/ext_tw_video_thumb/1660438000034279424/pu/img/1LMs4Lg0ZwosnhFw.jpg:large" width=100% height=100%></a>
-              </div>
-                  <p id="info">厚生労働省 (MHLW) Butterfly Heart Campaign (music production)</p>
-            </div>
-
-            <div class="work">
-              <div class="media-container">
-                  <iframe class="video" width=100% height=100% src="https://www.youtube.com/embed/JH5SmaQdc14?modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              </div>
-                  <p id="info">春野 - Up In The Clouds (arrangement)</p>
-            </div>
-
-            <div class="work">
-              <div class="media-container">
-                  <a href="https://twitter.com/phritzmusic/status/1651240423464005636" target="_blank" rel="noopener noreferrer"> <img src="https://pbs.twimg.com/media/FupiT2oWYAAPm6U.jpg:large" width=100% height=100%></a>
-              </div>
-                  <p id="info">Deemo II (music production)</p>
-            </div>
-
-            <div class="work">
-              <div class="media-container">
-                  <a href="https://www.instagram.com/reel/CtEAqUdPmwZ/?utm_source=ig_web_copy_link&igshid=MzRlODBiNWFlZA==" target="_blank" rel="noopener noreferrer"> <img src="https://www.uniqlo.com/jp/ja/contents/feature/masterpiece/common_22fw/img/og.jpg" width=100% height=100%></a>
-              </div>
-                  <p id="info">UNIQLO 'Masterpiece' instagram ad (music production)</p>
-            </div>
-
-            <div class="work">
-              <div class="media-container">
-                  <a href="https://twitter.com/ndccojp/status/1616366711355379712" target="_blank" rel="noopener noreferrer"> <img src="https://asset.watch.impress.co.jp/img/iw/docs/1463/783/okamura01_l.jpg" width=100% height=100%></a>
-              </div>
-                  <p id="info">okamura 'We Labo' visual (music production)</p>
-            </div>
-
-            <div class="work">
-              <div class="media-container">
-                  <a href="https://linkco.re/vaF9cCnv" target="_blank" rel="noopener noreferrer"> <img src="https://ogre.natalie.mu/media/news/music/2023/0201/Peterparker69_jkt202302.jpg" width=100% height=100%></a>
-              </div>
-                  <p id="info">Peterparker69 - deadpool EP (mix/master/co-prod)</p>
-            </div>
-
-          <div class="work">
-            <div class="media-container">
-                <iframe class="video" width="100%" height="100%" src="https://www.youtube.com/embed/TssreZGLlOo?modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-                <p id="info">PAS TASTA (co-production, mixing, mastering)</p>
-          </div>
-
-          <div class="work">
-            <div class="media-container">
-                <iframe class="video" width="100%" height="100%" src="https://www.youtube.com/embed/ES8CtZN4e5g?modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-                <p id="info">Cumuloworks SHOWREEL 2022 (music production)</p>
-          </div>
-
-          <div class="work">
-            <div class="media-container">
-                <iframe class="video" width="100%" height="100%" src="https://www.youtube.com/embed/FpaRTtqnNS4?modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-                <p id="info">Zurich Green Music (music production)</p>
-          </div>
-
-          <div class="work">
-            <div class="media-container">
-                <iframe class="video" width="100%" height="100%" src="https://www.youtube.com/embed/5g8c4_8Khw4?modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-
-                <p id="info">Panasonic 衣類スチーマー (music production)</p>
-
-          </div>
-
-              <div class="work">
-                <div class="media-container">
-                    <iframe class="video" width=100% height=100% src="https://www.youtube.com/embed/wEjgn-vdZFQ?modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                    <p id="info">meme tokyo. メテオ蜃気楼 (co-prod/arrangement)</p>
-              </div>
-
-              <div class="work">
-                <div class="media-container">
-                    <iframe class="video" width="100%" height="100%" src="https://www.youtube.com/embed/gmb_6ekWVEc?modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                    <p id="info">ZOZO niaulab TV (intro music production)</p>
-              </div>
-
-              <div class="work">
-                  <div class="media-container">
-                      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/rWlZP9o1o8k?modestbranding=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                  </div>
-
-                      <p id="info">Cumuloworks SHOWREEL 2021 (music production)</p>
-                  </div>
-
+          <p class="work-caption">サンドリオン — 天体図<br>TVアニメ『星屑テレパス』ED主題歌 · co-write, co-prod</p>
         </div>
 
-        <div class="btm-blank">
-          <br>
-          <p>others including <strong>SPACETIDE, <a href="https://twitter.com/IZUMOofficial/status/1626038659555393537" target="_blank" rel="noopener noreferrer">IZUMO</a>, <a href="https://open.spotify.com/show/5sC9O9kmXvJHEW7CLDe5pG?si=b35b630b1f914990" target="_blank" rel="noopener noreferrer">CANTEEN podcast jingle</a></strong> and more to come... </p>
+        <div class="work-item">
+          <div class="work-media">
+            <a href="https://splice.com/sounds/packs/moment/resonance-botanica-a-phritz-moment/samples" target="_blank" rel="noopener noreferrer">
+              <img src="https://splice-res.cloudinary.com/image/upload/f_auto,q_auto,w_auto/c_limit,w_450/v1691607059/n3aisgp0x1cljfshzanh.jpg" alt="Splice Moment — Resonance Botanica" loading="lazy">
+            </a>
+          </div>
+          <p class="work-caption">Splice Moment — Resonance Botanica<br>sample pack sound production</p>
         </div>
 
-    </main>
-    <footer>
-    </footer>
+        <div class="work-item">
+          <div class="work-media">
+            <a href="https://twitter.com/mizui_kakeru/status/1660438464649912325?s=20" target="_blank" rel="noopener noreferrer">
+              <img src="https://pbs.twimg.com/ext_tw_video_thumb/1660438000034279424/pu/img/1LMs4Lg0ZwosnhFw.jpg" alt="MHLW Butterfly Heart Campaign" loading="lazy">
+            </a>
+          </div>
+          <p class="work-caption">厚生労働省 (MHLW) Butterfly Heart Campaign<br>music production</p>
+        </div>
 
-    <script>
+        <div class="work-item">
+          <div class="work-media">
+            <iframe src="https://www.youtube.com/embed/JH5SmaQdc14?modestbranding=1"
+              title="春野 - Up In The Clouds" loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <p class="work-caption">春野 — Up In The Clouds<br>arrangement</p>
+        </div>
 
-      function updateProgressBar(progressBar, value) {
-        progressBar.querySelector(".progressbar_loaded").style.width = `${value}%`;
-      }
+        <div class="work-item">
+          <div class="work-media">
+            <a href="https://twitter.com/phritzmusic/status/1651240423464005636" target="_blank" rel="noopener noreferrer">
+              <img src="https://pbs.twimg.com/media/FupiT2oWYAAPm6U.jpg" alt="Deemo II" loading="lazy">
+            </a>
+          </div>
+          <p class="work-caption">Deemo II<br>music production</p>
+        </div>
 
-      document.getElementById("menu").addEventListener('click', closeNav);
+        <div class="work-item">
+          <div class="work-media">
+            <a href="https://www.instagram.com/reel/CtEAqUdPmwZ/?utm_source=ig_web_copy_link" target="_blank" rel="noopener noreferrer">
+              <img src="https://www.uniqlo.com/jp/ja/contents/feature/masterpiece/common_22fw/img/og.jpg" alt="UNIQLO Masterpiece" loading="lazy">
+            </a>
+          </div>
+          <p class="work-caption">UNIQLO — Masterpiece instagram ad<br>music production</p>
+        </div>
 
-      const checkpoint = 400;
-      const checkpoint2 = 200;
+        <div class="work-item">
+          <div class="work-media">
+            <a href="https://twitter.com/ndccojp/status/1616366711355379712" target="_blank" rel="noopener noreferrer">
+              <img src="https://asset.watch.impress.co.jp/img/iw/docs/1463/783/okamura01_l.jpg" alt="okamura We Labo" loading="lazy">
+            </a>
+          </div>
+          <p class="work-caption">okamura — We Labo visual<br>music production</p>
+        </div>
 
-      window.onload = function() {
-          const load = document.getElementById('load');
-          load.classList.add('loaded');
-      }
+        <div class="work-item">
+          <div class="work-media">
+            <a href="https://linkco.re/vaF9cCnv" target="_blank" rel="noopener noreferrer">
+              <img src="https://ogre.natalie.mu/media/news/music/2023/0201/Peterparker69_jkt202302.jpg" alt="Peterparker69 - deadpool EP" loading="lazy">
+            </a>
+          </div>
+          <p class="work-caption">Peterparker69 — deadpool EP<br>mix / master / co-prod</p>
+        </div>
 
-      window.addEventListener("scroll", () => {
-        const currentScroll = window.pageYOffset;
-        if (currentScroll <= checkpoint2) {
-          opacity = 1 - currentScroll / checkpoint2;
-        } else {
-          opacity = 0;
-        }
-        document.querySelector(".headerimg").style.opacity = opacity;
-      });
+        <div class="work-item">
+          <div class="work-media">
+            <iframe src="https://www.youtube.com/embed/TssreZGLlOo?modestbranding=1"
+              title="PAS TASTA" loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <p class="work-caption">PAS TASTA<br>co-production · mixing · mastering</p>
+        </div>
 
-      function openNav() {
-        document.getElementById("menu").style.width = "400px";
-        document.getElementById("menubtn").style.opacity = "0";
-        document.getElementById("menubtn").style.marginLeft = "400px";
-      }
+        <div class="work-item">
+          <div class="work-media">
+            <iframe src="https://www.youtube.com/embed/ES8CtZN4e5g?modestbranding=1"
+              title="Cumuloworks SHOWREEL 2022" loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <p class="work-caption">Cumuloworks SHOWREEL 2022<br>music production</p>
+        </div>
 
-      function closeNav() {
-        document.getElementById("menu").style.width = "0";
-        document.getElementById("menubtn").style.opacity = "1";
-        document.getElementById("menubtn").style.marginLeft = "0";
-      }
+        <div class="work-item">
+          <div class="work-media">
+            <iframe src="https://www.youtube.com/embed/FpaRTtqnNS4?modestbranding=1"
+              title="Zurich Green Music" loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <p class="work-caption">Zurich Green Music<br>music production</p>
+        </div>
 
-  </script>
+        <div class="work-item">
+          <div class="work-media">
+            <iframe src="https://www.youtube.com/embed/5g8c4_8Khw4?modestbranding=1"
+              title="Panasonic 衣類スチーマー" loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <p class="work-caption">Panasonic 衣類スチーマー<br>music production</p>
+        </div>
 
-  </body>
+        <div class="work-item">
+          <div class="work-media">
+            <iframe src="https://www.youtube.com/embed/wEjgn-vdZFQ?modestbranding=1"
+              title="meme tokyo. メテオ蜃気楼" loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <p class="work-caption">meme tokyo. — メテオ蜃気楼<br>co-prod / arrangement</p>
+        </div>
+
+        <div class="work-item">
+          <div class="work-media">
+            <iframe src="https://www.youtube.com/embed/gmb_6ekWVEc?modestbranding=1"
+              title="ZOZO niaulab TV" loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <p class="work-caption">ZOZO niaulab TV<br>intro music production</p>
+        </div>
+
+        <div class="work-item">
+          <div class="work-media">
+            <iframe src="https://www.youtube.com/embed/rWlZP9o1o8k?modestbranding=1"
+              title="Cumuloworks SHOWREEL 2021" loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <p class="work-caption">Cumuloworks SHOWREEL 2021<br>music production</p>
+        </div>
+
+      </div>
+
+      <p class="works-footnote">
+        others including <strong>SPACETIDE</strong>,
+        <a href="https://twitter.com/IZUMOofficial/status/1626038659555393537" target="_blank" rel="noopener noreferrer">IZUMO</a>,
+        <a href="https://open.spotify.com/show/5sC9O9kmXvJHEW7CLDe5pG?si=b35b630b1f914990" target="_blank" rel="noopener noreferrer">CANTEEN podcast jingle</a>
+        and more
+      </p>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ────────────────────────────────────────────── -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <p class="footer-copy">© phritz</p>
+    </div>
+  </footer>
+
+  <!-- ── Slide-in social menu (mobile/tablet) ──────────────── -->
+  <nav class="social-menu" id="social-menu" aria-label="Social links" aria-hidden="true">
+    <button class="social-menu-close" id="menu-close" aria-label="Close menu">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+    <ul class="social-menu-links">
+      <li>
+        <a href="https://open.spotify.com/artist/4pVTHC0fGP57HJ7Wy6cbtt" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-spotify" aria-hidden="true"></i><span>spotify</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://twitter.com/PhritzMusic" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-twitter" aria-hidden="true"></i><span>twitter</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.instagram.com/phritzmusic/" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-instagram" aria-hidden="true"></i><span>instagram</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/channel/UCYFa5RIwwfcvLRHhEVW5xsA" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-youtube" aria-hidden="true"></i><span>youtube</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.patreon.com/phritzmusic" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-patreon" aria-hidden="true"></i><span>patreon</span>
+        </a>
+      </li>
+      <li>
+        <a href="mailto:contact@phritzmusic.com">
+          <i class="fas fa-envelope" aria-hidden="true"></i><span>contact</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Backdrop overlay -->
+  <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
+
+  <script src="js/main.js"></script>
+</body>
 </html>
