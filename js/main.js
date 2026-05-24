@@ -45,11 +45,15 @@ function mergeReleases() {
   const manual  = Array.isArray(window.RELEASES_MANUAL)  ? window.RELEASES_MANUAL  : [];
 
   // Spotify-fetched entries take precedence; deduplicate by Spotify link
+  // (also deduplicates within manual entries themselves)
   const seen = new Set(spotify.map(r => r.link));
-  const unique = [
-    ...spotify,
-    ...manual.filter(r => !seen.has(r.link))
-  ];
+  const unique = [...spotify];
+  for (const r of manual) {
+    if (!seen.has(r.link)) {
+      seen.add(r.link);
+      unique.push(r);
+    }
+  }
 
   // Sort newest first — use release_date (from Spotify) when available, else year
   unique.sort((a, b) => {

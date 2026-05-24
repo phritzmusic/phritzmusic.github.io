@@ -17,7 +17,7 @@
   --pad-section:  clamp(64px, 9vw, 128px);
   --grid-gap:     clamp(10px, 1.5vw, 20px);
 
-  --header-h:     92px; /* taller to give logo more breathing room from top */
+  --header-h:     64px;
 }
 
 /* ── Reset ───────────────────────────────────────────────────── */
@@ -89,8 +89,8 @@ img {
   height: var(--header-h);
   display: flex;
   align-items: center;
-  /* socials align right; logo is absolutely centered */
-  justify-content: flex-end;
+  /* logo left, socials right */
+  justify-content: space-between;
   padding: 0 var(--pad-x);
   pointer-events: none; /* let clicks pass through empty space */
   transition: background 0.45s ease, box-shadow 0.45s ease;
@@ -104,28 +104,23 @@ img {
   box-shadow: 0 1px 0 var(--border);
 }
 
-/* Logo: centered absolutely within the header */
+/* Logo: upper-left, always visible */
 .header-logo {
-  position: absolute;
-  left: 50%;
-  top: 62%;
-  transform: translate(-50%, -50%);
   pointer-events: auto;
   display: flex;
   align-items: center;
   line-height: 0;
-  transition: opacity 0.45s ease;
-}
-
-/* On hero-pages: hide logo once user scrolls past the hero */
-.hero-page .site-header:not(.on-hero) .header-logo {
-  opacity: 0;
-  pointer-events: none;
 }
 
 .header-logo img {
   width: 19px;
   display: block;
+  transition: filter 0.45s ease;
+}
+
+/* On dark hero photo: invert logo to white so it's visible */
+.site-header.on-hero .header-logo img {
+  filter: invert(1);
 }
 
 /* ── X (Twitter) + Patreon inline SVG icons ─────────────────── */

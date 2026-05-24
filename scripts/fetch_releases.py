@@ -51,7 +51,7 @@ def fetch_artist_releases(artist_id: str, token: str) -> list[dict]:
     headers = {"Authorization": f"Bearer {token}"}
     url = (
         f"https://api.spotify.com/v1/artists/{artist_id}/albums"
-        f"?include_groups=album%2Csingle"
+        f"?include_groups=album,single&limit=50&market=JP"
     )
     results = []
     while url:
@@ -62,7 +62,13 @@ def fetch_artist_releases(artist_id: str, token: str) -> list[dict]:
         except HTTPError as e:
             print(f"  HTTP {e.code} fetching {url}", file=sys.stderr)
             break
-        for item in data.get("items", []):
+        except Exception as e:
+            print(f"  Error fetching {url}: {e}", file=sys.stderr)
+            break
+        items = data.get("items", [])
+        if items is None:
+            items = []
+        for item in items:
             images = item.get("images", [])
             results.append({
                 "title":        item["name"],
@@ -106,6 +112,15 @@ def main():
     # Newest first
     all_releases.sort(key=lambda r: r["release_date"], reverse=True)
     print(f"\nTotal unique releases: {len(all_releases)}")
+
+    if len(all_releases) == 0:
+        print(
+            "WARNING: 0 releases found across all artists. "
+            "Skipping file write to preserve existing data.\n"
+            "Check that SPOTIFY_CLIENT_ID / SPOTIFY_CLIENT_SECRET secrets are correct.",
+            file=sys.stderr,
+        )
+        sys.exit(1)  # non-zero exit → prevents the commit step from running
 
     # ── Build JS output ──────────────────────────────────────────────────────
     def js_entry(r: dict) -> str:
