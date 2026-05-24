@@ -108,15 +108,59 @@ img {
   transition: opacity 0.45s ease;
 }
 
-/* On hero-pages: hide logo once user scrolls past the hero */
-.hero-page .site-header:not(.on-hero) .header-logo {
+/* On hero-pages: hide header logo when hero is in view (#hero-logo shows instead) */
+.hero-page .site-header.on-hero .header-logo {
   opacity: 0;
   pointer-events: none;
 }
 
 .header-logo img {
-  width: 19px; /* +25% from 15px */
+  width: 24px;
   display: block;
+}
+
+/* ── Hero logo: separate fixed element, lower in the hero ────── */
+#hero-logo {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 78vh;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  line-height: 0;
+  pointer-events: auto;
+  opacity: 1;
+  transition: opacity 0.45s ease;
+  text-decoration: none;
+}
+
+#hero-logo img {
+  width: 24px;
+  display: block;
+}
+
+#hero-logo.logo-off {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── X (Twitter) SVG icon ────────────────────────────────────── */
+.social-x-icon {
+  fill: currentColor;
+  display: block;
+  flex-shrink: 0;
+}
+
+.social-float .social-x-icon {
+  width: 14.3px;
+  height: 14.3px;
+}
+
+.social-menu-links li a .social-x-icon {
+  width: 18px;
+  height: 18px;
+  fill: var(--text-muted);
 }
 
 /* Socials: right side */
@@ -141,13 +185,9 @@ img {
   color: var(--text);
 }
 
-/* On the dark hero photo: white icons + invert logo to white */
+/* On the dark hero photo: white social icons */
 .site-header.on-hero .social-float a {
   color: rgba(255, 255, 255, 0.72);
-}
-
-.site-header.on-hero .header-logo img {
-  filter: invert(1);
 }
 
 .site-header.on-hero .social-float a:hover {
@@ -677,25 +717,35 @@ img {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  border-top: 1px solid var(--border);
-  border-left: 1px solid var(--border);
+  gap: clamp(24px, 4vw, 48px) clamp(16px, 2vw, 32px);
 }
 
 .clients-grid li {
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: clamp(18px, 2.5vw, 28px) clamp(14px, 1.8vw, 24px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: clamp(10px, 1.5vw, 18px) clamp(8px, 1vw, 14px);
+}
+
+.clients-grid li img {
+  filter: grayscale(1) opacity(0.55);
+  max-height: 28px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.clients-grid li span {
   font-family: var(--font-body);
-  font-size: 10px;
+  font-size: 8px;
   font-weight: 300;
   letter-spacing: 2px;
   color: var(--text-muted);
-  transition: color 0.2s, background 0.2s;
-}
-
-.clients-grid li:hover {
-  color: var(--text);
-  background: rgba(26, 26, 26, 0.025);
+  text-align: center;
+  text-transform: uppercase;
 }
 
 /* Works footnote */

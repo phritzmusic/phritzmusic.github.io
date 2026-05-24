@@ -54,11 +54,14 @@
       <a href="https://open.spotify.com/artist/4pVTHC0fGP57HJ7Wy6cbtt" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
         <i class="fab fa-spotify" aria-hidden="true"></i>
       </a>
-      <a href="https://twitter.com/PhritzMusic" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
-        <i class="fab fa-x-twitter" aria-hidden="true"></i>
+      <a href="https://music.apple.com/jp/artist/phritz/1449826368?l=en" target="_blank" rel="noopener noreferrer" aria-label="Apple Music">
+        <i class="fab fa-apple" aria-hidden="true"></i>
       </a>
       <a href="https://www.instagram.com/phritzmusic/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
         <i class="fab fa-instagram" aria-hidden="true"></i>
+      </a>
+      <a href="https://twitter.com/PhritzMusic" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+        <svg class="social-x-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       </a>
       <a href="https://www.youtube.com/channel/UCYFa5RIwwfcvLRHhEVW5xsA" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
         <i class="fab fa-youtube" aria-hidden="true"></i>
@@ -75,6 +78,11 @@
     <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false">&#8942;</button>
 
   </header>
+
+  <!-- Hero logo: lower position in hero, replaces header logo during hero view -->
+  <a id="hero-logo" href="https://phritzmusic.com" aria-label="phritz home">
+    <img src="imgs/phritz_2026_logo.png" alt="phritz">
+  </a>
 
   <!-- Fixed press photo -->
   <div class="hero-bg"></div>
@@ -112,20 +120,62 @@
         <span class="section-tab">clients</span>
       </div>
       <ul class="clients-grid">
-        <li>Panasonic</li>
-        <li>Zurich Insurance Japan</li>
-        <li>okamura</li>
-        <li>UNIQLO</li>
-        <li>Deemo II</li>
-        <li>厚生労働省</li>
-        <li>Splice</li>
-        <li>Softbank</li>
-        <li>Hanwa Japan</li>
-        <li>ちふれ</li>
-        <li>Hermès</li>
-        <li>Hakuhodo</li>
-        <li>Kao</li>
-        <li>Hitachi</li>
+        <li>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Hitachi_2025_logo.svg/250px-Hitachi_2025_logo.svg.png" alt="Hitachi" loading="lazy" onerror="this.style.display='none'">
+          <span>Hitachi</span>
+        </li>
+        <li>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Kao-corp-logo.svg/250px-Kao-corp-logo.svg.png" alt="Kao" loading="lazy" onerror="this.style.display='none'">
+          <span>Kao</span>
+        </li>
+        <li>
+          <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/e6/Hakuhodo_logo_%282026%29.svg/250px-Hakuhodo_logo_%282026%29.svg.png" alt="Hakuhodo" loading="lazy" onerror="this.style.display='none'">
+          <span>Hakuhodo</span>
+        </li>
+        <li>
+          <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/Herm%C3%A8s.svg/250px-Herm%C3%A8s.svg.png" alt="Hermès" loading="lazy" onerror="this.style.display='none'">
+          <span>Hermès</span>
+        </li>
+        <li>
+          <img src="https://www.chifure-global.com/d70lr60000000093-img/logo_sp.png" alt="ちふれ" loading="lazy" onerror="this.style.display='none'">
+          <span>ちふれ</span>
+        </li>
+        <li>
+          <img src="https://images.seeklogo.com/logo-png/40/1/hanwa-logo-png_seeklogo-406164.png" alt="Hanwa Japan" loading="lazy" onerror="this.style.display='none'">
+          <span>Hanwa Japan</span>
+        </li>
+        <li>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/Softbank_mobile_logo.svg/250px-Softbank_mobile_logo.svg.png" alt="SoftBank" loading="lazy" onerror="this.style.display='none'">
+          <span>Softbank</span>
+        </li>
+        <li>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Splice_logo_clean.svg/250px-Splice_logo_clean.svg.png" alt="Splice" loading="lazy" onerror="this.style.display='none'">
+          <span>Splice</span>
+        </li>
+        <li>
+          <img src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a1/Logo_of_MHLW%28Japan%29.svg/250px-Logo_of_MHLW%28Japan%29.svg.png" alt="厚生労働省" loading="lazy" onerror="this.style.display='none'">
+          <span>厚生労働省</span>
+        </li>
+        <li>
+          <img src="https://deemo.com/deemo2/static/deemo2-logo-037d10f3e31e1d09d3b47eb8a10e5f29.png" alt="Deemo II" loading="lazy" onerror="this.style.display='none'">
+          <span>Deemo II</span>
+        </li>
+        <li>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Uniqlo_logo_Japanese.svg/250px-Uniqlo_logo_Japanese.svg.png" alt="UNIQLO" loading="lazy" onerror="this.style.display='none'">
+          <span>UNIQLO</span>
+        </li>
+        <li>
+          <img src="https://www.okamura.com/wp-content/themes/okamura/assets/images/common/logo_okamura.svg" alt="okamura" loading="lazy" onerror="this.style.display='none'">
+          <span>okamura</span>
+        </li>
+        <li>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Zurich_Insurance_Group_logo.svg/250px-Zurich_Insurance_Group_logo.svg.png" alt="Zurich Insurance Japan" loading="lazy" onerror="this.style.display='none'">
+          <span>Zurich Insurance Japan</span>
+        </li>
+        <li>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Panasonic_Group_logo.svg/250px-Panasonic_Group_logo.svg.png" alt="Panasonic" loading="lazy" onerror="this.style.display='none'">
+          <span>Panasonic</span>
+        </li>
       </ul>
     </section>
 
@@ -151,15 +201,21 @@
         </a>
       </li>
       <li>
-        <a href="https://twitter.com/PhritzMusic" target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-x-twitter" aria-hidden="true"></i>
-          <span>twitter</span>
+        <a href="https://music.apple.com/jp/artist/phritz/1449826368?l=en" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-apple" aria-hidden="true"></i>
+          <span>apple music</span>
         </a>
       </li>
       <li>
         <a href="https://www.instagram.com/phritzmusic/" target="_blank" rel="noopener noreferrer">
           <i class="fab fa-instagram" aria-hidden="true"></i>
           <span>instagram</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://twitter.com/PhritzMusic" target="_blank" rel="noopener noreferrer">
+          <svg class="social-x-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          <span>x</span>
         </a>
       </li>
       <li>
