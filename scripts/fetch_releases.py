@@ -60,7 +60,8 @@ def fetch_artist_releases(artist_id: str, token: str) -> list[dict]:
             with urlopen(req) as r:
                 data = json.loads(r.read())
         except HTTPError as e:
-            print(f"  HTTP {e.code} fetching {url}", file=sys.stderr)
+            body = e.read().decode("utf-8", errors="replace")
+            print(f"  HTTP {e.code} fetching {url}\n  Response: {body}", file=sys.stderr)
             break
         for item in data.get("items", []):
             images = item.get("images", [])
