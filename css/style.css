@@ -330,20 +330,20 @@ img {
 
 .scroll-hint span {
   font-family: var(--font-body);
-  font-size: 8px;
+  font-size: 11px;
   font-weight: 300;
-  letter-spacing: 3.5px;
+  letter-spacing: 4.5px;
   text-transform: uppercase;
   color: #fff;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6);
 }
 
 .scroll-hint-line {
-  width: 1px;
-  height: 36px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.9), transparent);
+  width: 1.5px;
+  height: 56px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.95), transparent);
   animation: line-drop 1.7s ease-in-out infinite;
-  filter: drop-shadow(0 0 3px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 0 4px rgba(0,0,0,0.35));
 }
 
 @keyframes line-drop {
