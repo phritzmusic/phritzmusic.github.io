@@ -406,7 +406,7 @@ img {
   font-family: var(--font-display); /* DM Sans — Helvetica/Aktiv territory */
   font-weight: 300;
   font-size: clamp(24px, 4.1vw, 52px);
-  letter-spacing: 0; /* natural DM Sans spacing */
+  letter-spacing: 0.02em;
   line-height: 1;
   color: var(--text);
   margin-bottom: clamp(14px, 2vw, 24px);
@@ -425,6 +425,7 @@ img {
 /* ── Artist bio text ──────────────────────────────────────────── */
 .artist-bios {
   width: 100%;
+  max-width: 380px;
   display: flex;
   flex-direction: column;
   gap: clamp(14px, 2vw, 22px);
@@ -434,7 +435,7 @@ img {
 .bio-en p {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 12.6px;
+  font-size: 13.86px;
   line-height: 1.95;
   color: var(--text);
   text-align: left;

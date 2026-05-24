@@ -104,6 +104,7 @@ function buildGrid(releases) {
   // Toggle button: show all ↔ show less
   if (releases.length > LIMIT) {
     const btn = document.createElement('button');
+    btn.id = 'disco-show-more';
     btn.className = 'show-more-btn';
 
     const collapse = () => {
