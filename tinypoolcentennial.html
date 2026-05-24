@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiny Pool Centennial</title>
+    <!-- Tailwind CSS CDN for easy styling and responsiveness -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for a typewriter-ish look */
+        body {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
+        /* Ensure iframes are responsive */
+        .responsive-iframe-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+            height: 0;
+            overflow: hidden;
+            max-width: 600px; /* Max width for the players */
+            margin: 0 auto; /* Center the container */
+        }
+        .responsive-iframe-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.5rem; /* Rounded corners for iframes */
+        }
+    </style>
+</head>
+<body class="bg-white text-black min-h-screen flex items-center justify-center p-4 pt-16">
+    <div class="text-center max-w-lg mx-auto">
+        <!-- Main title - font size remains the same, increased bottom margin -->
+        <h1 class="text-lg md:text-xl font-extrabold mb-8 rounded-lg">
+            tiny pool centennial &lt;3
+        </h1>
+        <!-- Subtitle - font size reduced, increased bottom margin -->
+        <p class="text-base md:text-lg mb-8 rounded-lg">
+            TPC is an indie side project by phritz
+        </p>
+        <!-- Contact information - font size reduced, increased bottom margin -->
+        <p class="text-base md:text-lg mb-10 rounded-lg">
+            contact at <a href="mailto:official.phritz@gmail.com" class="text-black hover:underline">official.phritz@gmail.com</a>
+        </p>
+
+        <!-- Spotify Mini Player -->
+        <div class="mb-8 w-full max-w-sm mx-auto">
+            <iframe
+                style="border-radius:12px"
+                src="https://open.spotify.com/embed/artist/7uA6zWZn3RS6XkkhBeVcDD?utm_source=generator"
+                width="100%"
+                height="152"
+                frameBorder="0"
+                allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy">
+            </iframe>
+        </div>
+
+        <!-- SoundCloud Mini Player -->
+        <div class="mb-8 w-full max-w-sm mx-auto">
+            <iframe
+                width="100%"
+                height="166"
+                scrolling="no"
+                frameborder="no"
+                allow="autoplay"
+                src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2119197162&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"
+                style="border-radius:12px;">
+            </iframe>
+        </div>
+
+        <!-- Bandcamp Mini Player -->
+        <div class="mb-8 w-full max-w-sm mx-auto">
+            <iframe
+                style="border: 0; width: 100%; height: 120px; border-radius:12px;"
+                src="https://bandcamp.com/EmbeddedPlayer/track=2547971993/size=large/bgcol=ffffff/linkcol=0687f5/tracklist=false/artwork=small/transparent=true/"
+                seamless>
+                <a href="https://phritz.bandcamp.com/track/brushes">Brushes by tiny pool centennial</a>
+            </iframe>
+        </div>
+    </div>
+</body>
+</html>
