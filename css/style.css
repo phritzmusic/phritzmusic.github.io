@@ -70,7 +70,7 @@ img {
 }
 
 .loader-logo {
-  width: 20px;
+  width: 19px;
   animation: blink 1.4s ease-in-out infinite;
 }
 
@@ -115,7 +115,7 @@ img {
 }
 
 .header-logo img {
-  width: 20px;
+  width: 19px;
   display: block;
 }
 
@@ -433,15 +433,11 @@ img {
 
 .bio-en p {
   font-family: var(--font-body);
-  font-weight: 300;
-  font-size: 12px;
+  font-weight: 400;
+  font-size: 12.6px;
   line-height: 1.95;
   color: var(--text);
   text-align: left;
-}
-
-.bio-en p + p {
-  margin-top: 0.9em;
 }
 
 .bio-jp {
@@ -849,7 +845,7 @@ img {
   .social-float  { display: none; }
   .menu-toggle   { display: flex; }
   .info-inner    { flex-direction: column; }
-  .info-image    { width: 100%; max-width: 420px; align-self: center; }
+  .info-image    { display: none; }
 }
 
 @media (max-width: 640px) {
