@@ -159,7 +159,7 @@ img {
 
 .social-float a {
   /* Default: dark (on main content) */
-  color: var(--text-muted);
+  color: #2f2f2f;
   font-size: 14.3px; /* +10% from 13px */
   line-height: 1;
   display: flex;
@@ -842,7 +842,7 @@ img {
 }
 
 .footer-social a {
-  color: var(--text-muted);
+  color: #2f2f2f;
   font-size: 14px;
   display: flex;
   align-items: center;
