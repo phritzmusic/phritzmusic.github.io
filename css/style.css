@@ -93,6 +93,15 @@ img {
   justify-content: flex-end;
   padding: 0 var(--pad-x);
   pointer-events: none; /* let clicks pass through empty space */
+  transition: background 0.45s ease, box-shadow 0.45s ease;
+}
+
+/* Off-hero: frosted background so icons don't clash with content */
+.site-header:not(.on-hero) {
+  background: rgba(244, 243, 240, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--border);
 }
 
 /* Logo: centered absolutely within the header */
@@ -144,7 +153,7 @@ img {
 .social-float {
   display: flex;
   align-items: center;
-  gap: clamp(14px, 2vw, 22px);
+  gap: clamp(15px, 2.1vw, 23px);
   pointer-events: auto;
 }
 
@@ -742,18 +751,20 @@ img {
 
 .clients-grid {
   list-style: none;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: clamp(24px, 4vw, 48px) clamp(16px, 2vw, 32px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(24px, 4vw, 48px) clamp(20px, 3vw, 40px);
 }
 
 .clients-grid li {
+  flex: 0 0 clamp(90px, 13vw, 130px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: clamp(10px, 1.5vw, 18px) clamp(8px, 1vw, 14px);
+  padding: clamp(8px, 1.2vw, 16px) clamp(6px, 0.8vw, 12px);
 }
 
 .clients-grid li img {
@@ -816,8 +827,36 @@ img {
 
 .footer-inner {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(16px, 2.5vw, 24px);
+}
+
+/* Footer social links */
+.footer-social {
+  display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(16px, 2.5vw, 28px);
+}
+
+.footer-social a {
+  color: var(--text-muted);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  transition: color 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.footer-social a:hover { color: var(--text); }
+
+.footer-social .social-x-icon,
+.footer-social .social-patreon-icon {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
 }
 
 .footer-copy {
@@ -838,7 +877,6 @@ img {
 @media (max-width: 960px) {
   #releases-grid { grid-template-columns: repeat(3, 1fr); }
   .works-grid    { grid-template-columns: repeat(3, 1fr); }
-  .clients-grid  { grid-template-columns: repeat(4, 1fr); }
 }
 
 /* Tablet & mobile: replace social icons with hamburger; stack info columns */
@@ -857,7 +895,6 @@ img {
 
   #releases-grid { grid-template-columns: repeat(2, 1fr); }
   .works-grid    { grid-template-columns: repeat(2, 1fr); }
-  .clients-grid  { grid-template-columns: repeat(3, 1fr); }
   .filter-btn    { margin-right: 16px; }
 }
 
