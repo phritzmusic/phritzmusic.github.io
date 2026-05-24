@@ -141,9 +141,13 @@ img {
   color: var(--text);
 }
 
-/* On the dark hero photo: white icons */
+/* On the dark hero photo: white icons + invert logo to white */
 .site-header.on-hero .social-float a {
   color: rgba(255, 255, 255, 0.72);
+}
+
+.site-header.on-hero .header-logo img {
+  filter: invert(1);
 }
 
 .site-header.on-hero .social-float a:hover {
@@ -664,6 +668,36 @@ img {
   line-height: 1.8;
 }
 
+/* ── Clients grid ─────────────────────────────────────────────── */
+.clients-section {
+  padding: 0 var(--pad-x) var(--pad-section);
+}
+
+.clients-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+}
+
+.clients-grid li {
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: clamp(18px, 2.5vw, 28px) clamp(14px, 1.8vw, 24px);
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  transition: color 0.2s, background 0.2s;
+}
+
+.clients-grid li:hover {
+  color: var(--text);
+  background: rgba(26, 26, 26, 0.025);
+}
+
 /* Works footnote */
 .works-footnote {
   font-family: var(--font-body);
@@ -727,6 +761,7 @@ img {
 @media (max-width: 960px) {
   #releases-grid { grid-template-columns: repeat(3, 1fr); }
   .works-grid    { grid-template-columns: repeat(3, 1fr); }
+  .clients-grid  { grid-template-columns: repeat(4, 1fr); }
 }
 
 /* Tablet & mobile: replace social icons with hamburger */
@@ -743,6 +778,7 @@ img {
 
   #releases-grid { grid-template-columns: repeat(2, 1fr); }
   .works-grid    { grid-template-columns: repeat(2, 1fr); }
+  .clients-grid  { grid-template-columns: repeat(3, 1fr); }
   .filter-btn    { margin-right: 16px; }
 }
 

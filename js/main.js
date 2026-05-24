@@ -101,17 +101,30 @@ function buildGrid(releases) {
   };
   observeVisible();
 
-  // Show-more button
+  // Toggle button: show all ↔ show less
   if (releases.length > LIMIT) {
     const btn = document.createElement('button');
     btn.className = 'show-more-btn';
-    btn.id = 'disco-show-more';
-    btn.textContent = `show all (${releases.length})`;
-    btn.addEventListener('click', () => {
+
+    const collapse = () => {
+      Array.from(grid.querySelectorAll('.release-tile')).slice(LIMIT).forEach(t => {
+        t.classList.add('tile-folded');
+        t.classList.remove('tile-visible');
+      });
+      btn.textContent = `show all (${releases.length})`;
+      btn.onclick = expand;
+      grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    const expand = () => {
       grid.querySelectorAll('.tile-folded').forEach(t => t.classList.remove('tile-folded'));
       observeVisible();
-      btn.remove();
-    });
+      btn.textContent = 'show less';
+      btn.onclick = collapse;
+    };
+
+    btn.textContent = `show all (${releases.length})`;
+    btn.onclick = expand;
     grid.insertAdjacentElement('afterend', btn);
   }
 }
@@ -172,11 +185,22 @@ function initOtherWorks() {
 
   const btn = document.createElement('button');
   btn.className = 'show-more-btn';
-  btn.textContent = `show all (${items.length})`;
-  btn.addEventListener('click', () => {
+
+  const collapseWorks = () => {
+    items.slice(LIMIT).forEach(item => item.classList.add('work-hidden'));
+    btn.textContent = `show all (${items.length})`;
+    btn.onclick = expandWorks;
+    grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const expandWorks = () => {
     items.forEach(item => item.classList.remove('work-hidden'));
-    btn.remove();
-  });
+    btn.textContent = 'show less';
+    btn.onclick = collapseWorks;
+  };
+
+  btn.textContent = `show all (${items.length})`;
+  btn.onclick = expandWorks;
   grid.insertAdjacentElement('afterend', btn);
 }
 
