@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="phritz — music producer based in japan">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="phritz">
+  <meta property="og:description" content="music producer based in japan">
+  <meta property="og:image" content="imgs/2021logo.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:image" content="imgs/2021logo.png">
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="imgs/logo2021/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="imgs/logo2021/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="imgs/logo2021/favicon-16x16.png">
+  <link rel="manifest" href="imgs/logo2021/site.webmanifest">
+  <link rel="mask-icon" href="imgs/logo2021/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="imgs/logo2021/favicon.ico">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-config" content="imgs/logo2021/browserconfig.xml">
+  <meta name="theme-color" content="#f4f3f0">
+
+  <!-- Fonts: DM Sans (display/name) + Jost (body/nav) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <script src="https://kit.fontawesome.com/80e356ee4f.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="css/style.css">
+  <title>phritz</title>
+</head>
+<body>
+
+  <!-- ── Loader ────────────────────────────────────────────── -->
+  <div id="loader" aria-hidden="true">
+    <img class="loader-logo" src="imgs/2021logo.png" alt="">
+  </div>
+
+  <!-- ── Floating header ───────────────────────────────────── -->
+  <header class="site-header" id="site-header">
+
+    <!-- Logo: absolutely centered -->
+    <a href="https://phritzmusic.com" class="header-logo" aria-label="phritz home">
+      <img src="imgs/2021logo.png" alt="phritz">
+    </a>
+
+    <!-- Socials: right side — desktop only -->
+    <nav class="social-float" aria-label="Social links">
+      <a href="https://open.spotify.com/artist/4pVTHC0fGP57HJ7Wy6cbtt" target="_blank" rel="noopener noreferrer" aria-label="Spotify">
+        <i class="fab fa-spotify" aria-hidden="true"></i>
+      </a>
+      <a href="https://twitter.com/PhritzMusic" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+        <i class="fab fa-twitter" aria-hidden="true"></i>
+      </a>
+      <a href="https://www.instagram.com/phritzmusic/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="fab fa-instagram" aria-hidden="true"></i>
+      </a>
+      <a href="https://www.youtube.com/channel/UCYFa5RIwwfcvLRHhEVW5xsA" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <i class="fab fa-youtube" aria-hidden="true"></i>
+      </a>
+      <a href="https://www.patreon.com/phritzmusic" target="_blank" rel="noopener noreferrer" aria-label="Patreon">
+        <i class="fab fa-patreon" aria-hidden="true"></i>
+      </a>
+      <a href="mailto:contact@phritzmusic.com" aria-label="Email">
+        <i class="fas fa-envelope" aria-hidden="true"></i>
+      </a>
+    </nav>
+
+    <!-- Vertical ellipsis toggle: mobile/tablet only -->
+    <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false">&#8942;</button>
+
+  </header>
+
+  <!-- Fixed press photo -->
+  <div class="hero-bg"></div>
+
+  <!-- ── Hero (screen 1) ───────────────────────────────────── -->
+  <section id="hero" aria-label="Hero">
+    <div class="scroll-hint" aria-hidden="true">
+      <span>scroll</span>
+      <div class="scroll-hint-line"></div>
+    </div>
+  </section>
+
+  <!-- ── Main (screen 2+) ──────────────────────────────────── -->
+  <main id="main">
+
+    <section class="info-section fade-in" aria-label="About">
+      <div class="info-inner">
+        <h1 class="artist-name">phritz</h1>
+        <p class="artist-bio">music producer based in japan</p>
+        <nav class="main-nav" aria-label="Site navigation">
+          <a href="#discography">discography</a>
+          <a href="otherworks">other works</a>
+          <a href="mailto:contact@phritzmusic.com">contact</a>
+        </nav>
+      </div>
+    </section>
+
+    <section id="discography" class="discography-section fade-in" aria-label="Discography">
+      <div id="filter-bar" role="tablist" aria-label="Filter by project"></div>
+      <div id="releases-grid" aria-label="Releases"></div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ────────────────────────────────────────────── -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <p class="footer-copy">© phritz</p>
+    </div>
+  </footer>
+
+  <!-- ── Slide-in social menu (mobile/tablet) ──────────────── -->
+  <nav class="social-menu" id="social-menu" aria-label="Social links" aria-hidden="true">
+    <button class="social-menu-close" id="menu-close" aria-label="Close menu">
+      <i class="fas fa-times" aria-hidden="true"></i>
+    </button>
+    <ul class="social-menu-links">
+      <li>
+        <a href="https://open.spotify.com/artist/4pVTHC0fGP57HJ7Wy6cbtt" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-spotify" aria-hidden="true"></i>
+          <span>spotify</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://twitter.com/PhritzMusic" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-twitter" aria-hidden="true"></i>
+          <span>twitter</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.instagram.com/phritzmusic/" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-instagram" aria-hidden="true"></i>
+          <span>instagram</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.youtube.com/channel/UCYFa5RIwwfcvLRHhEVW5xsA" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-youtube" aria-hidden="true"></i>
+          <span>youtube</span>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.patreon.com/phritzmusic" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-patreon" aria-hidden="true"></i>
+          <span>patreon</span>
+        </a>
+      </li>
+      <li>
+        <a href="mailto:contact@phritzmusic.com">
+          <i class="fas fa-envelope" aria-hidden="true"></i>
+          <span>contact</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Backdrop overlay -->
+  <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
+
+  <!-- Auto-fetched from Spotify (updated by GitHub Action) -->
+  <script src="data/releases-spotify.js"></script>
+  <!-- Manual releases: collabs/features not on primary artist Spotify pages -->
+  <script src="data/releases-manual.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

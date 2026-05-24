@@ -1,0 +1,160 @@
+/* ────────────────────────────────────────────────────────────
+   phritz – main.js
+   ──────────────────────────────────────────────────────────── */
+
+// ── Loader ───────────────────────────────────────────────────
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('loader').classList.add('hidden'), 600);
+});
+
+// ── Floating header: switch color when leaving the hero ───────
+const siteHeader = document.getElementById('site-header');
+const hero       = document.getElementById('hero');
+
+if (siteHeader && hero) {
+  siteHeader.classList.add('on-hero');
+  const headerObserver = new IntersectionObserver(
+    ([entry]) => siteHeader.classList.toggle('on-hero', entry.isIntersecting),
+    { threshold: 0 }
+  );
+  headerObserver.observe(hero);
+}
+
+// ── Scroll-based scroll-hint fade ────────────────────────────
+const scrollHint = document.querySelector('.scroll-hint');
+
+function onScroll() {
+  const s  = window.scrollY;
+  const vh = window.innerHeight;
+  if (scrollHint) scrollHint.style.opacity = Math.max(0, 1 - s / (vh * 0.22));
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+
+// ── IntersectionObserver: generic fade-in sections ───────────
+const io = new IntersectionObserver(
+  (entries) => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  }),
+  { threshold: 0.08 }
+);
+document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+
+// ── Discography: merge Spotify + manual, render + filter ──────
+function mergeReleases() {
+  const spotify = Array.isArray(window.RELEASES_SPOTIFY) ? window.RELEASES_SPOTIFY : [];
+  const manual  = Array.isArray(window.RELEASES_MANUAL)  ? window.RELEASES_MANUAL  : [];
+
+  // Spotify-fetched entries take precedence; deduplicate by Spotify link
+  const seen = new Set(spotify.map(r => r.link));
+  const unique = [
+    ...spotify,
+    ...manual.filter(r => !seen.has(r.link))
+  ];
+
+  // Sort newest first — use release_date (from Spotify) when available, else year
+  unique.sort((a, b) => {
+    const da = a.release_date || `${a.year}-12-31`;
+    const db = b.release_date || `${b.year}-12-31`;
+    return db.localeCompare(da);
+  });
+
+  return unique;
+}
+
+function buildGrid(releases) {
+  const grid = document.getElementById('releases-grid');
+  if (!grid) return;
+
+  grid.innerHTML = releases.map((r, i) => `
+    <a
+      class="release-tile"
+      href="${r.link}"
+      target="_blank"
+      rel="noopener noreferrer"
+      data-project="${r.project}"
+      style="transition-delay:${(i % 10) * 35}ms"
+    >
+      <img src="${r.artwork}" alt="${r.title}" loading="lazy" decoding="async">
+      <div class="release-overlay">
+        <p class="release-title">${r.title}</p>
+        <p class="release-meta">${r.project} · ${r.year}</p>
+      </div>
+    </a>
+  `).join('');
+
+  // Stagger tile entrance
+  const tileIO = new IntersectionObserver(
+    (entries) => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('tile-visible'); tileIO.unobserve(e.target); }
+    }),
+    { threshold: 0.04, rootMargin: '0px 0px -30px 0px' }
+  );
+  grid.querySelectorAll('.release-tile').forEach(t => tileIO.observe(t));
+}
+
+function initDiscography() {
+  const releases = mergeReleases();
+  if (releases.length === 0) return;
+
+  // Build filter tabs (only for projects with at least one release)
+  const filterBar = document.getElementById('filter-bar');
+  let activeProject = 'all';
+
+  if (filterBar) {
+    const usedProjects = [...new Set(releases.map(r => r.project))];
+    const labels = ['all', ...usedProjects];
+    const btns = labels.map((label, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'filter-btn' + (i === 0 ? ' active' : '');
+      btn.dataset.project = label;
+      btn.textContent = label;
+      return btn;
+    });
+    btns.forEach(b => filterBar.appendChild(b));
+
+    filterBar.addEventListener('click', e => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      activeProject = btn.dataset.project;
+      btns.forEach(b => b.classList.toggle('active', b === btn));
+      const filtered = activeProject === 'all'
+        ? releases
+        : releases.filter(r => r.project === activeProject);
+      buildGrid(filtered);
+    });
+  }
+
+  buildGrid(releases);
+}
+
+initDiscography();
+
+// ── Slide-in social menu (mobile/tablet) ─────────────────────
+const menuToggle  = document.getElementById('menu-toggle');
+const socialMenu  = document.getElementById('social-menu');
+const menuOverlay = document.getElementById('menu-overlay');
+const menuClose   = document.getElementById('menu-close');
+
+function openSocialMenu() {
+  socialMenu.classList.add('open');
+  menuOverlay.classList.add('open');
+  menuToggle.setAttribute('aria-expanded', 'true');
+  socialMenu.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSocialMenu() {
+  socialMenu.classList.remove('open');
+  menuOverlay.classList.remove('open');
+  menuToggle.setAttribute('aria-expanded', 'false');
+  socialMenu.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+if (menuToggle)  menuToggle.addEventListener('click', openSocialMenu);
+if (menuClose)   menuClose.addEventListener('click', closeSocialMenu);
+if (menuOverlay) menuOverlay.addEventListener('click', closeSocialMenu);
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && socialMenu?.classList.contains('open')) closeSocialMenu();
+});

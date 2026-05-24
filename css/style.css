@@ -1,0 +1,599 @@
+/* ────────────────────────────────────────────────────────────
+   phritz — style.css
+   ──────────────────────────────────────────────────────────── */
+
+/* ── Design tokens ───────────────────────────────────────────── */
+:root {
+  --bg:           #f4f3f0;
+  --text:         #1a1a1a;
+  --text-muted:   #909090;
+  --border:       rgba(26, 26, 26, 0.1);
+
+  /* DM Sans: clean neutral grotesque, Helvetica/Aktiv territory */
+  --font-display: 'DM Sans', system-ui, sans-serif;
+  --font-body:    'Jost', system-ui, sans-serif;
+
+  --pad-x:        clamp(28px, 5vw, 80px);
+  --pad-section:  clamp(64px, 9vw, 128px);
+  --grid-gap:     clamp(10px, 1.5vw, 20px);
+
+  --header-h:     92px; /* taller to give logo more breathing room from top */
+}
+
+/* ── Reset ───────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: var(--text);
+  /* No background-color here — body must stay transparent so the fixed
+     .hero-bg at z-index:-1 isn't painted over. Only html & #main carry bg. */
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ── Loader ───────────────────────────────────────────────────── */
+#loader {
+  position: fixed;
+  inset: 0;
+  background-color: var(--bg);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+
+#loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loader-logo {
+  width: 24px;
+  animation: blink 1.4s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.25; }
+  50%       { opacity: 1; }
+}
+
+/* ── Floating header ─────────────────────────────────────────── */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  /* socials align right; logo is absolutely centered */
+  justify-content: flex-end;
+  padding: 0 var(--pad-x);
+  pointer-events: none; /* let clicks pass through empty space */
+}
+
+/* Logo: centered absolutely within the header */
+.header-logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.header-logo img {
+  width: 19px; /* +25% from 15px */
+  display: block;
+}
+
+/* Socials: right side */
+.social-float {
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2vw, 22px);
+  pointer-events: auto;
+}
+
+.social-float a {
+  /* Default: dark (on main content) */
+  color: var(--text-muted);
+  font-size: 14.3px; /* +10% from 13px */
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  transition: color 0.35s ease, opacity 0.35s ease;
+}
+
+.social-float a:hover {
+  color: var(--text);
+}
+
+/* On the dark hero photo: white icons */
+.site-header.on-hero .social-float a {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.site-header.on-hero .social-float a:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+/* ── Vertical ellipsis toggle (mobile/tablet only) ───────────── */
+.menu-toggle {
+  display: none; /* shown via media query below */
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  pointer-events: auto;
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: normal;
+  color: var(--text);
+  transition: color 0.35s ease;
+  -webkit-tap-highlight-color: transparent;
+  /* Use the same font as body to ensure ⋮ renders cleanly */
+  font-family: var(--font-body);
+}
+
+/* On the dark hero: white ellipsis */
+.site-header.on-hero .menu-toggle {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ── Slide-in social menu ────────────────────────────────────── */
+.social-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(340px, 82vw);
+  height: 100%;
+  height: 100dvh;
+  background-color: var(--bg);
+  z-index: 160;
+  transform: translateX(100%);
+  transition: transform 0.48s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  padding: 32px 40px 48px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.social-menu.open {
+  transform: translateX(0);
+}
+
+/* Close button inside panel */
+.social-menu-close {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 16px;
+  padding: 6px;
+  margin-bottom: 48px;
+  transition: color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.social-menu-close:hover { color: var(--text); }
+
+/* Social links list inside the panel */
+.social-menu-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.social-menu-links li a {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 13px;
+  letter-spacing: 2.5px;
+  text-transform: lowercase;
+  color: var(--text);
+  min-height: 56px; /* comfortable touch target */
+  transition: color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.social-menu-links li:first-child a {
+  border-top: 1px solid var(--border);
+}
+
+.social-menu-links li a:hover { color: var(--text-muted); }
+
+.social-menu-links li a i {
+  width: 18px;
+  text-align: center;
+  font-size: 15px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+/* Backdrop overlay */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: 155;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.menu-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ── Hero ─────────────────────────────────────────────────────── */
+#hero {
+  position: relative;
+  height: 100vh;
+  height: 100lvh;
+}
+
+/* Fixed press photo background */
+.hero-bg {
+  position: fixed;
+  inset: 0;
+  background: url('../imgs/pic2023opt.jpg') center center / cover no-repeat;
+  z-index: -1;
+}
+
+/* Scroll indicator */
+.scroll-hint {
+  position: absolute;
+  bottom: 44px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: opacity 0.1s linear;
+  pointer-events: none;
+  user-select: none;
+}
+
+.scroll-hint span {
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 300;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.scroll-hint-line {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.65), transparent);
+  animation: line-drop 1.7s ease-in-out infinite;
+}
+
+@keyframes line-drop {
+  0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
+  65%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  100% { transform: scaleY(1); transform-origin: top; opacity: 0; }
+}
+
+/* ── Main content ─────────────────────────────────────────────── */
+#main {
+  position: relative;
+  z-index: 1;
+  background-color: var(--bg);
+}
+
+/* ── Fade-in utility ─────────────────────────────────────────── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Info section ─────────────────────────────────────────────── */
+.info-section {
+  min-height: 100vh;
+  min-height: 100lvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--pad-section) var(--pad-x);
+  /* offset so content isn't hidden behind fixed header */
+  padding-top: calc(var(--pad-section) + var(--header-h));
+}
+
+.info-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.artist-name {
+  font-family: var(--font-display); /* DM Sans — Helvetica/Aktiv territory */
+  font-weight: 300;
+  font-size: clamp(24px, 4.1vw, 52px);
+  letter-spacing: 0; /* natural DM Sans spacing */
+  line-height: 1;
+  color: var(--text);
+  margin-bottom: clamp(14px, 2vw, 24px);
+}
+
+.artist-bio {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 10px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: clamp(28px, 4.5vw, 52px);
+}
+
+/* ── Main nav ─────────────────────────────────────────────────── */
+.main-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.main-nav a {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: lowercase;
+  color: var(--text);
+  padding: 7px 2px;
+  position: relative;
+  display: inline-block;
+}
+
+.main-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  width: 100%;
+  height: 0.5px;
+  background-color: var(--text);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.24s ease;
+}
+
+.main-nav a:hover::after {
+  transform: scaleX(1);
+}
+
+/* ── Discography section ──────────────────────────────────────── */
+.discography-section {
+  padding: 0 var(--pad-x) var(--pad-section);
+}
+
+/* Filter bar */
+#filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: clamp(28px, 4vw, 52px);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0;
+}
+
+.filter-btn {
+  background: none;
+  border: none;
+  border-bottom: 1.5px solid transparent;
+  margin-bottom: -1px;
+  padding: 10px 0;
+  margin-right: clamp(20px, 3vw, 40px);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: lowercase;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.filter-btn:hover {
+  color: var(--text);
+}
+
+.filter-btn.active {
+  color: var(--text);
+  border-bottom-color: var(--text);
+}
+
+/* Releases grid */
+#releases-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--grid-gap);
+}
+
+/* Release tile */
+.release-tile {
+  display: block;
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background-color: rgba(26, 26, 26, 0.05);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.release-tile.tile-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.release-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.release-tile:hover img,
+.release-tile:focus-visible img {
+  transform: scale(1.04);
+}
+
+/* Hover overlay */
+.release-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10, 10, 10, 0.82) 0%,
+    rgba(10, 10, 10, 0.25) 50%,
+    transparent 100%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: clamp(8px, 1.5vw, 14px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.release-tile:hover .release-overlay,
+.release-tile:focus-visible .release-overlay {
+  opacity: 1;
+}
+
+.release-title {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(9px, 1.1vw, 12px);
+  letter-spacing: 0.3px;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 3px;
+}
+
+.release-meta {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: clamp(8px, 0.9vw, 10px);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* Touch devices: overlay always partially visible */
+@media (hover: none) {
+  .release-overlay {
+    opacity: 1;
+    background: linear-gradient(
+      to top,
+      rgba(10, 10, 10, 0.75) 0%,
+      transparent 55%
+    );
+  }
+}
+
+/* ── Footer ───────────────────────────────────────────────────── */
+#footer {
+  border-top: 1px solid var(--border);
+  padding: 24px var(--pad-x);
+  background-color: var(--bg); /* must cover the fixed hero-bg below */
+  position: relative;
+  z-index: 1;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-copy {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 300;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+
+@media (max-width: 1280px) {
+  #releases-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 960px) {
+  #releases-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Tablet & mobile: replace social icons with hamburger */
+@media (max-width: 768px) {
+  .social-float  { display: none; }
+  .menu-toggle   { display: flex; }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --grid-gap: 8px;
+    --pad-x: 20px;
+  }
+
+  #releases-grid { grid-template-columns: repeat(2, 1fr); }
+  .filter-btn    { margin-right: 16px; }
+}
+
+@media (max-width: 380px) {
+  #releases-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+}
