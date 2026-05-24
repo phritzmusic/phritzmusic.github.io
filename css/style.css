@@ -108,8 +108,8 @@ img {
   transition: opacity 0.45s ease;
 }
 
-/* On hero-pages: hide header logo when hero is in view (#hero-logo shows instead) */
-.hero-page .site-header.on-hero .header-logo {
+/* On hero-pages: hide logo once user scrolls past the hero */
+.hero-page .site-header:not(.on-hero) .header-logo {
   opacity: 0;
   pointer-events: none;
 }
@@ -117,32 +117,6 @@ img {
 .header-logo img {
   width: 24px;
   display: block;
-}
-
-/* ── Hero logo: separate fixed element, lower in the hero ────── */
-#hero-logo {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 78vh;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  line-height: 0;
-  pointer-events: auto;
-  opacity: 1;
-  transition: opacity 0.45s ease;
-  text-decoration: none;
-}
-
-#hero-logo img {
-  width: 24px;
-  display: block;
-}
-
-#hero-logo.logo-off {
-  opacity: 0;
-  pointer-events: none;
 }
 
 /* ── X (Twitter) + Patreon inline SVG icons ─────────────────── */
@@ -424,7 +398,40 @@ img {
   letter-spacing: 3.5px;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: clamp(28px, 4.5vw, 52px);
+  margin-bottom: clamp(20px, 3vw, 36px);
+}
+
+/* ── Artist bio text ──────────────────────────────────────────── */
+.artist-bios {
+  max-width: 560px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 2vw, 22px);
+  margin-bottom: clamp(32px, 5vw, 60px);
+}
+
+.bio-en p {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 1.95;
+  color: var(--text);
+  text-align: center;
+}
+
+.bio-en p + p {
+  margin-top: 0.9em;
+}
+
+.bio-jp {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 10px;
+  line-height: 2;
+  color: var(--text-muted);
+  text-align: center;
+  letter-spacing: 0.2px;
 }
 
 /* ── Main nav ─────────────────────────────────────────────────── */
@@ -734,7 +741,7 @@ img {
 
 .clients-grid li img {
   filter: grayscale(1) opacity(0.55);
-  max-height: 28px;
+  height: 22px;
   width: auto;
   max-width: 100%;
   object-fit: contain;

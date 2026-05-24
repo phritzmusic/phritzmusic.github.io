@@ -10,16 +10,11 @@ window.addEventListener('load', () => {
 // ── Floating header: switch color when leaving the hero ───────
 const siteHeader = document.getElementById('site-header');
 const hero       = document.getElementById('hero');
-const heroLogoEl = document.getElementById('hero-logo');
 
 if (siteHeader && hero) {
   siteHeader.classList.add('on-hero');
   const headerObserver = new IntersectionObserver(
-    ([entry]) => {
-      siteHeader.classList.toggle('on-hero', entry.isIntersecting);
-      // Show #hero-logo while hero is visible; hide it once user scrolls past
-      if (heroLogoEl) heroLogoEl.classList.toggle('logo-off', !entry.isIntersecting);
-    },
+    ([entry]) => siteHeader.classList.toggle('on-hero', entry.isIntersecting),
     { threshold: 0 }
   );
   headerObserver.observe(hero);
