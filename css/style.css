@@ -104,39 +104,40 @@ img {
   box-shadow: 0 1px 0 var(--border);
 }
 
-/* Logo: centered on hero, slides to upper-left off hero */
+/* Logo: centered always; fades in and shrinks when scrolled into the header */
 .header-logo {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 55%; /* slightly below the midpoint — keeps it off the very top edge */
   transform: translate(-50%, -50%);
   pointer-events: auto;
   display: flex;
   align-items: center;
   line-height: 0;
-  transition: left 0.45s ease, transform 0.45s ease;
+  opacity: 0;
+  transition: opacity 0.45s ease, top 0.45s ease;
 }
 
-/* Off hero: logo moves to left edge of header */
+/* On hero: show at the current centered position, no color change */
+.site-header.on-hero .header-logo {
+  opacity: 1;
+}
+
+/* Off hero: fade in, center within the compact bar, 20% smaller */
 .site-header:not(.on-hero) .header-logo {
-  left: var(--pad-x);
-  transform: translateY(-50%);
+  top: 50%;
+  opacity: 1;
 }
 
 .header-logo img {
   width: 19px;
   display: block;
-  transition: filter 0.45s ease, width 0.45s ease;
+  transition: width 0.45s ease;
 }
 
-/* Off hero: slightly smaller so it sits neatly in the compact bar */
+/* Off hero: 20% smaller (19 × 0.8 ≈ 15 px) */
 .site-header:not(.on-hero) .header-logo img {
-  width: 16px;
-}
-
-/* On dark hero photo: invert logo to white so it reads against the photo */
-.site-header.on-hero .header-logo img {
-  filter: invert(1);
+  width: 15px;
 }
 
 /* ── X (Twitter) + Patreon inline SVG icons ─────────────────── */
