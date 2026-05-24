@@ -51,7 +51,7 @@ def fetch_artist_releases(artist_id: str, token: str) -> list[dict]:
     headers = {"Authorization": f"Bearer {token}"}
     url = (
         f"https://api.spotify.com/v1/artists/{artist_id}/albums"
-        f"?include_groups=album,single&limit=50&market=JP"
+        f"?include_groups=album,single&limit=50"
     )
     results = []
     while url:
