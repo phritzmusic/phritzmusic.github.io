@@ -6,7 +6,7 @@ on:
     - cron: '0 3 * * *'   # Daily at 3 AM UTC (noon JST)
   workflow_dispatch:       # Manual trigger from GitHub → Actions tab
   push:
-    branches: [main]
+    branches: [master]
     paths-ignore:
       - 'data/releases-spotify.js'   # Don't loop on its own commits
       - 'data/releases-manual.js'
