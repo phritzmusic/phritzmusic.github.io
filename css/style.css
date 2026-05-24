@@ -425,7 +425,7 @@ img {
 /* ── Artist bio text ──────────────────────────────────────────── */
 .artist-bios {
   width: 100%;
-  max-width: 380px;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   gap: clamp(14px, 2vw, 22px);
@@ -435,7 +435,7 @@ img {
 .bio-en p {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 13.86px;
+  font-size: 18px;
   line-height: 1.95;
   color: var(--text);
   text-align: left;
@@ -757,7 +757,7 @@ img {
 }
 
 .clients-grid li img {
-  filter: grayscale(1) opacity(0.55);
+  filter: grayscale(1) opacity(0.82);
   height: 22px;
   width: auto;
   max-width: 100%;
