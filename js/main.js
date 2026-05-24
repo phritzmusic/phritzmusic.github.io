@@ -65,9 +65,15 @@ function buildGrid(releases) {
   const grid = document.getElementById('releases-grid');
   if (!grid) return;
 
+  const LIMIT = 10;
+
+  // Remove any existing show-more button from a previous filter/call
+  const existing = document.getElementById('disco-show-more');
+  if (existing) existing.remove();
+
   grid.innerHTML = releases.map((r, i) => `
     <a
-      class="release-tile"
+      class="release-tile${i >= LIMIT ? ' tile-folded' : ''}"
       href="${r.link}"
       target="_blank"
       rel="noopener noreferrer"
@@ -82,14 +88,32 @@ function buildGrid(releases) {
     </a>
   `).join('');
 
-  // Stagger tile entrance
+  // Stagger tile entrance (visible tiles only)
   const tileIO = new IntersectionObserver(
     (entries) => entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('tile-visible'); tileIO.unobserve(e.target); }
     }),
     { threshold: 0.04, rootMargin: '0px 0px -30px 0px' }
   );
-  grid.querySelectorAll('.release-tile').forEach(t => tileIO.observe(t));
+
+  const observeVisible = () => {
+    grid.querySelectorAll('.release-tile:not(.tile-folded):not(.tile-visible)').forEach(t => tileIO.observe(t));
+  };
+  observeVisible();
+
+  // Show-more button
+  if (releases.length > LIMIT) {
+    const btn = document.createElement('button');
+    btn.className = 'show-more-btn';
+    btn.id = 'disco-show-more';
+    btn.textContent = `show all (${releases.length})`;
+    btn.addEventListener('click', () => {
+      grid.querySelectorAll('.tile-folded').forEach(t => t.classList.remove('tile-folded'));
+      observeVisible();
+      btn.remove();
+    });
+    grid.insertAdjacentElement('afterend', btn);
+  }
 }
 
 function initDiscography() {
@@ -134,6 +158,29 @@ function initDiscography() {
 }
 
 initDiscography();
+
+// ── Other Works: fold excess items behind show-more ───────────
+function initOtherWorks() {
+  const grid = document.getElementById('works-grid');
+  if (!grid) return;
+
+  const LIMIT = 8;
+  const items = Array.from(grid.querySelectorAll('.work-item'));
+  if (items.length <= LIMIT) return;
+
+  items.slice(LIMIT).forEach(item => item.classList.add('work-hidden'));
+
+  const btn = document.createElement('button');
+  btn.className = 'show-more-btn';
+  btn.textContent = `show all (${items.length})`;
+  btn.addEventListener('click', () => {
+    items.forEach(item => item.classList.remove('work-hidden'));
+    btn.remove();
+  });
+  grid.insertAdjacentElement('afterend', btn);
+}
+
+initOtherWorks();
 
 // ── Slide-in social menu (mobile/tablet) ─────────────────────
 const menuToggle  = document.getElementById('menu-toggle');

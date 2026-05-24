@@ -26,7 +26,7 @@ window.RELEASES_MANUAL = [
     artwork: "https://yonige.net/s3/skiyaki/uploads/image/file/148934/Panikhida_D_01_s.jpg",
     link: "https://orcd.co/panikhida_pre",
     year: 2023,
-    release_date: "2023-12-31"
+    release_date: "2023-02-22"
   },
   {
     title: "Look at the Sky",
