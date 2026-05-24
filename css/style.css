@@ -89,8 +89,8 @@ img {
   height: var(--header-h);
   display: flex;
   align-items: center;
-  /* logo left, socials right */
-  justify-content: space-between;
+  /* socials right; logo absolutely positioned */
+  justify-content: flex-end;
   padding: 0 var(--pad-x);
   pointer-events: none; /* let clicks pass through empty space */
   transition: background 0.45s ease, box-shadow 0.45s ease;
@@ -104,21 +104,37 @@ img {
   box-shadow: 0 1px 0 var(--border);
 }
 
-/* Logo: upper-left, always visible */
+/* Logo: centered on hero, slides to upper-left off hero */
 .header-logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   pointer-events: auto;
   display: flex;
   align-items: center;
   line-height: 0;
+  transition: left 0.45s ease, transform 0.45s ease;
+}
+
+/* Off hero: logo moves to left edge of header */
+.site-header:not(.on-hero) .header-logo {
+  left: var(--pad-x);
+  transform: translateY(-50%);
 }
 
 .header-logo img {
   width: 19px;
   display: block;
-  transition: filter 0.45s ease;
+  transition: filter 0.45s ease, width 0.45s ease;
 }
 
-/* On dark hero photo: invert logo to white so it's visible */
+/* Off hero: slightly smaller so it sits neatly in the compact bar */
+.site-header:not(.on-hero) .header-logo img {
+  width: 16px;
+}
+
+/* On dark hero photo: invert logo to white so it reads against the photo */
 .site-header.on-hero .header-logo img {
   filter: invert(1);
 }
