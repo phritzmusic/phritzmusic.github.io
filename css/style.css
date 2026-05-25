@@ -102,17 +102,17 @@ img {
   transform: translateY(-100%);
 }
 
-/* Always cover the notch / Dynamic Island strip with frosted background */
-.site-header::before {
-  content: '';
-  position: absolute;
+/* ── Notch / Dynamic Island cover — always on top, independent of header ── */
+#notch-cover {
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: env(safe-area-inset-top, 0px);
-  background: rgba(244, 243, 240, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(244, 243, 240, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 150; /* above header (100) and social-menu (160-1) */
   pointer-events: none;
 }
 
@@ -379,19 +379,20 @@ img {
   100% { transform: scaleY(1); transform-origin: top; opacity: 0; }
 }
 
-/* ── Hero logo (separate element inside #hero, not the header logo) ── */
+/* ── Hero logo — fixed so it fades in place rather than scrolling away ── */
 #hero-logo {
-  position: absolute;
-  /* 20px below header midpoint */
+  position: fixed;
   top: calc(env(safe-area-inset-top, 0px) + var(--header-h) / 2 + 20px);
   left: 50%;
   transform: translate(-50%, -50%);
   line-height: 0;
-  pointer-events: auto;
+  pointer-events: none; /* header logo handles clicking off-hero */
+  z-index: 90; /* below header (100) */
+  transition: opacity 0.06s linear;
 }
 
 #hero-logo img {
-  width: 18px; /* 16px × 1.10 ≈ 18px */
+  width: 18px;
   display: block;
 }
 
@@ -490,7 +491,9 @@ img {
   font-size: 18px;
   line-height: 1.95;
   color: var(--text);
-  text-align: left;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 .bio-jp {
@@ -748,8 +751,17 @@ img {
 .cl-tab:hover   { color: var(--text); }
 .cl-tab.active  { color: var(--text); border-bottom-color: var(--text); }
 
+/* Tab panels — fade in on reveal */
+@keyframes panelFadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 .cl-panel { display: block; }
 .cl-panel--hidden { display: none; }
+.cl-panel.is-entering {
+  animation: panelFadeIn 0.32s ease forwards;
+}
 
 /* ── Live shows list ──────────────────────────────────────────── */
 .show-row {

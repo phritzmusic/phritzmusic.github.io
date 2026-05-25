@@ -40,13 +40,17 @@ window.addEventListener('scroll', () => {
   lastScrollY = y;
 }, { passive: true });
 
-// ── Scroll-based scroll-hint fade ────────────────────────────
-const scrollHint = document.querySelector('.scroll-hint');
+// ── Scroll-based fades: scroll-hint + hero logo ──────────────
+const scrollHint  = document.querySelector('.scroll-hint');
+const heroLogoEl  = document.getElementById('hero-logo');
 
 function onScroll() {
   const s  = window.scrollY;
   const vh = window.innerHeight;
+  // Scroll hint: gone by ~22% of viewport
   if (scrollHint) scrollHint.style.opacity = Math.max(0, 1 - s / (vh * 0.22));
+  // Hero logo: dissolves by ~40% of viewport (well before main content)
+  if (heroLogoEl)  heroLogoEl.style.opacity  = Math.max(0, 1 - s / (vh * 0.40));
 }
 window.addEventListener('scroll', onScroll, { passive: true });
 
@@ -235,11 +239,34 @@ initOtherWorks();
 const clTabs   = document.querySelectorAll('.cl-tab');
 const clPanels = document.querySelectorAll('.cl-panel');
 
+function activatePanel(target) {
+  clTabs.forEach(t => t.classList.toggle('active', t.dataset.panel === target));
+  clPanels.forEach(p => {
+    if (p.id === `panel-${target}`) {
+      p.classList.remove('cl-panel--hidden');
+      // Force reflow so animation restarts cleanly
+      p.classList.remove('is-entering');
+      void p.offsetWidth;
+      p.classList.add('is-entering');
+    } else {
+      p.classList.add('cl-panel--hidden');
+      p.classList.remove('is-entering');
+    }
+  });
+}
+
 clTabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    const target = tab.dataset.panel;
-    clTabs.forEach(t   => t.classList.toggle('active', t === tab));
-    clPanels.forEach(p => p.classList.toggle('cl-panel--hidden', p.id !== `panel-${target}`));
+  tab.addEventListener('click', () => activatePanel(tab.dataset.panel));
+});
+
+// ── "live" shortcut link in the bio nav ───────────────────────
+document.querySelectorAll('[data-activate-panel]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const panelId = link.dataset.activatePanel;
+    document.getElementById('clients')?.scrollIntoView({ behavior: 'smooth' });
+    // Small delay so scroll starts before tab switches
+    setTimeout(() => activatePanel(panelId), 80);
   });
 });
 
