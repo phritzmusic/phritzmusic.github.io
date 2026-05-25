@@ -14,11 +14,31 @@ const hero       = document.getElementById('hero');
 if (siteHeader && hero) {
   siteHeader.classList.add('on-hero');
   const headerObserver = new IntersectionObserver(
-    ([entry]) => siteHeader.classList.toggle('on-hero', entry.isIntersecting),
+    ([entry]) => {
+      siteHeader.classList.toggle('on-hero', entry.isIntersecting);
+      // Always reveal header when returning to the hero
+      if (entry.isIntersecting) siteHeader.classList.remove('header-hidden');
+    },
     { threshold: 0 }
   );
   headerObserver.observe(hero);
 }
+
+// ── Hide on scroll-down, reveal on scroll-up ─────────────────
+let lastScrollY = window.scrollY;
+const SCROLL_DELTA = 8; // px dead-zone to avoid jitter
+
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  if (siteHeader && !siteHeader.classList.contains('on-hero')) {
+    if (y > lastScrollY + SCROLL_DELTA) {
+      siteHeader.classList.add('header-hidden');
+    } else if (y < lastScrollY - SCROLL_DELTA) {
+      siteHeader.classList.remove('header-hidden');
+    }
+  }
+  lastScrollY = y;
+}, { passive: true });
 
 // ── Scroll-based scroll-hint fade ────────────────────────────
 const scrollHint = document.querySelector('.scroll-hint');

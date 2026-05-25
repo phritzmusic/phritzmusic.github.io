@@ -94,7 +94,12 @@ img {
   justify-content: flex-end;
   padding: env(safe-area-inset-top, 0px) var(--pad-x) 0;
   pointer-events: none; /* let clicks pass through empty space */
-  transition: background 0.45s ease, box-shadow 0.45s ease;
+  transition: background 0.45s ease, box-shadow 0.45s ease, transform 0.32s ease;
+}
+
+/* Hide header when scrolling down, reveal on scroll up */
+.site-header.header-hidden {
+  transform: translateY(-100%);
 }
 
 /* Always cover the notch / Dynamic Island strip with frosted background */
@@ -794,6 +799,7 @@ img {
   line-height: 2.2;
   color: var(--text-muted);
   letter-spacing: 0.5px;
+  text-align: center;
 }
 
 /* Works footnote */
