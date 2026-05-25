@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>add show — phritz tools</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:         #f4f3f0;
+      --text:       #1a1a1a;
+      --muted:      #909090;
+      --border:     rgba(26,26,26,0.12);
+      --accent:     #1a1a1a;
+      --font:       'Jost', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font);
+      font-weight: 300;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 64px 24px 80px;
+    }
+
+    h1 {
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: lowercase;
+      color: var(--muted);
+      margin-bottom: 48px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 560px;
+    }
+
+    .field {
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      text-transform: lowercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    input[type="text"],
+    input[type="url"],
+    input[type="date"] {
+      width: 100%;
+      background: none;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 8px 0 10px;
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 1px;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+
+    input[type="text"]:focus,
+    input[type="url"]:focus,
+    input[type="date"]:focus {
+      border-bottom-color: var(--text);
+    }
+
+    input::placeholder { color: var(--muted); }
+
+    .row { display: flex; gap: 24px; }
+    .row .field { flex: 1; }
+
+    .optional-note {
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      margin-left: 6px;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      margin-top: 36px;
+    }
+
+    button {
+      font-family: var(--font);
+      font-weight: 300;
+      letter-spacing: 2px;
+      text-transform: lowercase;
+      cursor: pointer;
+      transition: color 0.2s, background 0.2s, border-color 0.2s;
+    }
+
+    .btn-generate {
+      flex: 1;
+      background: var(--text);
+      color: var(--bg);
+      border: 1px solid var(--text);
+      font-size: 10px;
+      padding: 14px 20px;
+    }
+    .btn-generate:hover { background: #333; border-color: #333; }
+
+    .btn-clear {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 10px;
+      padding: 14px 20px;
+    }
+    .btn-clear:hover { border-color: var(--text); color: var(--text); }
+
+    /* Output area */
+    .output-section {
+      width: 100%;
+      max-width: 560px;
+      margin-top: 48px;
+      display: none;
+    }
+
+    .output-section.visible { display: block; }
+
+    .output-label {
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      text-transform: lowercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    /* Preview */
+    .preview-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .preview-main {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .preview-act {
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: lowercase;
+    }
+
+    .preview-title {
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: lowercase;
+      color: var(--muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .preview-details {
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+
+    .preview-date,
+    .preview-venue {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .preview-tickets {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: lowercase;
+      color: var(--muted);
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 1px;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    /* Code output */
+    .code-box {
+      position: relative;
+      background: rgba(26,26,26,0.04);
+      border: 1px solid var(--border);
+      padding: 20px;
+    }
+
+    pre {
+      font-family: 'SF Mono', 'Fira Code', 'Fira Mono', monospace;
+      font-size: 11px;
+      line-height: 1.7;
+      color: var(--text);
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    .btn-copy {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 9px;
+      padding: 6px 12px;
+    }
+    .btn-copy:hover { border-color: var(--text); color: var(--text); }
+    .btn-copy.copied { color: var(--text); border-color: var(--text); }
+
+    .instruction {
+      margin-top: 20px;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .instruction strong {
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    .divider {
+      width: 100%;
+      max-width: 560px;
+      height: 1px;
+      background: var(--border);
+      margin: 48px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>phritz · add show</h1>
+
+  <div class="card">
+
+    <div class="row">
+      <div class="field">
+        <label for="f-act">artist name</label>
+        <input type="text" id="f-act" placeholder="phritz" value="phritz">
+      </div>
+      <div class="field">
+        <label for="f-title">show title</label>
+        <input type="text" id="f-title" placeholder="show / event name">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="field">
+        <label for="f-date">date</label>
+        <input type="date" id="f-date">
+      </div>
+      <div class="field">
+        <label for="f-venue">venue</label>
+        <input type="text" id="f-venue" placeholder="Liquidroom, Tokyo">
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="f-tickets">
+        ticket url
+        <span class="optional-note">(optional)</span>
+      </label>
+      <input type="url" id="f-tickets" placeholder="https://...">
+    </div>
+
+    <div class="btn-group">
+      <button class="btn-generate" onclick="generate()">generate snippet</button>
+      <button class="btn-clear" onclick="clearAll()">clear</button>
+    </div>
+
+  </div>
+
+  <div class="output-section" id="output-section">
+
+    <div class="divider"></div>
+
+    <p class="output-label">preview</p>
+
+    <div class="preview-row" id="preview-row">
+      <div class="preview-main">
+        <span class="preview-act" id="p-act"></span>
+        <span class="preview-title" id="p-title"></span>
+      </div>
+      <div class="preview-details">
+        <span class="preview-date" id="p-date"></span>
+        <span class="preview-venue" id="p-venue"></span>
+        <a class="preview-tickets" id="p-tickets" style="display:none" href="#" target="_blank" rel="noopener">tickets →</a>
+      </div>
+    </div>
+
+    <p class="output-label">html snippet — paste into index.html inside #panel-live</p>
+
+    <div class="code-box">
+      <pre id="code-output"></pre>
+      <button class="btn-copy" id="btn-copy" onclick="copyCode()">copy</button>
+    </div>
+
+    <p class="instruction">
+      Open <strong>index.html</strong>, find <strong>#panel-live</strong>,
+      remove <code>&lt;p class="shows-none"&gt;…&lt;/p&gt;</code>
+      and paste the snippet above. Add multiple <code>.show-row</code> blocks for multiple dates.
+      When all shows have passed, restore the <code>shows-none</code> paragraph.
+    </p>
+
+  </div>
+
+  <script>
+    function formatDate(rawDate) {
+      if (!rawDate) return '';
+      // rawDate is YYYY-MM-DD
+      const [y, m, d] = rawDate.split('-');
+      return `${y} · ${m} · ${d}`;
+    }
+
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function generate() {
+      const act     = document.getElementById('f-act').value.trim();
+      const title   = document.getElementById('f-title').value.trim();
+      const rawDate = document.getElementById('f-date').value;
+      const venue   = document.getElementById('f-venue').value.trim();
+      const tickets = document.getElementById('f-tickets').value.trim();
+
+      if (!act || !rawDate || !venue) {
+        alert('Please fill in artist name, date, and venue.');
+        return;
+      }
+
+      const dateStr = formatDate(rawDate);
+
+      // Update preview
+      document.getElementById('p-act').textContent   = act;
+      document.getElementById('p-title').textContent = title ? `— ${title}` : '';
+      document.getElementById('p-date').textContent  = dateStr;
+      document.getElementById('p-venue').textContent = venue;
+
+      const pTickets = document.getElementById('p-tickets');
+      if (tickets) {
+        pTickets.style.display = 'inline';
+        pTickets.href = tickets;
+      } else {
+        pTickets.style.display = 'none';
+      }
+
+      // Build snippet
+      const titleSpan = title
+        ? `\n            <span class="show-title">— ${escapeHtml(title)}</span>`
+        : '';
+
+      const ticketAnchor = tickets
+        ? `\n            <a class="show-tickets" href="${escapeHtml(tickets)}" target="_blank" rel="noopener noreferrer">tickets →</a>`
+        : '';
+
+      const snippet =
+`<div class="show-row">
+  <div class="show-main">
+    <span class="show-act">${escapeHtml(act)}</span>${titleSpan}
+  </div>
+  <div class="show-details">
+    <span class="show-date">${escapeHtml(dateStr)}</span>
+    <span class="show-venue">${escapeHtml(venue)}</span>${ticketAnchor}
+  </div>
+</div>`;
+
+      document.getElementById('code-output').textContent = snippet;
+
+      // Show output section
+      document.getElementById('output-section').classList.add('visible');
+
+      // Reset copy button
+      const copyBtn = document.getElementById('btn-copy');
+      copyBtn.textContent = 'copy';
+      copyBtn.classList.remove('copied');
+
+      // Scroll to output
+      document.getElementById('output-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function copyCode() {
+      const code = document.getElementById('code-output').textContent;
+      navigator.clipboard.writeText(code).then(() => {
+        const btn = document.getElementById('btn-copy');
+        btn.textContent = 'copied ✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    function clearAll() {
+      document.getElementById('f-act').value    = 'phritz';
+      document.getElementById('f-title').value  = '';
+      document.getElementById('f-date').value   = '';
+      document.getElementById('f-venue').value  = '';
+      document.getElementById('f-tickets').value = '';
+      document.getElementById('output-section').classList.remove('visible');
+    }
+
+    // Allow Enter key to generate
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Enter') generate();
+    });
+  </script>
+
+</body>
+</html>
