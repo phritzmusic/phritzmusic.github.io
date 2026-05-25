@@ -231,6 +231,18 @@ function initOtherWorks() {
 
 initOtherWorks();
 
+// ── Clients / Live tab switcher ───────────────────────────────
+const clTabs   = document.querySelectorAll('.cl-tab');
+const clPanels = document.querySelectorAll('.cl-panel');
+
+clTabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.panel;
+    clTabs.forEach(t   => t.classList.toggle('active', t === tab));
+    clPanels.forEach(p => p.classList.toggle('cl-panel--hidden', p.id !== `panel-${target}`));
+  });
+});
+
 // ── Slide-in social menu (mobile/tablet) ─────────────────────
 const menuToggle  = document.getElementById('menu-toggle');
 const socialMenu  = document.getElementById('social-menu');

@@ -726,6 +726,69 @@ img {
   margin-bottom: -1px;
 }
 
+/* ── Clients / Live switchable tabs ───────────────────────────── */
+.cl-tab {
+  background: none;
+  border: none;
+  border-bottom: 1.5px solid transparent;
+  margin-bottom: -1px;
+  padding: 10px 0;
+  margin-right: clamp(20px, 3vw, 40px);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: lowercase;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cl-tab:hover   { color: var(--text); }
+.cl-tab.active  { color: var(--text); border-bottom-color: var(--text); }
+
+.cl-panel { display: block; }
+.cl-panel--hidden { display: none; }
+
+/* ── Live shows list ──────────────────────────────────────────── */
+.show-row {
+  display: flex;
+  align-items: baseline;
+  gap: clamp(24px, 4vw, 64px);
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.show-row:first-child { border-top: 1px solid var(--border); }
+
+.show-date {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.show-venue {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--text);
+}
+
+.shows-none {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: lowercase;
+  color: var(--text-muted);
+  padding: 18px 0;
+}
+
 /* Works grid */
 .works-grid {
   display: grid;

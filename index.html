@@ -129,11 +129,30 @@
       <div id="releases-grid" aria-label="Releases"></div>
     </section>
 
-    <section id="clients" class="clients-section fade-in" aria-label="Clients">
+    <section id="clients" class="clients-section fade-in" aria-label="Clients &amp; Live">
+
+      <!-- Shared tab bar -->
       <div class="otherworks-header">
-        <span class="section-tab">clients</span>
+        <button class="cl-tab active" data-panel="clients">clients</button>
+        <button class="cl-tab" data-panel="live">live</button>
       </div>
-      <p class="clients-list">Hitachi / Kao / Hakuhodo / Hermès / ちふれ / Hanwha Japan / SoftBank / Splice / 厚生労働省 / Deemo II / UNIQLO / okamura / チューリッヒ保険会社 / Panasonic</p>
+
+      <!-- Clients panel -->
+      <div id="panel-clients" class="cl-panel">
+        <p class="clients-list">Hitachi / Kao / Hakuhodo / Hermès / ちふれ / Hanwha Japan / SoftBank / Splice / 厚生労働省 / Deemo II / UNIQLO / okamura / チューリッヒ保険会社 / Panasonic</p>
+      </div>
+
+      <!-- Live shows panel -->
+      <div id="panel-live" class="cl-panel cl-panel--hidden">
+        <!-- Add show rows here when dates are confirmed, e.g.:
+        <div class="show-row">
+          <span class="show-date">2026 · 09 · 12</span>
+          <span class="show-venue">Liquidroom, Tokyo</span>
+        </div>
+        -->
+        <p class="shows-none">no upcoming dates</p>
+      </div>
+
     </section>
 
   </main>
