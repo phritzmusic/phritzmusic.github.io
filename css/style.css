@@ -363,8 +363,8 @@ img {
 /* ── Hero logo (separate element inside #hero, not the header logo) ── */
 #hero-logo {
   position: absolute;
-  /* top edge aligned with social icon tops (icons ~14px, logo 19px → +2px offset) */
-  top: calc(env(safe-area-inset-top, 0px) + var(--header-h) / 2 + 2px);
+  /* 14px below header midpoint */
+  top: calc(env(safe-area-inset-top, 0px) + var(--header-h) / 2 + 14px);
   left: 50%;
   transform: translate(-50%, -50%);
   line-height: 0;
@@ -372,7 +372,7 @@ img {
 }
 
 #hero-logo img {
-  width: 19px;
+  width: 16px; /* 19px × 0.85 ≈ 16px */
   display: block;
 }
 
