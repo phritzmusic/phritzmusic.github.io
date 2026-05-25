@@ -12,6 +12,7 @@
   /* DM Sans: clean neutral grotesque, Helvetica/Aktiv territory */
   --font-display: 'DM Sans', system-ui, sans-serif;
   --font-body:    'Jost', system-ui, sans-serif;
+  --font-serif:   'Lora', Georgia, serif;
 
   --pad-x:        clamp(28px, 5vw, 80px);
   --pad-section:  clamp(64px, 9vw, 128px);
@@ -130,9 +131,9 @@ img {
   transition: width 0.45s ease;
 }
 
-/* Off hero: 20% smaller (19 × 0.8 ≈ 15 px) */
+/* Off hero: smaller to sit comfortably in the compact bar */
 .site-header:not(.on-hero) .header-logo img {
-  width: 15px;
+  width: 13px;
 }
 
 /* ── X (Twitter) + Patreon inline SVG icons ─────────────────── */
@@ -362,9 +363,10 @@ img {
 /* ── Hero logo (separate element inside #hero, not the header logo) ── */
 #hero-logo {
   position: absolute;
-  top: 20%;
+  /* vertically centred in the same strip as the header icons */
+  top: calc(env(safe-area-inset-top, 0px) + var(--header-h) / 2);
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   line-height: 0;
   pointer-events: auto;
 }
@@ -464,7 +466,7 @@ img {
 }
 
 .bio-en p {
-  font-family: var(--font-body);
+  font-family: var(--font-serif);
   font-weight: 400;
   font-size: 18px;
   line-height: 1.95;
