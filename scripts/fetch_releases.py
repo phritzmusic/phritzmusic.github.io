@@ -15,6 +15,7 @@ import base64
 import json
 import os
 import sys
+import time
 from datetime import datetime, timezone
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
@@ -67,6 +68,31 @@ def get_token(client_id: str, client_secret: str) -> str:
         sys.exit(f"ERROR: Unexpected error during Spotify auth: {e}")
 
 
+def fetch_url_with_retry(url: str, headers: dict, max_retries: int = 6) -> dict:
+    """Fetch a URL, retrying on 429 (rate limit) with Retry-After back-off."""
+    for attempt in range(1, max_retries + 1):
+        req = Request(url, headers=headers)
+        try:
+            with urlopen(req) as r:
+                return json.loads(r.read())
+        except HTTPError as e:
+            if e.code == 429:
+                retry_after = int(e.headers.get("Retry-After", 60))
+                print(
+                    f"  Rate-limited (429). Waiting {retry_after}s "
+                    f"(attempt {attempt}/{max_retries})…",
+                    file=sys.stderr,
+                )
+                time.sleep(retry_after)
+                if attempt == max_retries:
+                    raise  # give up after final retry
+            else:
+                body = e.read().decode(errors="replace")
+                print(f"  HTTP {e.code}: {body[:300]}", file=sys.stderr)
+                raise
+    return {}  # unreachable, but keeps type checkers happy
+
+
 def fetch_artist_releases(artist_id: str, token: str) -> list[dict]:
     """Returns all albums + singles for the given artist (handles pagination)."""
     headers = {"Authorization": f"Bearer {token}"}
@@ -78,24 +104,18 @@ def fetch_artist_releases(artist_id: str, token: str) -> list[dict]:
     page = 0
     while url:
         page += 1
-        req = Request(url, headers=headers)
         try:
-            with urlopen(req) as r:
-                data = json.loads(r.read())
+            data = fetch_url_with_retry(url, headers)
         except HTTPError as e:
-            body = e.read().decode(errors="replace")
-            print(
-                f"  HTTP {e.code} on page {page}: {body[:300]}",
-                file=sys.stderr,
-            )
+            print(f"  Giving up on page {page} after repeated errors (HTTP {e.code}).", file=sys.stderr)
             break
         except Exception as e:
-            print(f"  Error on page {page}: {e}", file=sys.stderr)
+            print(f"  Unexpected error on page {page}: {e}", file=sys.stderr)
             break
 
         total = data.get("total", "?")
         items = data.get("items") or []
-        print(f"  page {page}: {len(items)} items (total reported by API: {total})")
+        print(f"  page {page}: {len(items)} items (API total: {total})")
 
         for item in items:
             images = item.get("images", [])
@@ -137,6 +157,7 @@ def main():
         print(f"\nFetching releases for '{project}' (ID: {artist_id})…")
         releases = fetch_artist_releases(artist_id, token)
         print(f"  → {len(releases)} releases returned for {project}")
+        time.sleep(1)  # small pause between artists to stay within rate limits
         for r in releases:
             if r["link"] in seen_links:
                 print(f"    skip duplicate: {r['title']}")
