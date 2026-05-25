@@ -114,8 +114,8 @@
           </div>
           <nav class="main-nav" aria-label="Site navigation">
             <a href="#discography">discography</a>
+            <a href="#live">live</a>
             <a href="#clients">clients</a>
-            <a href="#clients" data-activate-panel="live">live</a>
             <a href="mailto:contact@phritzmusic.com">contact</a>
           </nav>
         </div>
@@ -133,22 +133,13 @@
       <div id="releases-grid" aria-label="Releases"></div>
     </section>
 
-    <section id="clients" class="clients-section fade-in" aria-label="Clients &amp; Live">
-
-      <!-- Shared tab bar -->
+    <!-- ── Live section ─────────────────────────────────────── -->
+    <!-- Use tools/add-show.html to add or manage show dates  -->
+    <section id="live" class="live-section fade-in" aria-label="Live">
       <div class="otherworks-header">
-        <button class="cl-tab active" data-panel="clients">clients</button>
-        <button class="cl-tab" data-panel="live">live</button>
+        <span class="section-tab">live</span>
       </div>
-
-      <!-- Clients panel -->
-      <div id="panel-clients" class="cl-panel">
-        <p class="clients-list">Hitachi / Kao / Hakuhodo / Hermès / ちふれ / Hanwha Japan / SoftBank / Splice / 厚生労働省 / Deemo II / UNIQLO / okamura / チューリッヒ保険会社 / Panasonic</p>
-      </div>
-
-      <!-- Live shows panel -->
-      <!-- Use tools/add-show.html to generate new show rows -->
-      <div id="panel-live" class="cl-panel cl-panel--hidden">
+      <div id="panel-live">
         <div class="show-row">
           <div class="show-main">
             <span class="show-act">play in stereo</span>
@@ -171,7 +162,14 @@
           </div>
         </div>
       </div>
+    </section>
 
+    <!-- ── Clients section ───────────────────────────────────── -->
+    <section id="clients" class="clients-section fade-in" aria-label="Clients">
+      <div class="otherworks-header">
+        <span class="section-tab">clients</span>
+      </div>
+      <p class="clients-list">Hitachi / Kao / Hakuhodo / Hermès / ちふれ / Hanwha Japan / SoftBank / Splice / 厚生労働省 / Deemo II / UNIQLO / okamura / チューリッヒ保険会社 / Panasonic</p>
     </section>
 
   </main>

@@ -235,40 +235,7 @@ function initOtherWorks() {
 
 initOtherWorks();
 
-// ── Clients / Live tab switcher ───────────────────────────────
-const clTabs   = document.querySelectorAll('.cl-tab');
-const clPanels = document.querySelectorAll('.cl-panel');
-
-function activatePanel(target) {
-  clTabs.forEach(t => t.classList.toggle('active', t.dataset.panel === target));
-  clPanels.forEach(p => {
-    if (p.id === `panel-${target}`) {
-      p.classList.remove('cl-panel--hidden');
-      // Force reflow so animation restarts cleanly
-      p.classList.remove('is-entering');
-      void p.offsetWidth;
-      p.classList.add('is-entering');
-    } else {
-      p.classList.add('cl-panel--hidden');
-      p.classList.remove('is-entering');
-    }
-  });
-}
-
-clTabs.forEach(tab => {
-  tab.addEventListener('click', () => activatePanel(tab.dataset.panel));
-});
-
-// ── "live" shortcut link in the bio nav ───────────────────────
-document.querySelectorAll('[data-activate-panel]').forEach(link => {
-  link.addEventListener('click', e => {
-    e.preventDefault();
-    const panelId = link.dataset.activatePanel;
-    document.getElementById('clients')?.scrollIntoView({ behavior: 'smooth' });
-    // Small delay so scroll starts before tab switches
-    setTimeout(() => activatePanel(panelId), 80);
-  });
-});
+// (live and clients are now separate sections — no tab switching needed)
 
 // ── Slide-in social menu (mobile/tablet) ─────────────────────
 const menuToggle  = document.getElementById('menu-toggle');

@@ -340,7 +340,8 @@
         <input type="password" id="f-token" placeholder="ghp_...">
         <p class="note">
           Needs <strong>repo</strong> or <strong>public_repo</strong> write scope.<br>
-          Saved to browser localStorage — stays on your machine.
+          Saved to browser localStorage — stays on your machine.<br>
+          <strong>Open in Chrome</strong> — Safari blocks API calls from local files.
         </p>
       </div>
     </div>
@@ -470,8 +471,23 @@
       .replace(/&/g, '&amp;').replace(/</g, '&lt;')
       .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-    const toB64   = str => btoa(unescape(encodeURIComponent(str)));
-    const fromB64 = b64 => decodeURIComponent(escape(atob(b64.replace(/\n/g, ''))));
+    // Unicode-safe base64 using TextEncoder (works with Japanese characters in index.html)
+    function toB64(str) {
+      const bytes = new TextEncoder().encode(str);
+      let binary = '';
+      // Process in chunks to avoid call-stack limits on large files
+      const CHUNK = 8192;
+      for (let i = 0; i < bytes.length; i += CHUNK) {
+        binary += String.fromCharCode(...bytes.subarray(i, i + CHUNK));
+      }
+      return btoa(binary);
+    }
+    function fromB64(b64) {
+      const binary = atob(b64.replace(/\n/g, ''));
+      const bytes  = new Uint8Array(binary.length);
+      for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+      return new TextDecoder().decode(bytes);
+    }
 
     function formatDate(raw) {
       if (!raw) return '';
