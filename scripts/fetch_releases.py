@@ -42,8 +42,29 @@ def get_token(client_id: str, client_secret: str) -> str:
         },
         method="POST",
     )
-    with urlopen(req) as r:
-        return json.loads(r.read())["access_token"]
+    try:
+        with urlopen(req) as r:
+            body = r.read()
+            data = json.loads(body)
+            token = data.get("access_token")
+            if not token:
+                sys.exit(
+                    f"ERROR: Spotify auth response contained no access_token.\n"
+                    f"Response: {body.decode()[:500]}"
+                )
+            token_type = data.get("token_type", "?")
+            expires_in = data.get("expires_in", "?")
+            print(f"  Auth OK — token_type={token_type}, expires_in={expires_in}s")
+            return token
+    except HTTPError as e:
+        body = e.read().decode(errors="replace")
+        sys.exit(
+            f"ERROR: Spotify auth failed with HTTP {e.code}.\n"
+            f"Response: {body[:500]}\n"
+            f"→ Check that SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET are correct."
+        )
+    except Exception as e:
+        sys.exit(f"ERROR: Unexpected error during Spotify auth: {e}")
 
 
 def fetch_artist_releases(artist_id: str, token: str) -> list[dict]:
@@ -54,20 +75,28 @@ def fetch_artist_releases(artist_id: str, token: str) -> list[dict]:
         f"?include_groups=album,single&limit=50"
     )
     results = []
+    page = 0
     while url:
+        page += 1
         req = Request(url, headers=headers)
         try:
             with urlopen(req) as r:
                 data = json.loads(r.read())
         except HTTPError as e:
-            print(f"  HTTP {e.code} fetching {url}", file=sys.stderr)
+            body = e.read().decode(errors="replace")
+            print(
+                f"  HTTP {e.code} on page {page}: {body[:300]}",
+                file=sys.stderr,
+            )
             break
         except Exception as e:
-            print(f"  Error fetching {url}: {e}", file=sys.stderr)
+            print(f"  Error on page {page}: {e}", file=sys.stderr)
             break
-        items = data.get("items", [])
-        if items is None:
-            items = []
+
+        total = data.get("total", "?")
+        items = data.get("items") or []
+        print(f"  page {page}: {len(items)} items (total reported by API: {total})")
+
         for item in items:
             images = item.get("images", [])
             results.append({
@@ -75,7 +104,7 @@ def fetch_artist_releases(artist_id: str, token: str) -> list[dict]:
                 "artwork":      images[0]["url"] if images else "",
                 "link":         item["external_urls"]["spotify"],
                 "year":         int(item["release_date"][:4]),
-                "release_date": item["release_date"],  # e.g. "2024-03-15"
+                "release_date": item["release_date"],
             })
         url = data.get("next")  # None on last page
     return results
@@ -89,10 +118,15 @@ def main():
 
     if not client_id or not client_secret:
         sys.exit(
-            "Error: SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET must be set.\n"
-            "Get them at https://developer.spotify.com/dashboard"
+            "ERROR: SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET must be set.\n"
+            f"  SPOTIFY_CLIENT_ID     is {'set' if client_id else 'MISSING or empty'}\n"
+            f"  SPOTIFY_CLIENT_SECRET is {'set' if client_secret else 'MISSING or empty'}\n"
+            "Get credentials at https://developer.spotify.com/dashboard\n"
+            "Add them as GitHub Secrets under Settings → Secrets → Actions."
         )
 
+    print(f"SPOTIFY_CLIENT_ID     : {'*' * (len(client_id) - 4) + client_id[-4:]}")
+    print(f"SPOTIFY_CLIENT_SECRET : {'*' * (len(client_secret) - 4) + client_secret[-4:]}")
     print("Authenticating with Spotify…")
     token = get_token(client_id, client_secret)
 
@@ -100,24 +134,23 @@ def main():
     seen_links: set[str] = set()
 
     for project, artist_id in ARTISTS.items():
-        print(f"Fetching releases for {project} ({artist_id})…")
+        print(f"\nFetching releases for '{project}' (ID: {artist_id})…")
         releases = fetch_artist_releases(artist_id, token)
-        print(f"  → {len(releases)} releases found")
+        print(f"  → {len(releases)} releases returned for {project}")
         for r in releases:
             if r["link"] in seen_links:
-                continue  # skip duplicates (album shared across artist pages)
+                print(f"    skip duplicate: {r['title']}")
+                continue
             seen_links.add(r["link"])
             all_releases.append({"project": project, **r})
 
     # Newest first
     all_releases.sort(key=lambda r: r["release_date"], reverse=True)
-    print(f"\nTotal unique releases: {len(all_releases)}")
+    print(f"\nTotal unique releases across all artists: {len(all_releases)}")
 
     if len(all_releases) == 0:
         print(
-            "WARNING: 0 releases found across all artists. "
-            "Skipping file write to preserve existing data.\n"
-            "Check that SPOTIFY_CLIENT_ID / SPOTIFY_CLIENT_SECRET secrets are correct.",
+            "\nWARNING: 0 releases found — skipping file write to preserve existing data.",
             file=sys.stderr,
         )
         sys.exit(1)  # non-zero exit → prevents the commit step from running
@@ -156,7 +189,7 @@ window.RELEASES_SPOTIFY = [
     with open(OUTPUT, "w", encoding="utf-8") as f:
         f.write(content)
 
-    print(f"Written → {OUTPUT}")
+    print(f"\nWritten → {OUTPUT}")
 
 
 if __name__ == "__main__":
