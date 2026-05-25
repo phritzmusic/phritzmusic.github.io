@@ -9,12 +9,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg:         #f4f3f0;
-      --text:       #1a1a1a;
-      --muted:      #909090;
-      --border:     rgba(26,26,26,0.12);
-      --accent:     #1a1a1a;
-      --font:       'Jost', system-ui, sans-serif;
+      --bg:      #f4f3f0;
+      --text:    #1a1a1a;
+      --muted:   #909090;
+      --border:  rgba(26,26,26,0.12);
+      --font:    'Jost', system-ui, sans-serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -40,14 +39,9 @@
       margin-bottom: 48px;
     }
 
-    .card {
-      width: 100%;
-      max-width: 560px;
-    }
+    .card { width: 100%; max-width: 560px; }
 
-    .field {
-      margin-bottom: 24px;
-    }
+    .field { margin-bottom: 24px; }
 
     label {
       display: block;
@@ -60,7 +54,8 @@
 
     input[type="text"],
     input[type="url"],
-    input[type="date"] {
+    input[type="date"],
+    input[type="password"] {
       width: 100%;
       background: none;
       border: none;
@@ -74,42 +69,76 @@
       outline: none;
       transition: border-color 0.2s;
       -webkit-appearance: none;
+      border-radius: 0;
     }
 
-    input[type="text"]:focus,
-    input[type="url"]:focus,
-    input[type="date"]:focus {
-      border-bottom-color: var(--text);
-    }
-
+    input:focus { border-bottom-color: var(--text); }
     input::placeholder { color: var(--muted); }
 
     .row { display: flex; gap: 24px; }
     .row .field { flex: 1; }
 
-    .optional-note {
+    .note {
       font-size: 9px;
       letter-spacing: 1.5px;
       color: var(--muted);
-      margin-left: 6px;
+      margin-top: 6px;
+      line-height: 1.7;
     }
 
-    .btn-group {
+    /* ── GitHub settings ───────────────────────────────────────── */
+    .gh-section {
+      margin-top: 32px;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+
+    .gh-section summary {
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      text-transform: lowercase;
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
       display: flex;
-      gap: 12px;
-      margin-top: 36px;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 0;
     }
+    .gh-section summary::-webkit-details-marker { display: none; }
+    .gh-section summary::after {
+      content: '›';
+      transition: transform 0.2s;
+      font-size: 12px;
+    }
+    .gh-section[open] summary::after { transform: rotate(90deg); }
+    .gh-section[open] summary { margin-bottom: 20px; }
 
+    .token-status {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--muted);
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+    .token-status.saved { background: #5a9; }
+
+    /* ── Buttons ───────────────────────────────────────────────── */
     button {
       font-family: var(--font);
       font-weight: 300;
       letter-spacing: 2px;
       text-transform: lowercase;
       cursor: pointer;
-      transition: color 0.2s, background 0.2s, border-color 0.2s;
+      transition: color 0.2s, background 0.2s, border-color 0.2s, opacity 0.2s;
     }
+    button:disabled { opacity: 0.45; cursor: default; }
 
-    .btn-generate {
+    .btn-group { display: flex; gap: 12px; margin-top: 36px; }
+
+    .btn-primary {
       flex: 1;
       background: var(--text);
       color: var(--bg);
@@ -117,25 +146,28 @@
       font-size: 10px;
       padding: 14px 20px;
     }
-    .btn-generate:hover { background: #333; border-color: #333; }
+    .btn-primary:not(:disabled):hover { background: #333; border-color: #333; }
 
-    .btn-clear {
+    .btn-ghost {
       background: none;
       border: 1px solid var(--border);
       color: var(--muted);
       font-size: 10px;
       padding: 14px 20px;
     }
-    .btn-clear:hover { border-color: var(--text); color: var(--text); }
+    .btn-ghost:not(:disabled):hover { border-color: var(--text); color: var(--text); }
 
-    /* Output area */
-    .output-section {
+    /* ── Divider ───────────────────────────────────────────────── */
+    .divider {
       width: 100%;
       max-width: 560px;
-      margin-top: 48px;
-      display: none;
+      height: 1px;
+      background: var(--border);
+      margin: 48px 0;
     }
 
+    /* ── Output ────────────────────────────────────────────────── */
+    .output-section { width: 100%; max-width: 560px; display: none; }
     .output-section.visible { display: block; }
 
     .output-label {
@@ -146,7 +178,7 @@
       margin-bottom: 16px;
     }
 
-    /* Preview */
+    /* Preview row */
     .preview-row {
       display: flex;
       align-items: baseline;
@@ -155,9 +187,8 @@
       padding: 16px 0;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      margin-bottom: 24px;
+      margin-bottom: 32px;
     }
-
     .preview-main {
       display: flex;
       align-items: baseline;
@@ -165,72 +196,31 @@
       flex: 1;
       min-width: 0;
     }
+    .preview-act  { font-weight: 400; font-size: 11px; letter-spacing: 2px; text-transform: lowercase; }
+    .preview-title { font-weight: 300; font-size: 11px; letter-spacing: 1.5px; text-transform: lowercase; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .preview-details { display: flex; align-items: baseline; gap: 20px; flex-shrink: 0; }
+    .preview-date, .preview-venue { font-size: 10px; letter-spacing: 2px; color: var(--muted); white-space: nowrap; }
+    .preview-tickets { font-size: 9px; letter-spacing: 2px; text-transform: lowercase; color: var(--muted); border-bottom: 1px solid currentColor; padding-bottom: 1px; white-space: nowrap; text-decoration: none; }
 
-    .preview-act {
-      font-weight: 400;
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: lowercase;
-    }
-
-    .preview-title {
-      font-weight: 300;
-      font-size: 11px;
-      letter-spacing: 1.5px;
-      text-transform: lowercase;
-      color: var(--muted);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .preview-details {
-      display: flex;
-      align-items: baseline;
-      gap: 20px;
-      flex-shrink: 0;
-    }
-
-    .preview-date,
-    .preview-venue {
-      font-size: 10px;
-      letter-spacing: 2px;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-
-    .preview-tickets {
-      font-size: 9px;
-      letter-spacing: 2px;
-      text-transform: lowercase;
-      color: var(--muted);
-      border-bottom: 1px solid currentColor;
-      padding-bottom: 1px;
-      white-space: nowrap;
-      text-decoration: none;
-    }
-
-    /* Code output */
+    /* Code box */
     .code-box {
       position: relative;
       background: rgba(26,26,26,0.04);
       border: 1px solid var(--border);
       padding: 20px;
+      margin-bottom: 16px;
     }
-
     pre {
-      font-family: 'SF Mono', 'Fira Code', 'Fira Mono', monospace;
+      font-family: 'SF Mono', 'Fira Code', monospace;
       font-size: 11px;
       line-height: 1.7;
       color: var(--text);
       white-space: pre;
       overflow-x: auto;
     }
-
     .btn-copy {
       position: absolute;
-      top: 12px;
-      right: 12px;
+      top: 12px; right: 12px;
       background: none;
       border: 1px solid var(--border);
       color: var(--muted);
@@ -240,25 +230,30 @@
     .btn-copy:hover { border-color: var(--text); color: var(--text); }
     .btn-copy.copied { color: var(--text); border-color: var(--text); }
 
-    .instruction {
-      margin-top: 20px;
+    /* Action row under code box */
+    .action-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-push {
+      flex: 1;
+      background: var(--text);
+      color: var(--bg);
+      border: 1px solid var(--text);
       font-size: 10px;
+      padding: 13px 20px;
+    }
+    .btn-push:not(:disabled):hover { background: #333; border-color: #333; }
+    .btn-push.success { background: #3a7a55; border-color: #3a7a55; }
+    .btn-push.error   { background: #a04040; border-color: #a04040; }
+
+    .push-status {
+      font-size: 9px;
       letter-spacing: 1.5px;
       color: var(--muted);
-      line-height: 1.8;
-    }
-
-    .instruction strong {
-      font-weight: 400;
-      color: var(--text);
-    }
-
-    .divider {
-      width: 100%;
-      max-width: 560px;
-      height: 1px;
-      background: var(--border);
-      margin: 48px 0;
+      flex: 1;
     }
   </style>
 </head>
@@ -275,7 +270,7 @@
       </div>
       <div class="field">
         <label for="f-title">show title</label>
-        <input type="text" id="f-title" placeholder="show / event name">
+        <input type="text" id="f-title" placeholder="Flux">
       </div>
     </div>
 
@@ -286,75 +281,152 @@
       </div>
       <div class="field">
         <label for="f-venue">venue</label>
-        <input type="text" id="f-venue" placeholder="Liquidroom, Tokyo">
+        <input type="text" id="f-venue" placeholder="SPREAD, Shimokitazawa">
       </div>
     </div>
 
     <div class="field">
-      <label for="f-tickets">
-        ticket url
-        <span class="optional-note">(optional)</span>
-      </label>
+      <label for="f-tickets">ticket url <span style="letter-spacing:1px;opacity:.55">(optional)</span></label>
       <input type="url" id="f-tickets" placeholder="https://...">
     </div>
 
+    <!-- GitHub settings (collapsible) -->
+    <details class="gh-section" id="gh-section">
+      <summary>
+        github settings
+        <span class="token-status" id="token-status"></span>
+      </summary>
+
+      <div class="field">
+        <label for="f-token">personal access token</label>
+        <input type="password" id="f-token" placeholder="ghp_...">
+        <p class="note">
+          Needs <strong>repo</strong> (or <strong>public_repo</strong>) write scope.<br>
+          Saved to browser localStorage — never leaves your machine.
+        </p>
+      </div>
+    </details>
+
     <div class="btn-group">
-      <button class="btn-generate" onclick="generate()">generate snippet</button>
-      <button class="btn-clear" onclick="clearAll()">clear</button>
+      <button class="btn-primary" onclick="generate()">generate snippet</button>
+      <button class="btn-ghost"   onclick="clearAll()">clear</button>
     </div>
 
   </div>
 
+  <!-- ── Output ─────────────────────────────────────────────────── -->
   <div class="output-section" id="output-section">
 
     <div class="divider"></div>
 
     <p class="output-label">preview</p>
 
-    <div class="preview-row" id="preview-row">
+    <div class="preview-row">
       <div class="preview-main">
-        <span class="preview-act" id="p-act"></span>
+        <span class="preview-act"   id="p-act"></span>
         <span class="preview-title" id="p-title"></span>
       </div>
       <div class="preview-details">
-        <span class="preview-date" id="p-date"></span>
-        <span class="preview-venue" id="p-venue"></span>
-        <a class="preview-tickets" id="p-tickets" style="display:none" href="#" target="_blank" rel="noopener">tickets →</a>
+        <span class="preview-date"    id="p-date"></span>
+        <span class="preview-venue"   id="p-venue"></span>
+        <a    class="preview-tickets" id="p-tickets" style="display:none" href="#" target="_blank" rel="noopener">tickets →</a>
       </div>
     </div>
 
-    <p class="output-label">html snippet — paste into index.html inside #panel-live</p>
+    <p class="output-label">html snippet</p>
 
     <div class="code-box">
       <pre id="code-output"></pre>
       <button class="btn-copy" id="btn-copy" onclick="copyCode()">copy</button>
     </div>
 
-    <p class="instruction">
-      Open <strong>index.html</strong>, find <strong>#panel-live</strong>,
-      remove <code>&lt;p class="shows-none"&gt;…&lt;/p&gt;</code>
-      and paste the snippet above. Add multiple <code>.show-row</code> blocks for multiple dates.
-      When all shows have passed, restore the <code>shows-none</code> paragraph.
-    </p>
+    <div class="action-row">
+      <button class="btn-push" id="btn-push" onclick="pushToWebsite()">push to website →</button>
+      <span class="push-status" id="push-status"></span>
+    </div>
 
   </div>
 
   <script>
-    function formatDate(rawDate) {
-      if (!rawDate) return '';
-      // rawDate is YYYY-MM-DD
-      const [y, m, d] = rawDate.split('-');
+    /* ── Helpers ──────────────────────────────────────────────── */
+    const REPO   = 'phritzmusic/phritzmusic.github.io';
+    const BRANCH = 'master';
+    const PATH   = 'index.html';
+    const TOKEN_KEY = 'phritz_gh_token';
+
+    function formatDate(raw) {
+      if (!raw) return '';
+      const [y, m, d] = raw.split('-');
       return `${y} · ${m} · ${d}`;
     }
 
-    function escapeHtml(str) {
+    function esc(str) {
       return str
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
+    // Unicode-safe base64
+    function toB64(str)   { return btoa(unescape(encodeURIComponent(str))); }
+    function fromB64(b64) { return decodeURIComponent(escape(atob(b64.replace(/\n/g, '')))); }
+
+    /* ── Token persistence ───────────────────────────────────── */
+    function loadToken() {
+      try { return localStorage.getItem(TOKEN_KEY) || ''; } catch { return ''; }
+    }
+    function saveToken(t) {
+      try { localStorage.setItem(TOKEN_KEY, t); } catch {}
+    }
+
+    function updateTokenStatus() {
+      const saved = loadToken();
+      const dot   = document.getElementById('token-status');
+      const input = document.getElementById('f-token');
+      if (saved) {
+        dot.classList.add('saved');
+        if (!input.value) input.value = saved;
+      } else {
+        dot.classList.remove('saved');
+      }
+    }
+
+    /* ── Splice: inject show row into index.html string ─────── */
+    function splicePanel(html, snippet) {
+      const MARKER = '<div id="panel-live"';
+      const si = html.indexOf(MARKER);
+      if (si === -1) return null;
+
+      const tagEnd = html.indexOf('>', si) + 1;
+
+      // Walk forward to find the matching </div>
+      let depth = 1, i = tagEnd;
+      while (i < html.length && depth > 0) {
+        const o = html.indexOf('<div', i);
+        const c = html.indexOf('</div>', i);
+        if (c === -1) break;
+        if (o !== -1 && o < c) { depth++; i = o + 4; }
+        else { depth--; if (depth > 0) i = c + 6; else i = c; }
+      }
+
+      // Inner content of the panel
+      let inner = html.slice(tagEnd, i);
+
+      // Remove "no dates" placeholder if present
+      inner = inner.replace(/[ \t]*<p class="shows-none">[\s\S]*?<\/p>\n?/g, '');
+
+      // Indent snippet to match file style (8-space outer indent)
+      const PAD = '        ';
+      const indented = snippet.trim().split('\n')
+        .map(line => PAD + line)
+        .join('\n');
+
+      return html.slice(0, tagEnd)
+           + '\n' + indented
+           + inner
+           + html.slice(i);
+    }
+
+    /* ── Generate snippet ───────────────────────────────────── */
     function generate() {
       const act     = document.getElementById('f-act').value.trim();
       const title   = document.getElementById('f-title').value.trim();
@@ -374,75 +446,161 @@
       document.getElementById('p-title').textContent = title ? `— ${title}` : '';
       document.getElementById('p-date').textContent  = dateStr;
       document.getElementById('p-venue').textContent = venue;
-
       const pTickets = document.getElementById('p-tickets');
-      if (tickets) {
-        pTickets.style.display = 'inline';
-        pTickets.href = tickets;
-      } else {
-        pTickets.style.display = 'none';
-      }
+      if (tickets) { pTickets.style.display = 'inline'; pTickets.href = tickets; }
+      else          { pTickets.style.display = 'none'; }
 
-      // Build snippet
-      const titleSpan = title
-        ? `\n            <span class="show-title">— ${escapeHtml(title)}</span>`
-        : '';
-
-      const ticketAnchor = tickets
-        ? `\n            <a class="show-tickets" href="${escapeHtml(tickets)}" target="_blank" rel="noopener noreferrer">tickets →</a>`
-        : '';
+      // Build snippet (2-space indent, consistent throughout)
+      const titleLine   = title   ? `\n    <span class="show-title">— ${esc(title)}</span>`                                                             : '';
+      const ticketLine  = tickets ? `\n    <a class="show-tickets" href="${esc(tickets)}" target="_blank" rel="noopener noreferrer">tickets →</a>` : '';
 
       const snippet =
 `<div class="show-row">
   <div class="show-main">
-    <span class="show-act">${escapeHtml(act)}</span>${titleSpan}
+    <span class="show-act">${esc(act)}</span>${titleLine}
   </div>
   <div class="show-details">
-    <span class="show-date">${escapeHtml(dateStr)}</span>
-    <span class="show-venue">${escapeHtml(venue)}</span>${ticketAnchor}
+    <span class="show-date">${esc(dateStr)}</span>
+    <span class="show-venue">${esc(venue)}</span>${ticketLine}
   </div>
 </div>`;
 
       document.getElementById('code-output').textContent = snippet;
 
-      // Show output section
-      document.getElementById('output-section').classList.add('visible');
+      // Reset state
+      document.getElementById('push-status').textContent = '';
+      const pushBtn = document.getElementById('btn-push');
+      pushBtn.textContent = 'push to website →';
+      pushBtn.className   = 'btn-push';
+      pushBtn.disabled    = false;
 
-      // Reset copy button
       const copyBtn = document.getElementById('btn-copy');
       copyBtn.textContent = 'copy';
       copyBtn.classList.remove('copied');
 
-      // Scroll to output
-      document.getElementById('output-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('output-section').classList.add('visible');
+      document.getElementById('output-section')
+        .scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
+    /* ── Copy snippet ───────────────────────────────────────── */
     function copyCode() {
-      const code = document.getElementById('code-output').textContent;
-      navigator.clipboard.writeText(code).then(() => {
-        const btn = document.getElementById('btn-copy');
-        btn.textContent = 'copied ✓';
-        btn.classList.add('copied');
-        setTimeout(() => {
-          btn.textContent = 'copy';
-          btn.classList.remove('copied');
-        }, 2000);
-      });
+      navigator.clipboard.writeText(document.getElementById('code-output').textContent)
+        .then(() => {
+          const btn = document.getElementById('btn-copy');
+          btn.textContent = 'copied ✓';
+          btn.classList.add('copied');
+          setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('copied'); }, 2000);
+        });
     }
 
+    /* ── Push to website via GitHub Contents API ────────────── */
+    async function pushToWebsite() {
+      const tokenInput = document.getElementById('f-token').value.trim() || loadToken();
+      if (!tokenInput) {
+        document.getElementById('gh-section').open = true;
+        document.getElementById('f-token').focus();
+        setStatus('add your github token above first', false);
+        return;
+      }
+      saveToken(tokenInput);
+      updateTokenStatus();
+
+      const snippet = document.getElementById('code-output').textContent;
+      if (!snippet) { setStatus('generate a snippet first', false); return; }
+
+      const btn = document.getElementById('btn-push');
+      btn.textContent = 'pushing…';
+      btn.disabled    = true;
+      setStatus('');
+
+      const API = `https://api.github.com/repos/${REPO}/contents/${PATH}`;
+      const headers = {
+        Authorization: `Bearer ${tokenInput}`,
+        Accept: 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+      };
+
+      try {
+        // 1. Fetch current file
+        const getRes = await fetch(`${API}?ref=${BRANCH}`, { headers });
+        if (!getRes.ok) {
+          const err = await getRes.json().catch(() => ({}));
+          throw new Error(`GitHub API ${getRes.status}: ${err.message || getRes.statusText}`);
+        }
+        const fileData  = await getRes.json();
+        const sha       = fileData.sha;
+        const currentHtml = fromB64(fileData.content);
+
+        // 2. Inject new show row
+        const updatedHtml = splicePanel(currentHtml, snippet);
+        if (!updatedHtml) throw new Error('#panel-live not found in index.html');
+
+        // 3. Build commit message
+        const act     = document.getElementById('f-act').value.trim();
+        const title   = document.getElementById('f-title').value.trim();
+        const rawDate = document.getElementById('f-date').value;
+        const commitMsg = `add show: ${act}${title ? ' — ' + title : ''} (${formatDate(rawDate)})`;
+
+        // 4. Commit
+        const putRes = await fetch(API, {
+          method: 'PUT',
+          headers,
+          body: JSON.stringify({
+            message: commitMsg,
+            content: toB64(updatedHtml),
+            sha,
+            branch: BRANCH,
+          }),
+        });
+
+        if (!putRes.ok) {
+          const err = await putRes.json().catch(() => ({}));
+          throw new Error(`Commit failed ${putRes.status}: ${err.message || putRes.statusText}`);
+        }
+
+        btn.textContent = 'pushed ✓';
+        btn.className   = 'btn-push success';
+        setStatus('live on phritzmusic.com in ~30 s');
+        setTimeout(() => {
+          btn.textContent = 'push to website →';
+          btn.className   = 'btn-push';
+          btn.disabled    = false;
+        }, 5000);
+
+      } catch (err) {
+        btn.textContent = 'push to website →';
+        btn.className   = 'btn-push';
+        btn.disabled    = false;
+        setStatus(`error: ${err.message}`, false);
+        console.error(err);
+      }
+    }
+
+    function setStatus(msg, ok = true) {
+      const el = document.getElementById('push-status');
+      el.textContent = msg;
+      el.style.color = ok ? 'var(--muted)' : '#a04040';
+    }
+
+    /* ── Clear ──────────────────────────────────────────────── */
     function clearAll() {
-      document.getElementById('f-act').value    = 'phritz';
-      document.getElementById('f-title').value  = '';
-      document.getElementById('f-date').value   = '';
-      document.getElementById('f-venue').value  = '';
+      document.getElementById('f-act').value     = 'phritz';
+      document.getElementById('f-title').value   = '';
+      document.getElementById('f-date').value    = '';
+      document.getElementById('f-venue').value   = '';
       document.getElementById('f-tickets').value = '';
       document.getElementById('output-section').classList.remove('visible');
+      setStatus('');
     }
 
-    // Allow Enter key to generate
+    /* ── Enter key ──────────────────────────────────────────── */
     document.addEventListener('keydown', e => {
-      if (e.key === 'Enter') generate();
+      if (e.key === 'Enter' && e.target.id !== 'f-token') generate();
     });
+
+    /* ── Init ───────────────────────────────────────────────── */
+    updateTokenStatus();
   </script>
 
 </body>
