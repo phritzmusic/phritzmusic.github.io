@@ -86,12 +86,12 @@ img {
   left: 0;
   right: 0;
   z-index: 100;
-  height: var(--header-h);
+  height: calc(var(--header-h) + env(safe-area-inset-top, 0px));
   display: flex;
   align-items: center;
   /* socials right; logo absolutely positioned */
   justify-content: flex-end;
-  padding: 0 var(--pad-x);
+  padding: env(safe-area-inset-top, 0px) var(--pad-x) 0;
   pointer-events: none; /* let clicks pass through empty space */
   transition: background 0.45s ease, box-shadow 0.45s ease;
 }
@@ -104,28 +104,23 @@ img {
   box-shadow: 0 1px 0 var(--border);
 }
 
-/* Logo: centered always; fades in and shrinks when scrolled into the header */
+/* Logo: left-aligned, hidden by default; fades in off-hero */
 .header-logo {
   position: absolute;
-  left: 50%;
-  top: 55%; /* slightly below the midpoint — keeps it off the very top edge */
-  transform: translate(-50%, -50%);
+  left: var(--pad-x);
+  top: 50%;
+  transform: translateY(-50%);
   pointer-events: auto;
   display: flex;
   align-items: center;
   line-height: 0;
   opacity: 0;
-  transition: opacity 0.45s ease, top 0.45s ease;
+  transition: opacity 0.45s ease;
 }
 
-/* On hero: show at the current centered position, no color change */
-.site-header.on-hero .header-logo {
-  opacity: 1;
-}
-
-/* Off hero: fade in, center within the compact bar, 20% smaller */
+/* Off hero: fade in, vertically centred within the non-safe-area strip */
 .site-header:not(.on-hero) .header-logo {
-  top: 50%;
+  top: calc(env(safe-area-inset-top, 0px) + var(--header-h) / 2);
   opacity: 1;
 }
 
@@ -364,6 +359,21 @@ img {
   100% { transform: scaleY(1); transform-origin: top; opacity: 0; }
 }
 
+/* ── Hero logo (separate element inside #hero, not the header logo) ── */
+#hero-logo {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  line-height: 0;
+  pointer-events: auto;
+}
+
+#hero-logo img {
+  width: 19px;
+  display: block;
+}
+
 /* ── Main content ─────────────────────────────────────────────── */
 #main {
   position: relative;
@@ -392,7 +402,7 @@ img {
   justify-content: center;
   padding: var(--pad-section) var(--pad-x);
   /* offset so content isn't hidden behind fixed header */
-  padding-top: calc(var(--pad-section) + var(--header-h));
+  padding-top: calc(var(--pad-section) + var(--header-h) + env(safe-area-inset-top, 0px));
 }
 
 .info-inner {
