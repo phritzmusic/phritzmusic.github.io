@@ -97,7 +97,21 @@ img {
   transition: background 0.45s ease, box-shadow 0.45s ease;
 }
 
-/* Off-hero: frosted background so icons don't clash with content */
+/* Always cover the notch / Dynamic Island strip with frosted background */
+.site-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: env(safe-area-inset-top, 0px);
+  background: rgba(244, 243, 240, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: none;
+}
+
+/* Off-hero: extend frosted background to the full header bar */
 .site-header:not(.on-hero) {
   background: rgba(244, 243, 240, 0.92);
   backdrop-filter: blur(12px);
