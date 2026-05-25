@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>add show — phritz tools</title>
+  <title>shows — phritz tools</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg:      #f4f3f0;
-      --text:    #1a1a1a;
-      --muted:   #909090;
-      --border:  rgba(26,26,26,0.12);
-      --font:    'Jost', system-ui, sans-serif;
+      --bg:     #f4f3f0;
+      --text:   #1a1a1a;
+      --muted:  #909090;
+      --border: rgba(26,26,26,0.12);
+      --font:   'Jost', system-ui, sans-serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,7 +27,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 64px 24px 80px;
+      padding: 56px 24px 80px;
     }
 
     h1 {
@@ -36,11 +36,88 @@
       letter-spacing: 4px;
       text-transform: lowercase;
       color: var(--muted);
-      margin-bottom: 48px;
+      margin-bottom: 36px;
     }
 
-    .card { width: 100%; max-width: 560px; }
+    /* ── GitHub token (shared, always visible) ─────────────────── */
+    .gh-section {
+      width: 100%;
+      max-width: 560px;
+      border: 1px solid var(--border);
+      padding: 0;
+      margin-bottom: 32px;
+    }
 
+    .gh-section summary {
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      text-transform: lowercase;
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 16px;
+    }
+    .gh-section summary::-webkit-details-marker { display: none; }
+    .gh-section summary::after {
+      content: '›';
+      margin-left: auto;
+      transition: transform 0.2s;
+      font-size: 12px;
+    }
+    .gh-section[open] summary::after { transform: rotate(90deg); }
+    .gh-section[open] .gh-inner { display: block; }
+
+    .gh-inner {
+      display: none;
+      padding: 0 16px 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .token-dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--muted);
+      flex-shrink: 0;
+    }
+    .token-dot.saved { background: #5a9; }
+
+    /* ── Tabs ──────────────────────────────────────────────────── */
+    .tab-bar {
+      width: 100%;
+      max-width: 560px;
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 36px;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      border-bottom: 1.5px solid transparent;
+      margin-bottom: -1px;
+      padding: 10px 0;
+      margin-right: 32px;
+      font-family: var(--font);
+      font-weight: 300;
+      font-size: 10px;
+      letter-spacing: 2.5px;
+      text-transform: lowercase;
+      color: var(--muted);
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .tab-btn:hover  { color: var(--text); }
+    .tab-btn.active { color: var(--text); border-bottom-color: var(--text); }
+
+    /* ── Tab panels ─────────────────────────────────────────────── */
+    .tab-panel { width: 100%; max-width: 560px; }
+
+    /* ── Shared form primitives ─────────────────────────────────── */
     .field { margin-bottom: 24px; }
 
     label {
@@ -71,7 +148,6 @@
       -webkit-appearance: none;
       border-radius: 0;
     }
-
     input:focus { border-bottom-color: var(--text); }
     input::placeholder { color: var(--muted); }
 
@@ -82,50 +158,11 @@
       font-size: 9px;
       letter-spacing: 1.5px;
       color: var(--muted);
-      margin-top: 6px;
-      line-height: 1.7;
+      margin-top: 8px;
+      line-height: 1.8;
     }
 
-    /* ── GitHub settings ───────────────────────────────────────── */
-    .gh-section {
-      margin-top: 32px;
-      border-top: 1px solid var(--border);
-      padding-top: 24px;
-    }
-
-    .gh-section summary {
-      font-size: 9px;
-      letter-spacing: 2.5px;
-      text-transform: lowercase;
-      color: var(--muted);
-      cursor: pointer;
-      user-select: none;
-      list-style: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 0;
-    }
-    .gh-section summary::-webkit-details-marker { display: none; }
-    .gh-section summary::after {
-      content: '›';
-      transition: transform 0.2s;
-      font-size: 12px;
-    }
-    .gh-section[open] summary::after { transform: rotate(90deg); }
-    .gh-section[open] summary { margin-bottom: 20px; }
-
-    .token-status {
-      display: inline-block;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--muted);
-      margin-left: 4px;
-      vertical-align: middle;
-    }
-    .token-status.saved { background: #5a9; }
-
-    /* ── Buttons ───────────────────────────────────────────────── */
+    /* ── Buttons ─────────────────────────────────────────────────── */
     button {
       font-family: var(--font);
       font-weight: 300;
@@ -157,17 +194,11 @@
     }
     .btn-ghost:not(:disabled):hover { border-color: var(--text); color: var(--text); }
 
-    /* ── Divider ───────────────────────────────────────────────── */
-    .divider {
-      width: 100%;
-      max-width: 560px;
-      height: 1px;
-      background: var(--border);
-      margin: 48px 0;
-    }
+    /* ── Divider ─────────────────────────────────────────────────── */
+    .divider { height: 1px; background: var(--border); margin: 44px 0; }
 
-    /* ── Output ────────────────────────────────────────────────── */
-    .output-section { width: 100%; max-width: 560px; display: none; }
+    /* ── Output (Add tab) ────────────────────────────────────────── */
+    .output-section { display: none; }
     .output-section.visible { display: block; }
 
     .output-label {
@@ -189,13 +220,7 @@
       border-bottom: 1px solid var(--border);
       margin-bottom: 32px;
     }
-    .preview-main {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-      flex: 1;
-      min-width: 0;
-    }
+    .preview-main { display: flex; align-items: baseline; gap: 8px; flex: 1; min-width: 0; }
     .preview-act  { font-weight: 400; font-size: 11px; letter-spacing: 2px; text-transform: lowercase; }
     .preview-title { font-weight: 300; font-size: 11px; letter-spacing: 1.5px; text-transform: lowercase; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .preview-details { display: flex; align-items: baseline; gap: 20px; flex-shrink: 0; }
@@ -203,39 +228,13 @@
     .preview-tickets { font-size: 9px; letter-spacing: 2px; text-transform: lowercase; color: var(--muted); border-bottom: 1px solid currentColor; padding-bottom: 1px; white-space: nowrap; text-decoration: none; }
 
     /* Code box */
-    .code-box {
-      position: relative;
-      background: rgba(26,26,26,0.04);
-      border: 1px solid var(--border);
-      padding: 20px;
-      margin-bottom: 16px;
-    }
-    pre {
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      font-size: 11px;
-      line-height: 1.7;
-      color: var(--text);
-      white-space: pre;
-      overflow-x: auto;
-    }
-    .btn-copy {
-      position: absolute;
-      top: 12px; right: 12px;
-      background: none;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 9px;
-      padding: 6px 12px;
-    }
+    .code-box { position: relative; background: rgba(26,26,26,0.04); border: 1px solid var(--border); padding: 20px; margin-bottom: 16px; }
+    pre { font-family: 'SF Mono','Fira Code',monospace; font-size: 11px; line-height: 1.7; color: var(--text); white-space: pre; overflow-x: auto; }
+    .btn-copy { position: absolute; top: 12px; right: 12px; background: none; border: 1px solid var(--border); color: var(--muted); font-size: 9px; padding: 6px 12px; }
     .btn-copy:hover { border-color: var(--text); color: var(--text); }
     .btn-copy.copied { color: var(--text); border-color: var(--text); }
 
-    /* Action row under code box */
-    .action-row {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
+    .action-row { display: flex; gap: 12px; align-items: center; }
 
     .btn-push {
       flex: 1;
@@ -249,19 +248,114 @@
     .btn-push.success { background: #3a7a55; border-color: #3a7a55; }
     .btn-push.error   { background: #a04040; border-color: #a04040; }
 
-    .push-status {
-      font-size: 9px;
-      letter-spacing: 1.5px;
+    .status-msg { font-size: 9px; letter-spacing: 1.5px; color: var(--muted); flex: 1; }
+    .status-msg.err { color: #a04040; }
+
+    /* ── Manage tab ──────────────────────────────────────────────── */
+    .manage-load-area { text-align: center; padding: 16px 0 24px; }
+    .manage-load-area p { margin-top: 14px; }
+
+    .manage-loading {
+      text-align: center;
+      font-size: 10px;
+      letter-spacing: 2px;
       color: var(--muted);
-      flex: 1;
+      padding: 32px 0;
     }
+
+    .manage-empty {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--muted);
+      text-transform: lowercase;
+      padding: 24px 0;
+    }
+
+    /* Individual show card */
+    .show-card {
+      padding: 24px 0 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    .show-card:first-child { border-top: 1px solid var(--border); }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .card-num {
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      text-transform: lowercase;
+      color: var(--muted);
+    }
+
+    .btn-remove {
+      background: none;
+      border: none;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: lowercase;
+      color: var(--muted);
+      padding: 4px 0;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-remove:hover { color: #a04040; border-bottom-color: #a04040; }
+
+    .manage-actions {
+      margin-top: 36px;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-save {
+      flex: 1;
+      background: var(--text);
+      color: var(--bg);
+      border: 1px solid var(--text);
+      font-size: 10px;
+      padding: 14px 20px;
+    }
+    .btn-save:not(:disabled):hover { background: #333; border-color: #333; }
+    .btn-save.success { background: #3a7a55; border-color: #3a7a55; }
   </style>
 </head>
 <body>
 
-  <h1>phritz · add show</h1>
+  <h1>phritz · shows</h1>
 
-  <div class="card">
+  <!-- ── GitHub token (shared) ──────────────────────────────── -->
+  <details class="gh-section" id="gh-section">
+    <summary>
+      github settings
+      <span class="token-dot" id="token-dot"></span>
+    </summary>
+    <div class="gh-inner">
+      <div class="field" style="margin-top:16px">
+        <label for="f-token">personal access token</label>
+        <input type="password" id="f-token" placeholder="ghp_...">
+        <p class="note">
+          Needs <strong>repo</strong> or <strong>public_repo</strong> write scope.<br>
+          Saved to browser localStorage — stays on your machine.
+        </p>
+      </div>
+    </div>
+  </details>
+
+  <!-- ── Tabs ───────────────────────────────────────────────── -->
+  <div class="tab-bar">
+    <button class="tab-btn active" id="tab-add"    onclick="switchTab('add')">add</button>
+    <button class="tab-btn"        id="tab-manage" onclick="switchTab('manage')">manage</button>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       ADD TAB
+       ══════════════════════════════════════════════════════════ -->
+  <div class="tab-panel" id="panel-add">
 
     <div class="row">
       <div class="field">
@@ -286,73 +380,98 @@
     </div>
 
     <div class="field">
-      <label for="f-tickets">ticket url <span style="letter-spacing:1px;opacity:.55">(optional)</span></label>
+      <label for="f-tickets">ticket url <span style="opacity:.5;letter-spacing:1px">(optional)</span></label>
       <input type="url" id="f-tickets" placeholder="https://...">
     </div>
 
-    <!-- GitHub settings (collapsible) -->
-    <details class="gh-section" id="gh-section">
-      <summary>
-        github settings
-        <span class="token-status" id="token-status"></span>
-      </summary>
-
-      <div class="field">
-        <label for="f-token">personal access token</label>
-        <input type="password" id="f-token" placeholder="ghp_...">
-        <p class="note">
-          Needs <strong>repo</strong> (or <strong>public_repo</strong>) write scope.<br>
-          Saved to browser localStorage — never leaves your machine.
-        </p>
-      </div>
-    </details>
-
     <div class="btn-group">
       <button class="btn-primary" onclick="generate()">generate snippet</button>
-      <button class="btn-ghost"   onclick="clearAll()">clear</button>
+      <button class="btn-ghost"   onclick="clearAdd()">clear</button>
     </div>
 
+    <!-- Output -->
+    <div class="output-section" id="output-section">
+
+      <div class="divider"></div>
+
+      <p class="output-label">preview</p>
+
+      <div class="preview-row">
+        <div class="preview-main">
+          <span class="preview-act"   id="p-act"></span>
+          <span class="preview-title" id="p-title"></span>
+        </div>
+        <div class="preview-details">
+          <span class="preview-date"    id="p-date"></span>
+          <span class="preview-venue"   id="p-venue"></span>
+          <a    class="preview-tickets" id="p-tickets" style="display:none" href="#" target="_blank" rel="noopener">tickets →</a>
+        </div>
+      </div>
+
+      <p class="output-label">html snippet</p>
+
+      <div class="code-box">
+        <pre id="code-output"></pre>
+        <button class="btn-copy" id="btn-copy" onclick="copyCode()">copy</button>
+      </div>
+
+      <div class="action-row">
+        <button class="btn-push" id="btn-push" onclick="pushAdd()">push to website →</button>
+        <span class="status-msg" id="add-status"></span>
+      </div>
+
+    </div>
   </div>
 
-  <!-- ── Output ─────────────────────────────────────────────────── -->
-  <div class="output-section" id="output-section">
+  <!-- ══════════════════════════════════════════════════════════
+       MANAGE TAB
+       ══════════════════════════════════════════════════════════ -->
+  <div class="tab-panel" id="panel-manage" style="display:none">
 
-    <div class="divider"></div>
-
-    <p class="output-label">preview</p>
-
-    <div class="preview-row">
-      <div class="preview-main">
-        <span class="preview-act"   id="p-act"></span>
-        <span class="preview-title" id="p-title"></span>
-      </div>
-      <div class="preview-details">
-        <span class="preview-date"    id="p-date"></span>
-        <span class="preview-venue"   id="p-venue"></span>
-        <a    class="preview-tickets" id="p-tickets" style="display:none" href="#" target="_blank" rel="noopener">tickets →</a>
-      </div>
+    <!-- Load area -->
+    <div class="manage-load-area" id="manage-load-area">
+      <button class="btn-primary" style="max-width:240px" onclick="loadShows()">load shows from website</button>
+      <p class="note">fetches the current live panel from phritzmusic.com</p>
     </div>
 
-    <p class="output-label">html snippet</p>
+    <!-- Loading spinner -->
+    <div class="manage-loading" id="manage-loading" style="display:none">loading…</div>
 
-    <div class="code-box">
-      <pre id="code-output"></pre>
-      <button class="btn-copy" id="btn-copy" onclick="copyCode()">copy</button>
-    </div>
+    <!-- Shows list -->
+    <div id="manage-content" style="display:none">
+      <div id="show-cards"></div>
 
-    <div class="action-row">
-      <button class="btn-push" id="btn-push" onclick="pushToWebsite()">push to website →</button>
-      <span class="push-status" id="push-status"></span>
+      <div class="manage-actions">
+        <button class="btn-save" id="btn-save" onclick="saveChanges()">save all changes →</button>
+        <span class="status-msg" id="manage-status"></span>
+      </div>
     </div>
 
   </div>
 
   <script>
-    /* ── Helpers ──────────────────────────────────────────────── */
-    const REPO   = 'phritzmusic/phritzmusic.github.io';
-    const BRANCH = 'master';
-    const PATH   = 'index.html';
+    /* ══════════════════════════════════════════════════════════
+       CONFIG
+       ══════════════════════════════════════════════════════════ */
+    const REPO      = 'phritzmusic/phritzmusic.github.io';
+    const BRANCH    = 'master';
+    const PATH      = 'index.html';
+    const API_URL   = `https://api.github.com/repos/${REPO}/contents/${PATH}`;
     const TOKEN_KEY = 'phritz_gh_token';
+
+    // State for manage tab
+    let manageSha  = '';
+    let manageHtml = '';
+
+    /* ══════════════════════════════════════════════════════════
+       HELPERS
+       ══════════════════════════════════════════════════════════ */
+    const esc = str => str
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+    const toB64   = str => btoa(unescape(encodeURIComponent(str)));
+    const fromB64 = b64 => decodeURIComponent(escape(atob(b64.replace(/\n/g, ''))));
 
     function formatDate(raw) {
       if (!raw) return '';
@@ -360,46 +479,98 @@
       return `${y} · ${m} · ${d}`;
     }
 
-    function esc(str) {
-      return str
-        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    function parseDate(formatted) {
+      // "2026 · 06 · 30" → "2026-06-30"
+      return formatted.replace(/\s*·\s*/g, '-');
     }
 
-    // Unicode-safe base64
-    function toB64(str)   { return btoa(unescape(encodeURIComponent(str))); }
-    function fromB64(b64) { return decodeURIComponent(escape(atob(b64.replace(/\n/g, '')))); }
-
-    /* ── Token persistence ───────────────────────────────────── */
-    function loadToken() {
-      try { return localStorage.getItem(TOKEN_KEY) || ''; } catch { return ''; }
+    /* ── Token helpers ────────────────────────────────────────── */
+    function getToken() {
+      return document.getElementById('f-token').value.trim()
+          || (() => { try { return localStorage.getItem(TOKEN_KEY) || ''; } catch { return ''; } })();
     }
+
     function saveToken(t) {
       try { localStorage.setItem(TOKEN_KEY, t); } catch {}
     }
 
-    function updateTokenStatus() {
-      const saved = loadToken();
-      const dot   = document.getElementById('token-status');
+    function updateTokenDot() {
+      const saved = (() => { try { return localStorage.getItem(TOKEN_KEY) || ''; } catch { return ''; } })();
+      const dot   = document.getElementById('token-dot');
       const input = document.getElementById('f-token');
-      if (saved) {
-        dot.classList.add('saved');
-        if (!input.value) input.value = saved;
-      } else {
-        dot.classList.remove('saved');
-      }
+      dot.classList.toggle('saved', !!saved);
+      if (saved && !input.value) input.value = saved;
     }
 
-    /* ── Splice: inject show row into index.html string ─────── */
+    function apiHeaders(token) {
+      return {
+        Authorization:  `Bearer ${token}`,
+        Accept:         'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+      };
+    }
+
+    /* ── Build snippet from show data ─────────────────────────── */
+    function buildSnippet(show) {
+      const titleLine  = show.title
+        ? `\n    <span class="show-title">— ${esc(show.title)}</span>`
+        : '';
+      const ticketLine = show.tickets
+        ? `\n    <a class="show-tickets" href="${esc(show.tickets)}" target="_blank" rel="noopener noreferrer">tickets →</a>`
+        : '';
+      return [
+        '<div class="show-row">',
+        '  <div class="show-main">',
+        `    <span class="show-act">${esc(show.act)}</span>${titleLine}`,
+        '  </div>',
+        '  <div class="show-details">',
+        `    <span class="show-date">${esc(formatDate(show.date))}</span>`,
+        `    <span class="show-venue">${esc(show.venue)}</span>${ticketLine}`,
+        '  </div>',
+        '</div>',
+      ].join('\n');
+    }
+
+    /* ── Build full panel inner HTML from array of shows ──────── */
+    function buildPanelHtml(shows) {
+      const PAD = '        '; // 8 spaces — matches file indentation
+      if (shows.length === 0) {
+        return `\n${PAD}<p class="shows-none">no upcoming dates</p>\n      `;
+      }
+      const rows = shows.map(show =>
+        buildSnippet(show).split('\n').map(l => PAD + l).join('\n')
+      );
+      return '\n' + rows.join('\n') + '\n      ';
+    }
+
+    /* ── Splice: prepend one new show row into the panel ──────── */
     function splicePanel(html, snippet) {
-      const MARKER = '<div id="panel-live"';
-      const si = html.indexOf(MARKER);
+      const si = html.indexOf('<div id="panel-live"');
       if (si === -1) return null;
-
       const tagEnd = html.indexOf('>', si) + 1;
+      const [, closeIdx] = findPanelClose(html, tagEnd);
 
-      // Walk forward to find the matching </div>
-      let depth = 1, i = tagEnd;
+      let inner = html.slice(tagEnd, closeIdx);
+      inner = inner.replace(/[ \t]*<p class="shows-none">[\s\S]*?<\/p>\n?/g, '');
+
+      const PAD = '        ';
+      const indented = snippet.trim().split('\n').map(l => PAD + l).join('\n');
+
+      return html.slice(0, tagEnd) + '\n' + indented + inner + html.slice(closeIdx);
+    }
+
+    /* ── Replace: swap entire panel content ───────────────────── */
+    function replacePanel(html, newInner) {
+      const si = html.indexOf('<div id="panel-live"');
+      if (si === -1) return null;
+      const tagEnd = html.indexOf('>', si) + 1;
+      const [, closeIdx] = findPanelClose(html, tagEnd);
+      return html.slice(0, tagEnd) + newInner + html.slice(closeIdx);
+    }
+
+    /* ── Walk nested divs to find matching </div> ─────────────── */
+    function findPanelClose(html, from) {
+      let depth = 1, i = from;
       while (i < html.length && depth > 0) {
         const o = html.indexOf('<div', i);
         const c = html.indexOf('</div>', i);
@@ -407,200 +578,334 @@
         if (o !== -1 && o < c) { depth++; i = o + 4; }
         else { depth--; if (depth > 0) i = c + 6; else i = c; }
       }
-
-      // Inner content of the panel
-      let inner = html.slice(tagEnd, i);
-
-      // Remove "no dates" placeholder if present
-      inner = inner.replace(/[ \t]*<p class="shows-none">[\s\S]*?<\/p>\n?/g, '');
-
-      // Indent snippet to match file style (8-space outer indent)
-      const PAD = '        ';
-      const indented = snippet.trim().split('\n')
-        .map(line => PAD + line)
-        .join('\n');
-
-      return html.slice(0, tagEnd)
-           + '\n' + indented
-           + inner
-           + html.slice(i);
+      return [depth, i]; // i = start of closing </div>
     }
 
-    /* ── Generate snippet ───────────────────────────────────── */
-    function generate() {
-      const act     = document.getElementById('f-act').value.trim();
-      const title   = document.getElementById('f-title').value.trim();
-      const rawDate = document.getElementById('f-date').value;
-      const venue   = document.getElementById('f-venue').value.trim();
-      const tickets = document.getElementById('f-tickets').value.trim();
+    /* ── Parse existing shows from fetched HTML ───────────────── */
+    function parseShows(html) {
+      const parser = new DOMParser();
+      const doc    = parser.parseFromString(html, 'text/html');
+      const panel  = doc.getElementById('panel-live');
+      if (!panel) return [];
+      return Array.from(panel.querySelectorAll('.show-row')).map(row => ({
+        act:     row.querySelector('.show-act')?.textContent.trim()  || '',
+        title:   (row.querySelector('.show-title')?.textContent.trim() || '').replace(/^—\s*/, ''),
+        date:    parseDate(row.querySelector('.show-date')?.textContent.trim() || ''),
+        venue:   row.querySelector('.show-venue')?.textContent.trim() || '',
+        tickets: row.querySelector('.show-tickets')?.getAttribute('href') || '',
+      }));
+    }
 
-      if (!act || !rawDate || !venue) {
+    /* ══════════════════════════════════════════════════════════
+       TAB SWITCHER
+       ══════════════════════════════════════════════════════════ */
+    function switchTab(tab) {
+      document.getElementById('panel-add').style.display    = tab === 'add'    ? '' : 'none';
+      document.getElementById('panel-manage').style.display = tab === 'manage' ? '' : 'none';
+      document.getElementById('tab-add').classList.toggle('active',    tab === 'add');
+      document.getElementById('tab-manage').classList.toggle('active', tab === 'manage');
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       ADD TAB
+       ══════════════════════════════════════════════════════════ */
+    function generate() {
+      const show = getAddForm();
+      if (!show.act || !show.date || !show.venue) {
         alert('Please fill in artist name, date, and venue.');
         return;
       }
 
-      const dateStr = formatDate(rawDate);
+      // Preview
+      document.getElementById('p-act').textContent   = show.act;
+      document.getElementById('p-title').textContent = show.title ? `— ${show.title}` : '';
+      document.getElementById('p-date').textContent  = formatDate(show.date);
+      document.getElementById('p-venue').textContent = show.venue;
+      const pt = document.getElementById('p-tickets');
+      if (show.tickets) { pt.style.display = 'inline'; pt.href = show.tickets; }
+      else               { pt.style.display = 'none'; }
 
-      // Update preview
-      document.getElementById('p-act').textContent   = act;
-      document.getElementById('p-title').textContent = title ? `— ${title}` : '';
-      document.getElementById('p-date').textContent  = dateStr;
-      document.getElementById('p-venue').textContent = venue;
-      const pTickets = document.getElementById('p-tickets');
-      if (tickets) { pTickets.style.display = 'inline'; pTickets.href = tickets; }
-      else          { pTickets.style.display = 'none'; }
+      // Snippet
+      document.getElementById('code-output').textContent = buildSnippet(show);
 
-      // Build snippet (2-space indent, consistent throughout)
-      const titleLine   = title   ? `\n    <span class="show-title">— ${esc(title)}</span>`                                                             : '';
-      const ticketLine  = tickets ? `\n    <a class="show-tickets" href="${esc(tickets)}" target="_blank" rel="noopener noreferrer">tickets →</a>` : '';
-
-      const snippet =
-`<div class="show-row">
-  <div class="show-main">
-    <span class="show-act">${esc(act)}</span>${titleLine}
-  </div>
-  <div class="show-details">
-    <span class="show-date">${esc(dateStr)}</span>
-    <span class="show-venue">${esc(venue)}</span>${ticketLine}
-  </div>
-</div>`;
-
-      document.getElementById('code-output').textContent = snippet;
-
-      // Reset state
-      document.getElementById('push-status').textContent = '';
-      const pushBtn = document.getElementById('btn-push');
-      pushBtn.textContent = 'push to website →';
-      pushBtn.className   = 'btn-push';
-      pushBtn.disabled    = false;
-
-      const copyBtn = document.getElementById('btn-copy');
-      copyBtn.textContent = 'copy';
-      copyBtn.classList.remove('copied');
+      // Reset buttons
+      setAddStatus('');
+      const pb = document.getElementById('btn-push');
+      pb.textContent = 'push to website →'; pb.className = 'btn-push'; pb.disabled = false;
+      const cb = document.getElementById('btn-copy');
+      cb.textContent = 'copy'; cb.classList.remove('copied');
 
       document.getElementById('output-section').classList.add('visible');
-      document.getElementById('output-section')
-        .scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('output-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    /* ── Copy snippet ───────────────────────────────────────── */
+    function getAddForm() {
+      return {
+        act:     document.getElementById('f-act').value.trim(),
+        title:   document.getElementById('f-title').value.trim(),
+        date:    document.getElementById('f-date').value,
+        venue:   document.getElementById('f-venue').value.trim(),
+        tickets: document.getElementById('f-tickets').value.trim(),
+      };
+    }
+
     function copyCode() {
       navigator.clipboard.writeText(document.getElementById('code-output').textContent)
         .then(() => {
           const btn = document.getElementById('btn-copy');
-          btn.textContent = 'copied ✓';
-          btn.classList.add('copied');
+          btn.textContent = 'copied ✓'; btn.classList.add('copied');
           setTimeout(() => { btn.textContent = 'copy'; btn.classList.remove('copied'); }, 2000);
         });
     }
 
-    /* ── Push to website via GitHub Contents API ────────────── */
-    async function pushToWebsite() {
-      const tokenInput = document.getElementById('f-token').value.trim() || loadToken();
-      if (!tokenInput) {
-        document.getElementById('gh-section').open = true;
-        document.getElementById('f-token').focus();
-        setStatus('add your github token above first', false);
-        return;
-      }
-      saveToken(tokenInput);
-      updateTokenStatus();
-
+    async function pushAdd() {
+      const token   = getToken();
       const snippet = document.getElementById('code-output').textContent;
-      if (!snippet) { setStatus('generate a snippet first', false); return; }
+      if (!token)   { requireToken(); return; }
+      if (!snippet) { setAddStatus('generate a snippet first', true); return; }
+
+      saveToken(token); updateTokenDot();
 
       const btn = document.getElementById('btn-push');
-      btn.textContent = 'pushing…';
-      btn.disabled    = true;
-      setStatus('');
-
-      const API = `https://api.github.com/repos/${REPO}/contents/${PATH}`;
-      const headers = {
-        Authorization: `Bearer ${tokenInput}`,
-        Accept: 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json',
-      };
+      btn.textContent = 'pushing…'; btn.disabled = true;
+      setAddStatus('');
 
       try {
-        // 1. Fetch current file
-        const getRes = await fetch(`${API}?ref=${BRANCH}`, { headers });
-        if (!getRes.ok) {
-          const err = await getRes.json().catch(() => ({}));
-          throw new Error(`GitHub API ${getRes.status}: ${err.message || getRes.statusText}`);
-        }
-        const fileData  = await getRes.json();
-        const sha       = fileData.sha;
-        const currentHtml = fromB64(fileData.content);
+        const { sha, html } = await fetchFile(token);
+        const updated = splicePanel(html, snippet);
+        if (!updated) throw new Error('#panel-live not found in index.html');
 
-        // 2. Inject new show row
-        const updatedHtml = splicePanel(currentHtml, snippet);
-        if (!updatedHtml) throw new Error('#panel-live not found in index.html');
+        const show = getAddForm();
+        const msg  = `add show: ${show.act}${show.title ? ' — ' + show.title : ''} (${formatDate(show.date)})`;
+        await commitFile(token, updated, sha, msg);
 
-        // 3. Build commit message
-        const act     = document.getElementById('f-act').value.trim();
-        const title   = document.getElementById('f-title').value.trim();
-        const rawDate = document.getElementById('f-date').value;
-        const commitMsg = `add show: ${act}${title ? ' — ' + title : ''} (${formatDate(rawDate)})`;
-
-        // 4. Commit
-        const putRes = await fetch(API, {
-          method: 'PUT',
-          headers,
-          body: JSON.stringify({
-            message: commitMsg,
-            content: toB64(updatedHtml),
-            sha,
-            branch: BRANCH,
-          }),
-        });
-
-        if (!putRes.ok) {
-          const err = await putRes.json().catch(() => ({}));
-          throw new Error(`Commit failed ${putRes.status}: ${err.message || putRes.statusText}`);
-        }
-
-        btn.textContent = 'pushed ✓';
-        btn.className   = 'btn-push success';
-        setStatus('live on phritzmusic.com in ~30 s');
-        setTimeout(() => {
-          btn.textContent = 'push to website →';
-          btn.className   = 'btn-push';
-          btn.disabled    = false;
-        }, 5000);
+        btn.textContent = 'pushed ✓'; btn.className = 'btn-push success';
+        setAddStatus('live on phritzmusic.com in ~30 s');
+        setTimeout(() => { btn.textContent = 'push to website →'; btn.className = 'btn-push'; btn.disabled = false; }, 5000);
 
       } catch (err) {
-        btn.textContent = 'push to website →';
-        btn.className   = 'btn-push';
-        btn.disabled    = false;
-        setStatus(`error: ${err.message}`, false);
-        console.error(err);
+        btn.textContent = 'push to website →'; btn.className = 'btn-push'; btn.disabled = false;
+        setAddStatus(`error: ${err.message}`, true);
       }
     }
 
-    function setStatus(msg, ok = true) {
-      const el = document.getElementById('push-status');
-      el.textContent = msg;
-      el.style.color = ok ? 'var(--muted)' : '#a04040';
-    }
-
-    /* ── Clear ──────────────────────────────────────────────── */
-    function clearAll() {
+    function clearAdd() {
       document.getElementById('f-act').value     = 'phritz';
       document.getElementById('f-title').value   = '';
       document.getElementById('f-date').value    = '';
       document.getElementById('f-venue').value   = '';
       document.getElementById('f-tickets').value = '';
       document.getElementById('output-section').classList.remove('visible');
-      setStatus('');
+      setAddStatus('');
     }
 
-    /* ── Enter key ──────────────────────────────────────────── */
+    function setAddStatus(msg, isErr = false) {
+      const el = document.getElementById('add-status');
+      el.textContent = msg;
+      el.className = 'status-msg' + (isErr ? ' err' : '');
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       MANAGE TAB
+       ══════════════════════════════════════════════════════════ */
+    async function loadShows() {
+      const token = getToken();
+      if (!token) { requireToken(); return; }
+      saveToken(token); updateTokenDot();
+
+      show('manage-load-area', false);
+      show('manage-loading',   true);
+      show('manage-content',   false);
+      setManageStatus('');
+
+      try {
+        const { sha, html } = await fetchFile(token);
+        manageSha  = sha;
+        manageHtml = html;
+
+        const shows = parseShows(html);
+        renderCards(shows);
+
+        show('manage-loading', false);
+        show('manage-content', true);
+
+      } catch (err) {
+        show('manage-loading',   false);
+        show('manage-load-area', true);
+        setManageStatus(`error: ${err.message}`, true);
+      }
+    }
+
+    function renderCards(shows) {
+      const container = document.getElementById('show-cards');
+
+      if (shows.length === 0) {
+        container.innerHTML = '<p class="manage-empty">no shows in the live panel</p>';
+        return;
+      }
+
+      container.innerHTML = shows.map((show, i) => `
+        <div class="show-card" data-idx="${i}">
+          <div class="card-header">
+            <span class="card-num">show ${i + 1} of ${shows.length}</span>
+            <button class="btn-remove" onclick="removeCard(this)">remove</button>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label>artist name</label>
+              <input type="text"  class="m-act"     value="${esc(show.act)}">
+            </div>
+            <div class="field">
+              <label>show title</label>
+              <input type="text"  class="m-title"   value="${esc(show.title)}">
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label>date</label>
+              <input type="date"  class="m-date"    value="${show.date}">
+            </div>
+            <div class="field">
+              <label>venue</label>
+              <input type="text"  class="m-venue"   value="${esc(show.venue)}">
+            </div>
+          </div>
+          <div class="field">
+            <label>ticket url <span style="opacity:.5;letter-spacing:1px">(optional)</span></label>
+            <input type="url"   class="m-tickets" value="${esc(show.tickets)}">
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function removeCard(btn) {
+      const card    = btn.closest('.show-card');
+      const allCards = Array.from(document.querySelectorAll('.show-card'));
+      const total   = allCards.length - 1;
+
+      card.remove();
+
+      // Renumber remaining cards
+      document.querySelectorAll('.show-card').forEach((c, i) => {
+        c.querySelector('.card-num').textContent = `show ${i + 1} of ${total}`;
+      });
+
+      if (total === 0) {
+        document.getElementById('show-cards').innerHTML =
+          '<p class="manage-empty">no shows — save to clear the live panel</p>';
+      }
+    }
+
+    async function saveChanges() {
+      const token = getToken();
+      if (!token) { requireToken(); return; }
+      if (!manageHtml) { setManageStatus('load shows first', true); return; }
+
+      saveToken(token); updateTokenDot();
+
+      const btn = document.getElementById('btn-save');
+      btn.textContent = 'saving…'; btn.disabled = true;
+      setManageStatus('');
+
+      try {
+        // Collect current card values
+        const shows = Array.from(document.querySelectorAll('.show-card')).map(card => ({
+          act:     card.querySelector('.m-act').value.trim(),
+          title:   card.querySelector('.m-title').value.trim(),
+          date:    card.querySelector('.m-date').value,
+          venue:   card.querySelector('.m-venue').value.trim(),
+          tickets: card.querySelector('.m-tickets').value.trim(),
+        })).filter(s => s.act && s.date && s.venue);
+
+        const newInner  = buildPanelHtml(shows);
+        const updated   = replacePanel(manageHtml, newInner);
+        if (!updated) throw new Error('#panel-live not found in index.html');
+
+        const n   = shows.length;
+        const msg = n === 0
+          ? 'clear live shows panel'
+          : `update live shows (${n} show${n > 1 ? 's' : ''})`;
+
+        const data = await commitFile(token, updated, manageSha, msg);
+
+        // Update stored state so further saves use the new SHA
+        manageSha  = data.content.sha;
+        manageHtml = updated;
+
+        btn.textContent = 'saved ✓'; btn.className = 'btn-save success';
+        setManageStatus('live on phritzmusic.com in ~30 s');
+        setTimeout(() => { btn.textContent = 'save all changes →'; btn.className = 'btn-save'; btn.disabled = false; }, 5000);
+
+      } catch (err) {
+        btn.textContent = 'save all changes →'; btn.className = 'btn-save'; btn.disabled = false;
+        setManageStatus(`error: ${err.message}`, true);
+      }
+    }
+
+    function setManageStatus(msg, isErr = false) {
+      const el = document.getElementById('manage-status');
+      el.textContent = msg;
+      el.className = 'status-msg' + (isErr ? ' err' : '');
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       GITHUB API
+       ══════════════════════════════════════════════════════════ */
+    async function fetchFile(token) {
+      const res  = await fetch(`${API_URL}?ref=${BRANCH}`, { headers: apiHeaders(token) });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(`GitHub ${res.status}: ${err.message || res.statusText}`);
+      }
+      const data = await res.json();
+      return { sha: data.sha, html: fromB64(data.content) };
+    }
+
+    async function commitFile(token, html, sha, message) {
+      const res = await fetch(API_URL, {
+        method: 'PUT',
+        headers: apiHeaders(token),
+        body: JSON.stringify({ message, content: toB64(html), sha, branch: BRANCH }),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(`Commit failed ${res.status}: ${err.message || res.statusText}`);
+      }
+      return res.json();
+    }
+
+    function apiHeaders(token) {
+      return {
+        Authorization:  `Bearer ${token}`,
+        Accept:         'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+      };
+    }
+
+    /* ══════════════════════════════════════════════════════════
+       UTILS
+       ══════════════════════════════════════════════════════════ */
+    function show(id, visible) {
+      document.getElementById(id).style.display = visible ? '' : 'none';
+    }
+
+    function requireToken() {
+      document.getElementById('gh-section').open = true;
+      document.getElementById('f-token').focus();
+    }
+
+    // Enter key triggers generate on add tab (not on token/url fields)
     document.addEventListener('keydown', e => {
-      if (e.key === 'Enter' && e.target.id !== 'f-token') generate();
+      if (e.key === 'Enter'
+          && document.getElementById('panel-add').style.display !== 'none'
+          && e.target.type !== 'url'
+          && e.target.id  !== 'f-token') {
+        generate();
+      }
     });
 
-    /* ── Init ───────────────────────────────────────────────── */
-    updateTokenStatus();
+    // Init
+    updateTokenDot();
   </script>
 
 </body>
