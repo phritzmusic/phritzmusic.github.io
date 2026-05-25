@@ -214,6 +214,12 @@ img {
 /* ── Vertical ellipsis toggle (mobile/tablet only) ───────────── */
 .menu-toggle {
   display: none; /* shown via media query below */
+  /* Absolutely positioned — same pattern as .header-logo — so the ⋮ sits at
+     exactly safe-area + header-h/2 regardless of Safari's env() flex quirks */
+  position: absolute;
+  right: var(--pad-x);
+  top: calc(env(safe-area-inset-top, 0px) + var(--header-h) / 2);
+  transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
@@ -226,9 +232,6 @@ img {
   transition: color 0.35s ease;
   -webkit-tap-highlight-color: transparent;
   font-family: var(--font-body);
-  /* Match .social-float height so flex-end places the ⋮ below the notch */
-  height: var(--header-h);
-  align-items: center;
 }
 
 /* On the dark hero: white ellipsis */
@@ -765,7 +768,6 @@ img {
   font-weight: 400;
   font-size: 11px;
   letter-spacing: 2px;
-  text-transform: lowercase;
   color: var(--text);
   white-space: nowrap;
 }
@@ -775,7 +777,6 @@ img {
   font-weight: 300;
   font-size: 11px;
   letter-spacing: 1.5px;
-  text-transform: lowercase;
   color: var(--text-muted);
   overflow: hidden;
   text-overflow: ellipsis;

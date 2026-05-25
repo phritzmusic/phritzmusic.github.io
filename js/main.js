@@ -11,13 +11,22 @@ window.addEventListener('load', () => {
 const siteHeader = document.getElementById('site-header');
 const hero       = document.getElementById('hero');
 
+// theme-color meta — dark on hero (photo), page-bg off-hero
+const metaTheme = document.querySelector('meta[name="theme-color"]');
+
 if (siteHeader && hero) {
   siteHeader.classList.add('on-hero');
+  if (metaTheme) metaTheme.setAttribute('content', '#000000');
+
   const headerObserver = new IntersectionObserver(
     ([entry]) => {
       siteHeader.classList.toggle('on-hero', entry.isIntersecting);
-      // Always reveal header when returning to the hero
-      if (entry.isIntersecting) siteHeader.classList.remove('header-hidden');
+      if (entry.isIntersecting) {
+        siteHeader.classList.remove('header-hidden');
+        if (metaTheme) metaTheme.setAttribute('content', '#000000'); // hero: dark photo
+      } else {
+        if (metaTheme) metaTheme.setAttribute('content', '#f4f3f0'); // off-hero: page bg
+      }
     },
     { threshold: 0 }
   );
