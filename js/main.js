@@ -306,8 +306,10 @@ function initLive() {
       r.style.setProperty('--row-i', i);
       r.classList.remove('row-folded');
     });
-    // Step 2: force reflow so the browser sees them as visible before animating
+    // Step 2: force reflow — rows were display:none during fonts.ready so
+    // applyMarquees() couldn't measure them; re-run now they're visible
     panel.offsetHeight; // eslint-disable-line no-unused-expressions
+    applyMarquees();
     // Step 3: staggered fade-in
     rows.slice(FOLD).forEach(r => r.classList.add('row-revealed'));
     btn.textContent = 'show less';

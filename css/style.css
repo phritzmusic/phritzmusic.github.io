@@ -870,6 +870,9 @@ img {
   .show-row {
     flex-direction: column;
     gap: 6px;
+    /* stretch so .show-main fills the row width — baseline (desktop default)
+       leaves it sized by content, letting long titles blow past the viewport */
+    align-items: stretch;
   }
   .show-details {
     gap: clamp(12px, 4vw, 24px);
