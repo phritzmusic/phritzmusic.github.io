@@ -10,6 +10,7 @@ window.addEventListener('load', () => {
 // ── Floating header: switch color when leaving the hero ───────
 const siteHeader = document.getElementById('site-header');
 const hero       = document.getElementById('hero');
+const notchCover = document.getElementById('notch-cover');
 
 // theme-color meta — dark on hero (photo), page-bg off-hero
 const metaTheme = document.querySelector('meta[name="theme-color"]');
@@ -17,10 +18,13 @@ const metaTheme = document.querySelector('meta[name="theme-color"]');
 if (siteHeader && hero) {
   siteHeader.classList.add('on-hero');
   if (metaTheme) metaTheme.setAttribute('content', '#000000');
+  // Notch cover: transparent on hero so it doesn't show beige over the dark photo
+  if (notchCover) notchCover.classList.add('on-hero');
 
   const headerObserver = new IntersectionObserver(
     ([entry]) => {
       siteHeader.classList.toggle('on-hero', entry.isIntersecting);
+      if (notchCover) notchCover.classList.toggle('on-hero', entry.isIntersecting);
       if (entry.isIntersecting) {
         if (metaTheme) metaTheme.setAttribute('content', '#000000'); // hero: dark photo
       } else {

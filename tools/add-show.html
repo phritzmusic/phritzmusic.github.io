@@ -559,20 +559,25 @@
       return '\n' + rows.join('\n') + '\n      ';
     }
 
-    /* ── Splice: prepend one new show row into the panel ──────── */
+    /* ── Splice: add new show + re-sort all by date (closest first) */
     function splicePanel(html, snippet) {
-      const si = html.indexOf('<div id="panel-live"');
-      if (si === -1) return null;
-      const tagEnd = html.indexOf('>', si) + 1;
-      const [, closeIdx] = findPanelClose(html, tagEnd);
+      // Parse new show from the snippet HTML fragment
+      const snippetDoc = new DOMParser().parseFromString(
+        `<div id="panel-live">${snippet}</div>`, 'text/html'
+      );
+      const newShows = Array.from(snippetDoc.querySelectorAll('.show-row')).map(row => ({
+        act:     row.querySelector('.show-act')?.textContent.trim()  || '',
+        title:   (row.querySelector('.show-title')?.textContent.trim() || '').replace(/^—\s*/, ''),
+        date:    parseDate(row.querySelector('.show-date')?.textContent.trim() || ''),
+        venue:   row.querySelector('.show-venue')?.textContent.trim() || '',
+        tickets: row.querySelector('.show-tickets')?.getAttribute('href') || '',
+      }));
 
-      let inner = html.slice(tagEnd, closeIdx);
-      inner = inner.replace(/[ \t]*<p class="shows-none">[\s\S]*?<\/p>\n?/g, '');
+      // Merge with existing shows and sort ascending (closest date first)
+      const all = [...parseShows(html), ...newShows];
+      all.sort((a, b) => a.date.localeCompare(b.date));
 
-      const PAD = '        ';
-      const indented = snippet.trim().split('\n').map(l => PAD + l).join('\n');
-
-      return html.slice(0, tagEnd) + '\n' + indented + inner + html.slice(closeIdx);
+      return replacePanel(html, buildPanelHtml(all));
     }
 
     /* ── Replace: swap entire panel content ───────────────────── */
