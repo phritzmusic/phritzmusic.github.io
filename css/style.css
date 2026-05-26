@@ -115,21 +115,11 @@ img {
   transition: background 0.45s ease, backdrop-filter 0.45s ease;
 }
 
-/* On hero: notch-cover is transparent — the header's dark frosted background
-   extends through the full header height including the safe-area strip */
+/* On hero: dark to match the hero photo + Dynamic Island hardware */
 #notch-cover.on-hero {
-  background: transparent;
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-}
-
-/* On hero: dark frosted glass — photo visible through it, but content can
-   never bleed through. This is the same pattern Hoka and other premium sites
-   use: always-present header background, just dark over photo vs light off it. */
-.site-header.on-hero {
-  background: rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(20px) saturate(1.4);
-  -webkit-backdrop-filter: blur(20px) saturate(1.4);
 }
 
 /* Off-hero: extend frosted background to the full header bar */
