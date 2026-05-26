@@ -7,9 +7,10 @@ window.addEventListener('load', () => {
   setTimeout(() => document.getElementById('loader').classList.add('hidden'), 600);
 });
 
-// ── Floating header: switch when hero bottom hits header ─────────
+// ── Floating header + notch: switch when hero bottom hits header ─
 const siteHeader = document.getElementById('site-header');
 const hero       = document.getElementById('hero');
+const notchCover = document.getElementById('notch-cover');
 
 // theme-color meta — dark on hero (photo), page-bg off-hero
 const metaTheme = document.querySelector('meta[name="theme-color"]');
@@ -19,6 +20,7 @@ let heroH = 0; // cached hero height, re-measured on resize
 function setOnHero(on) {
   if (!siteHeader) return;
   siteHeader.classList.toggle('on-hero', on);
+  if (notchCover) notchCover.classList.toggle('on-hero', on);
   if (metaTheme) metaTheme.setAttribute('content', on ? '#000000' : '#f4f3f0');
 }
 

@@ -87,17 +87,42 @@ img {
   left: 0;
   right: 0;
   z-index: 100;
-  height: var(--header-h);
+  height: calc(var(--header-h) + env(safe-area-inset-top, 0px));
   display: flex;
-  align-items: center;
+  /* flex-end + explicit item heights = reliable placement below Dynamic Island.
+     align-items:center with env() padding has a Safari rendering quirk where
+     it centres within the full height rather than the padded content box. */
+  align-items: flex-end;
   justify-content: flex-end;
-  padding: 0 var(--pad-x) 0;
+  padding: env(safe-area-inset-top, 0px) var(--pad-x) 0;
   pointer-events: none; /* let clicks pass through empty space */
   transition: background 0.45s ease, box-shadow 0.45s ease, transform 0.32s ease;
 }
 
 
-/* Off-hero: frosted background for the header bar */
+/* ── Notch / Dynamic Island cover — always on top, independent of header ── */
+#notch-cover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: env(safe-area-inset-top, 0px);
+  background: rgba(244, 243, 240, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 150; /* above header (100) and social-menu (160-1) */
+  pointer-events: none;
+  transition: background 0.45s ease, backdrop-filter 0.45s ease;
+}
+
+/* On hero: dark to match the hero photo + Dynamic Island hardware */
+#notch-cover.on-hero {
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Off-hero: extend frosted background to the full header bar */
 .site-header:not(.on-hero) {
   background: rgba(244, 243, 240, 0.92);
   backdrop-filter: blur(12px);
@@ -119,9 +144,9 @@ img {
   transition: opacity 0.45s ease;
 }
 
-/* Off hero: fade in, vertically centred in the header bar */
+/* Off hero: fade in, vertically centred within the non-safe-area strip */
 .site-header:not(.on-hero) .header-logo {
-  top: calc(var(--header-h) / 2);
+  top: calc(env(safe-area-inset-top, 0px) + var(--header-h) / 2);
   opacity: 1;
 }
 
@@ -192,9 +217,11 @@ img {
 /* ── Vertical ellipsis toggle (mobile/tablet only) ───────────── */
 .menu-toggle {
   display: none; /* shown via media query below */
+  /* Absolutely positioned so the ⋮ sits at exactly safe-area + header-h/2
+     regardless of Safari's env() flex quirks */
   position: absolute;
   right: var(--pad-x);
-  top: calc(var(--header-h) / 2);
+  top: calc(env(safe-area-inset-top, 0px) + var(--header-h) / 2);
   transform: translateY(-50%);
   background: none;
   border: none;
@@ -367,7 +394,7 @@ img {
 /* ── Hero logo — fixed so it fades in place rather than scrolling away ── */
 #hero-logo {
   position: fixed;
-  top: calc(var(--header-h) / 2 + 20px);
+  top: calc(env(safe-area-inset-top, 0px) + var(--header-h) / 2 + 20px);
   left: 50%;
   transform: translate(-50%, -50%);
   line-height: 0;
@@ -409,7 +436,7 @@ img {
   justify-content: center;
   padding: var(--pad-section) var(--pad-x);
   /* offset so content isn't hidden behind fixed header */
-  padding-top: calc(var(--pad-section) + var(--header-h));
+  padding-top: calc(var(--pad-section) + var(--header-h) + env(safe-area-inset-top, 0px));
 }
 
 .info-inner {
