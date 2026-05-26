@@ -296,8 +296,8 @@ img {
   border-bottom: 1px solid var(--border);
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 19px;
-  letter-spacing: 0.1em;
+  font-size: 17px;
+  letter-spacing: 0;
   text-transform: lowercase;
   color: var(--text);
   min-height: 56px; /* comfortable touch target */
