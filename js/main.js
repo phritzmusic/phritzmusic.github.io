@@ -7,7 +7,7 @@ window.addEventListener('load', () => {
   setTimeout(() => document.getElementById('loader').classList.add('hidden'), 600);
 });
 
-// ── Floating header: switch color when leaving the hero ───────
+// ── Floating header + notch: switch when hero bottom hits header ─
 const siteHeader = document.getElementById('site-header');
 const hero       = document.getElementById('hero');
 const notchCover = document.getElementById('notch-cover');
@@ -15,29 +15,23 @@ const notchCover = document.getElementById('notch-cover');
 // theme-color meta — dark on hero (photo), page-bg off-hero
 const metaTheme = document.querySelector('meta[name="theme-color"]');
 
-if (siteHeader && hero) {
-  siteHeader.classList.add('on-hero');
-  if (metaTheme) metaTheme.setAttribute('content', '#000000');
-  // Notch cover: transparent on hero so it doesn't show beige over the dark photo
-  if (notchCover) notchCover.classList.add('on-hero');
+let heroH = 0; // cached hero height, re-measured on resize
 
-  const headerObserver = new IntersectionObserver(
-    ([entry]) => {
-      siteHeader.classList.toggle('on-hero', entry.isIntersecting);
-      if (notchCover) notchCover.classList.toggle('on-hero', entry.isIntersecting);
-      if (entry.isIntersecting) {
-        if (metaTheme) metaTheme.setAttribute('content', '#000000'); // hero: dark photo
-      } else {
-        if (metaTheme) metaTheme.setAttribute('content', '#f4f3f0'); // off-hero: page bg
-      }
-    },
-    { threshold: 0 }
-  );
-  headerObserver.observe(hero);
+function setOnHero(on) {
+  if (!siteHeader) return;
+  siteHeader.classList.toggle('on-hero', on);
+  if (notchCover) notchCover.classList.toggle('on-hero', on);
+  if (metaTheme) metaTheme.setAttribute('content', on ? '#000000' : '#f4f3f0');
 }
 
+if (siteHeader && hero) {
+  const measureHero = () => { heroH = hero.offsetHeight; };
+  measureHero();
+  window.addEventListener('resize', measureHero, { passive: true });
+  setOnHero(true); // start on-hero
+}
 
-// ── Scroll-based fades: scroll-hint + hero logo ──────────────
+// ── Scroll-based fades: scroll-hint + hero logo + on-hero state ─
 const scrollHint  = document.querySelector('.scroll-hint');
 const heroLogoEl  = document.getElementById('hero-logo');
 
@@ -48,8 +42,15 @@ function onScroll() {
   if (scrollHint) scrollHint.style.opacity = Math.max(0, 1 - s / (vh * 0.22));
   // Hero logo: dissolves by ~40% of viewport (well before main content)
   if (heroLogoEl)  heroLogoEl.style.opacity  = Math.max(0, 1 - s / (vh * 0.40));
+  // Header/notch: flip off-hero the moment the hero's bottom edge
+  // reaches the header's bottom — content never bleeds through the
+  // transparent header into the status-bar / Dynamic Island area
+  if (siteHeader && hero) {
+    setOnHero(s < heroH - siteHeader.offsetHeight);
+  }
 }
 window.addEventListener('scroll', onScroll, { passive: true });
+onScroll(); // run once on load (handles page loads that start mid-scroll)
 
 // ── IntersectionObserver: generic fade-in sections ───────────
 const io = new IntersectionObserver(

@@ -115,9 +115,9 @@ img {
   transition: background 0.45s ease, backdrop-filter 0.45s ease;
 }
 
-/* On hero: transparent so the dark photo shows through the Dynamic Island area */
+/* On hero: dark to match the hero photo + Dynamic Island hardware */
 #notch-cover.on-hero {
-  background: transparent;
+  background: rgba(0, 0, 0, 0.85);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
