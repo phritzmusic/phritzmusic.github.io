@@ -19,14 +19,8 @@ window.RELEASES_MANUAL = [
     year:         2025,
     release_date: "2025-03-05"
   },
-  {
-    title:        "しりべつの冬景をたずねて",
-    project:      "phritz",
-    artwork:      "https://i.scdn.co/image/ab67616d00001e02460c15de0244d5414bd463c5",
-    link:         "https://open.spotify.com/album/1vaJRcGBF61MHM9k7q5hyv",
-    year:         2025,
-    release_date: "2025-01-01"
-  },
+  // しりべつの冬景をたずねて: removed — Spotify returns this as
+  // "a visit to wintry Shiribetsu" (different album ID), deduplicate by title.
   {
     title:        "what if?",
     project:      "phritz",
@@ -35,14 +29,8 @@ window.RELEASES_MANUAL = [
     year:         2024,
     release_date: "2024-01-01"
   },
-  {
-    title:        "Somewhere Blue",
-    project:      "phritz",
-    artwork:      "https://i.scdn.co/image/ab67616d00001e02565ee64d1d3ddf86484a5c1e",
-    link:         "https://open.spotify.com/album/2W17S0sQp6LVpV8LSFvHAv",
-    year:         2024,
-    release_date: "2024-04-12"
-  },
+  // Somewhere Blue: removed — Spotify returns this with a different album ID,
+  // causing a duplicate. Spotify version takes precedence.
   {
     title:        "Feathering",
     project:      "phritz",
@@ -99,14 +87,8 @@ window.RELEASES_MANUAL = [
     year:         2022,
     release_date: "2022-09-16"
   },
-  {
-    title:        "grayscale",
-    project:      "phritz",
-    artwork:      "https://i.scdn.co/image/ab67616d00001e0211fd17092c11c802aaf4cfae",
-    link:         "https://open.spotify.com/album/23fZgDStQmUj0XcGl27NyZ",
-    year:         2021,
-    release_date: "2021-06-01"
-  },
+  // grayscale: removed — Spotify returns this with a different album ID,
+  // causing a duplicate. Spotify version takes precedence.
   {
     title:        "Love Ride (feat. Shelhiel)",
     project:      "phritz",
