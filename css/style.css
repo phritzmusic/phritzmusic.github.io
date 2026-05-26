@@ -503,9 +503,7 @@ img {
   font-size: 18px;
   line-height: 1.95;
   color: var(--text);
-  text-align: justify;
-  hyphens: auto;
-  -webkit-hyphens: auto;
+  text-align: left;
 }
 
 .bio-jp {
