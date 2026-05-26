@@ -9,8 +9,8 @@
   --text-muted:   #909090;
   --border:       rgba(26, 26, 26, 0.1);
 
-  /* Urbanist: clean geometric grotesque, used for both display and body */
-  --font-display: 'Urbanist', system-ui, sans-serif;
+  /* Jost: display/artist name  |  Urbanist: body/nav/UI */
+  --font-display: 'Jost', system-ui, sans-serif;
   --font-body:    'Urbanist', system-ui, sans-serif;
   --font-serif:   'Lora', Georgia, serif;
 
@@ -36,7 +36,7 @@ html {
 
 body {
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   color: var(--text);
   /* No background-color here — body must stay transparent so the fixed
      .hero-bg at z-index:-1 isn't painted over. Only html & #main carry bg. */
@@ -297,7 +297,7 @@ img {
   font-family: var(--font-body);
   font-weight: 400;
   font-size: 17px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
   text-transform: lowercase;
   color: var(--text);
   min-height: 56px; /* comfortable touch target */
@@ -370,8 +370,8 @@ img {
 .scroll-hint span {
   font-family: var(--font-body);
   font-size: 11px;
-  font-weight: 300;
-  letter-spacing: 2px;
+  font-weight: 400;
+  letter-spacing: 0;
   text-transform: uppercase;
   color: #fff;
   text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6);
@@ -469,9 +469,9 @@ img {
 
 .artist-name {
   font-family: var(--font-display);
-  font-weight: 300;
+  font-weight: 300; /* Jost Light */
   font-size: clamp(24px, 4.1vw, 52px);
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   line-height: 1;
   color: var(--text);
   margin-bottom: clamp(14px, 2vw, 24px);
@@ -479,9 +479,9 @@ img {
 
 .artist-bio {
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 10px;
-  letter-spacing: 1px;
+  letter-spacing: 0;
   text-transform: uppercase;
   color: var(--text-muted);
   margin-bottom: clamp(20px, 3vw, 36px);
@@ -510,7 +510,7 @@ img {
 
 .bio-jp {
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 10px;
   line-height: 2;
   color: var(--text-muted);
@@ -528,9 +528,9 @@ img {
 
 .main-nav a {
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 11px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
   text-transform: lowercase;
   color: var(--text);
   padding: 7px 2px;
@@ -578,9 +578,9 @@ img {
   padding: 10px 0;
   margin-right: clamp(20px, 3vw, 40px);
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 10px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
   text-transform: lowercase;
   color: var(--text-muted);
   cursor: pointer;
@@ -669,9 +669,9 @@ img {
 
 .release-meta {
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   font-size: clamp(8px, 0.9vw, 10px);
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.55);
 }
@@ -696,9 +696,9 @@ img {
   border: 0.5px solid var(--text);
   padding: 11px 32px;
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 10px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
   text-transform: lowercase;
   color: var(--text);
   cursor: pointer;
@@ -730,9 +730,9 @@ img {
 
 .section-tab {
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 10px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
   text-transform: lowercase;
   color: var(--text);
   padding: 10px 0;
@@ -748,7 +748,7 @@ img {
 /* ── Live shows list ──────────────────────────────────────────── */
 .show-row {
   display: flex;
-  align-items: baseline;
+  align-items: flex-start;
   justify-content: space-between;
   gap: clamp(16px, 3vw, 48px);
   padding: 16px 0;
@@ -770,14 +770,14 @@ img {
   font-family: var(--font-body);
   font-weight: 400;
   font-size: 11px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
   color: var(--text);
   white-space: nowrap;
 }
 
 .show-title {
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 11px;
   letter-spacing: 0;
   color: var(--text-muted);
@@ -825,26 +825,27 @@ img {
   .show-row.row-revealed { animation: none; }
 }
 
-/* Right column: date · venue · tickets */
+/* Right column: date / venue / tickets — stacked vertically */
 .show-details {
   display: flex;
-  align-items: baseline;
-  gap: clamp(14px, 2.5vw, 36px);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
   flex-shrink: 0;
 }
 
 .show-date {
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 10px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
   color: var(--text-muted);
   white-space: nowrap;
 }
 
 .show-venue {
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 10px;
   letter-spacing: 0;
   color: var(--text-muted);
@@ -853,9 +854,9 @@ img {
 
 .show-tickets {
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 9px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
   text-transform: lowercase;
   color: var(--text-muted);
   border-bottom: 1px solid currentColor;
@@ -870,20 +871,17 @@ img {
   .show-row {
     flex-direction: column;
     gap: 6px;
-    /* stretch so .show-main fills the row width — baseline (desktop default)
-       leaves it sized by content, letting long titles blow past the viewport */
+    /* stretch so .show-main fills the row width — without this, long titles
+       blow past the viewport in column-direction flex */
     align-items: stretch;
-  }
-  .show-details {
-    gap: clamp(12px, 4vw, 24px);
   }
 }
 
 .shows-none {
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 10px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
   text-transform: lowercase;
   color: var(--text-muted);
   padding: 18px 0;
@@ -944,7 +942,7 @@ img {
 .work-caption {
   font-family: var(--font-body);
   font-size: 9px;
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: 0;
   color: var(--text-muted);
   line-height: 1.8;
@@ -957,11 +955,11 @@ img {
 
 .clients-list {
   font-family: var(--font-body);
-  font-weight: 300;
+  font-weight: 400;
   font-size: clamp(12px, 1.4vw, 15px);
   line-height: 2.8;
   color: var(--text-muted);
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
   word-spacing: 8px;
   text-align: center;
 }
@@ -970,7 +968,7 @@ img {
 .works-footnote {
   font-family: var(--font-body);
   font-size: 10px;
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: 0;
   color: var(--text-muted);
   text-align: center;
@@ -1042,8 +1040,8 @@ img {
 .footer-copy {
   font-family: var(--font-body);
   font-size: 9px;
-  font-weight: 300;
-  letter-spacing: 0.5px;
+  font-weight: 400;
+  letter-spacing: 0;
   text-transform: uppercase;
   color: var(--text-muted);
 }
