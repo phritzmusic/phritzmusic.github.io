@@ -22,7 +22,6 @@ if (siteHeader && hero) {
     ([entry]) => {
       siteHeader.classList.toggle('on-hero', entry.isIntersecting);
       if (entry.isIntersecting) {
-        siteHeader.classList.remove('header-hidden');
         if (metaTheme) metaTheme.setAttribute('content', '#000000'); // hero: dark photo
       } else {
         if (metaTheme) metaTheme.setAttribute('content', '#f4f3f0'); // off-hero: page bg
@@ -33,21 +32,6 @@ if (siteHeader && hero) {
   headerObserver.observe(hero);
 }
 
-// ── Hide on scroll-down, reveal on scroll-up ─────────────────
-let lastScrollY = window.scrollY;
-const SCROLL_DELTA = 8; // px dead-zone to avoid jitter
-
-window.addEventListener('scroll', () => {
-  const y = window.scrollY;
-  if (siteHeader && !siteHeader.classList.contains('on-hero')) {
-    if (y > lastScrollY + SCROLL_DELTA) {
-      siteHeader.classList.add('header-hidden');
-    } else if (y < lastScrollY - SCROLL_DELTA) {
-      siteHeader.classList.remove('header-hidden');
-    }
-  }
-  lastScrollY = y;
-}, { passive: true });
 
 // ── Scroll-based fades: scroll-hint + hero logo ──────────────
 const scrollHint  = document.querySelector('.scroll-hint');

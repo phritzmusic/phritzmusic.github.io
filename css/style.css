@@ -99,10 +99,6 @@ img {
   transition: background 0.45s ease, box-shadow 0.45s ease, transform 0.32s ease;
 }
 
-/* Hide header when scrolling down, reveal on scroll up */
-.site-header.header-hidden {
-  transform: translateY(-100%);
-}
 
 /* ── Notch / Dynamic Island cover — always on top, independent of header ── */
 #notch-cover {
