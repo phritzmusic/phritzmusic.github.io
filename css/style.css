@@ -759,6 +759,30 @@ img {
   white-space: nowrap;
 }
 
+/* Marquee: title scrolls left then back when it overflows the column */
+@keyframes marquee-ping {
+  0%,  16%  { transform: translateX(0); }
+  54%, 70%  { transform: translateX(var(--marquee-shift, 0px)); }
+  100%      { transform: translateX(0); }
+}
+
+.show-title.is-marquee { text-overflow: clip; }
+
+.show-title.is-marquee .show-title-inner {
+  display: inline-block;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee-ping 9s linear 2s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .show-title.is-marquee { text-overflow: ellipsis; }
+  .show-title.is-marquee .show-title-inner { animation: none; }
+}
+
+/* Folded show rows */
+.show-row.row-folded { display: none; }
+
 /* Right column: date · venue · tickets */
 .show-details {
   display: flex;

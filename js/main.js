@@ -231,6 +231,71 @@ function initOtherWorks() {
 
 initOtherWorks();
 
+// ── Live section: prune past shows · marquee · fold ───────────
+function initLive() {
+  const panel = document.getElementById('panel-live');
+  if (!panel) return;
+
+  // 1. Remove shows whose date is strictly before today (local midnight)
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  panel.querySelectorAll('.show-row').forEach(row => {
+    const txt = row.querySelector('.show-date')?.textContent.trim() ?? '';
+    // "2026 · 06 · 07" → "2026-06-07"
+    const iso = txt.replace(/\s*·\s*/g, '-');
+    const d = new Date(iso);
+    if (!txt || isNaN(d.getTime()) || d < today) row.remove();
+  });
+
+  const rows = Array.from(panel.querySelectorAll('.show-row'));
+
+  if (rows.length === 0) {
+    panel.innerHTML = '<p class="shows-none">no upcoming shows</p>';
+    return;
+  }
+
+  // 2. Marquee: if .show-title text overflows its column, animate it back and forth
+  rows.forEach(row => {
+    const el = row.querySelector('.show-title');
+    if (!el) return;
+    const overflow = el.scrollWidth - el.clientWidth;
+    if (overflow > 2) {
+      el.innerHTML = `<span class="show-title-inner">${el.innerHTML}</span>`;
+      el.style.setProperty('--marquee-shift', `-${overflow}px`);
+      el.classList.add('is-marquee');
+    }
+  });
+
+  // 3. Fold: show first FOLD rows, collapse the rest behind a button
+  const FOLD = 4;
+  if (rows.length <= FOLD) return;
+
+  rows.slice(FOLD).forEach(r => r.classList.add('row-folded'));
+
+  const btn = document.createElement('button');
+  btn.className = 'show-more-btn';
+
+  const collapse = () => {
+    rows.slice(FOLD).forEach(r => r.classList.add('row-folded'));
+    btn.textContent = `show all (${rows.length})`;
+    btn.onclick = expand;
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const expand = () => {
+    rows.forEach(r => r.classList.remove('row-folded'));
+    btn.textContent = 'show less';
+    btn.onclick = collapse;
+  };
+
+  btn.textContent = `show all (${rows.length})`;
+  btn.onclick = expand;
+  panel.insertAdjacentElement('afterend', btn);
+}
+
+// Use rAF so layout is committed before measuring overflow
+requestAnimationFrame(initLive);
+
 // (live and clients are now separate sections — no tab switching needed)
 
 // ── Slide-in social menu (mobile/tablet) ─────────────────────
