@@ -96,11 +96,12 @@ def fetch_url_with_retry(url: str, headers: dict, max_retries: int = 6) -> dict:
 def fetch_artist_releases(artist_id: str, token: str) -> list[dict]:
     """Returns all albums + singles for the given artist (handles pagination)."""
     headers = {"Authorization": f"Bearer {token}"}
-    # Note: include_groups uses %2C (URL-encoded comma) — Spotify now rejects
-    # the literal comma in some API versions.  limit=20 is the safe default.
+    # Diagnostic: no include_groups — just limit=20 — to isolate 400 error source.
+    # If this works, add include_groups back. If it still fails, the issue is
+    # deeper (app quota, endpoint deprecation, or credentials).
     url = (
         f"https://api.spotify.com/v1/artists/{artist_id}/albums"
-        f"?include_groups=album%2Csingle&limit=20"
+        f"?limit=20"
     )
     results = []
     page = 0
