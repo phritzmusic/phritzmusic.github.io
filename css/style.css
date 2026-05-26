@@ -860,6 +860,7 @@ img {
   padding-bottom: 1px;
   transition: color 0.2s;
   white-space: nowrap;
+  width: fit-content;
 }
 .show-tickets:hover { color: var(--text); }
 
