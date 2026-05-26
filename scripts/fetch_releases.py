@@ -96,13 +96,9 @@ def fetch_url_with_retry(url: str, headers: dict, max_retries: int = 6) -> dict:
 def fetch_artist_releases(artist_id: str, token: str) -> list[dict]:
     """Returns all albums + singles for the given artist (handles pagination)."""
     headers = {"Authorization": f"Bearer {token}"}
-    # Diagnostic: no include_groups — just limit=20 — to isolate 400 error source.
-    # If this works, add include_groups back. If it still fails, the issue is
-    # deeper (app quota, endpoint deprecation, or credentials).
-    url = (
-        f"https://api.spotify.com/v1/artists/{artist_id}/albums"
-        f"?limit=20"
-    )
+    # Diagnostic: no query params at all — uses Spotify defaults.
+    # If this also gets 400, the endpoint itself or credentials are the problem.
+    url = f"https://api.spotify.com/v1/artists/{artist_id}/albums"
     results = []
     page = 0
     while url:
