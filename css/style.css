@@ -746,14 +746,11 @@ img {
 }
 
 /* ── Live shows list ──────────────────────────────────────────── */
-/* 4-column grid: [title(1fr) | date(auto) | venue(auto) | tickets(auto)]
-   .show-details uses display:contents so its children become direct grid
-   children — every row shares the same column tracks → perfect alignment */
 .show-row {
-  display: grid;
-  grid-template-columns: 1fr auto auto auto;
+  display: flex;
   align-items: baseline;
-  column-gap: clamp(16px, 2.5vw, 36px);
+  justify-content: space-between;
+  gap: clamp(16px, 3vw, 48px);
   padding: 16px 0;
   border-bottom: 1px solid var(--border);
 }
@@ -765,6 +762,7 @@ img {
   display: flex;
   align-items: baseline;
   gap: 8px;
+  flex: 1;
   min-width: 0;
 }
 
@@ -827,9 +825,12 @@ img {
   .show-row.row-revealed { animation: none; }
 }
 
-/* Unwrap so date/venue/tickets become direct grid children of .show-row */
+/* Right side: date · venue · tickets in a horizontal row */
 .show-details {
-  display: contents;
+  display: flex;
+  align-items: baseline;
+  gap: clamp(12px, 2vw, 28px);
+  flex-shrink: 0;
 }
 
 .show-date {
@@ -864,12 +865,12 @@ img {
 }
 .show-tickets:hover { color: var(--text); }
 
-/* Mobile: collapse to single column — all items stack vertically */
+/* Mobile: stack title above the details row */
 @media (max-width: 600px) {
   .show-row {
-    grid-template-columns: 1fr;
-    row-gap: 3px;
-    column-gap: 0;
+    flex-direction: column;
+    gap: 4px;
+    align-items: stretch;
   }
 }
 
