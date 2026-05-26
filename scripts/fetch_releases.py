@@ -96,9 +96,13 @@ def fetch_url_with_retry(url: str, headers: dict, max_retries: int = 6) -> dict:
 def fetch_artist_releases(artist_id: str, token: str) -> list[dict]:
     """Returns all albums + singles for the given artist (handles pagination)."""
     headers = {"Authorization": f"Bearer {token}"}
-    # Diagnostic: no query params at all — uses Spotify defaults.
-    # If this also gets 400, the endpoint itself or credentials are the problem.
-    url = f"https://api.spotify.com/v1/artists/{artist_id}/albums"
+    # Spotify now rejects any explicit `limit` parameter on this endpoint (400).
+    # Omitting it lets Spotify use its default pagination (5/page) and the
+    # `next` URL returned in each response drives subsequent pages automatically.
+    url = (
+        f"https://api.spotify.com/v1/artists/{artist_id}/albums"
+        f"?include_groups=album,single"
+    )
     results = []
     page = 0
     while url:
