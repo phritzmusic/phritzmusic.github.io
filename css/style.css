@@ -810,6 +810,21 @@ img {
 /* Folded show rows */
 .show-row.row-folded { display: none; }
 
+/* Revealed show rows — staggered fade-in when "show all" is clicked */
+@keyframes show-row-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.show-row.row-revealed {
+  animation: show-row-in 0.38s ease both;
+  animation-delay: calc(var(--row-i, 0) * 55ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .show-row.row-revealed { animation: none; }
+}
+
 /* Right column: date · venue · tickets */
 .show-details {
   display: flex;

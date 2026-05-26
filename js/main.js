@@ -256,21 +256,34 @@ function initLive() {
     return;
   }
 
-  // 2. Marquee: if .show-title text overflows its column, animate it back and forth
-  rows.forEach(row => {
-    const el = row.querySelector('.show-title');
-    if (!el) return;
-    const overflow = el.scrollWidth - el.clientWidth;
-    if (overflow > 2) {
-      el.innerHTML = `<span class="show-title-inner">${el.innerHTML}</span>`;
-      el.style.setProperty('--marquee-shift', `-${overflow}px`);
-      el.classList.add('is-marquee');
-    }
-  });
+  // 2. Marquee: if .show-title text overflows its column, animate it back and forth.
+  //    Must run after fonts are loaded so text widths are accurate — called via
+  //    document.fonts.ready below.
+  function applyMarquees() {
+    rows.forEach(row => {
+      const el = row.querySelector('.show-title');
+      if (!el) return;
+      // Remove any previous wrapping so we can re-measure cleanly
+      if (el.classList.contains('is-marquee')) {
+        el.innerHTML = el.querySelector('.show-title-inner').innerHTML;
+        el.classList.remove('is-marquee');
+      }
+      const overflow = el.scrollWidth - el.clientWidth;
+      if (overflow > 2) {
+        el.innerHTML = `<span class="show-title-inner">${el.innerHTML}</span>`;
+        el.style.setProperty('--marquee-shift', `-${overflow}px`);
+        el.classList.add('is-marquee');
+      }
+    });
+  }
 
   // 3. Fold: show first FOLD rows, collapse the rest behind a button
   const FOLD = 4;
-  if (rows.length <= FOLD) return;
+  if (rows.length <= FOLD) {
+    // Still need to apply marquees even when no fold
+    document.fonts.ready.then(applyMarquees);
+    return;
+  }
 
   rows.slice(FOLD).forEach(r => r.classList.add('row-folded'));
 
@@ -278,14 +291,25 @@ function initLive() {
   btn.className = 'show-more-btn';
 
   const collapse = () => {
-    rows.slice(FOLD).forEach(r => r.classList.add('row-folded'));
+    rows.slice(FOLD).forEach(r => {
+      r.classList.add('row-folded');
+      r.classList.remove('row-revealed');
+    });
     btn.textContent = `show all (${rows.length})`;
     btn.onclick = expand;
     panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   const expand = () => {
-    rows.forEach(r => r.classList.remove('row-folded'));
+    // Step 1: make rows visible (remove display:none)
+    rows.slice(FOLD).forEach((r, i) => {
+      r.style.setProperty('--row-i', i);
+      r.classList.remove('row-folded');
+    });
+    // Step 2: force reflow so the browser sees them as visible before animating
+    panel.offsetHeight; // eslint-disable-line no-unused-expressions
+    // Step 3: staggered fade-in
+    rows.slice(FOLD).forEach(r => r.classList.add('row-revealed'));
     btn.textContent = 'show less';
     btn.onclick = collapse;
   };
@@ -293,10 +317,12 @@ function initLive() {
   btn.textContent = `show all (${rows.length})`;
   btn.onclick = expand;
   panel.insertAdjacentElement('afterend', btn);
+
+  // Apply marquees after fonts load (accurate text widths)
+  document.fonts.ready.then(applyMarquees);
 }
 
-// Use rAF so layout is committed before measuring overflow
-requestAnimationFrame(initLive);
+initLive();
 
 // (live and clients are now separate sections — no tab switching needed)
 
