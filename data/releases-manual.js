@@ -12,6 +12,14 @@ window.RELEASES_MANUAL = [
   // ─── phritz ────────────────────────────────────────────────────────────────
 
   {
+    title:        "Outline",
+    project:      "phritz",
+    artwork:      "https://i.scdn.co/image/ab67616d0000b273fb26a3b492d7ad52adc8dec3",
+    link:         "https://open.spotify.com/album/6GeOnZMdZDbz5qn2zDuupO",
+    year:         2026,
+    release_date: "2026-05-27"
+  },
+  {
     title:        "Pods",
     project:      "phritz",
     artwork:      "https://i.scdn.co/image/ab67616d00001e026a50fcc487a4f443dfab30f1",
