@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Outline — 星宮とと, EAERAN & phritz — now streaming everywhere">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Outline — 星宮とと, EAERAN & phritz">
+  <meta property="og:description" content="Now streaming everywhere">
+  <meta property="og:image" content="https://imgs.ototoy.jp/imgs/jacket/3713/00000003.3713510.1778655789.043_320.jpg">
+  <meta property="og:type" content="music.song">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://imgs.ototoy.jp/imgs/jacket/3713/00000003.3713510.1778655789.043_320.jpg">
+
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="imgs/logo2021/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="imgs/logo2021/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="imgs/logo2021/favicon-16x16.png">
+  <meta name="theme-color" content="#f4f3f0">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300&family=Urbanist:wght@300;400&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <script src="https://kit.fontawesome.com/80e356ee4f.js" crossorigin="anonymous"></script>
+
+  <title>Outline — 星宮とと, EAERAN & phritz</title>
+
+  <style>
+    :root {
+      --bg:           #f4f3f0;
+      --text:         #1a1a1a;
+      --text-muted:   #909090;
+      --border:       rgba(26, 26, 26, 0.1);
+      --font-display: 'DM Sans', system-ui, sans-serif;
+      --font-body:    'Urbanist', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      background-color: var(--bg);
+      -webkit-text-size-adjust: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 400;
+      color: var(--text);
+      background-color: var(--bg);
+      min-height: 100vh;
+      min-height: 100dvh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img { display: block; max-width: 100%; }
+
+    /* ── Header ────────────────────────────────────────────── */
+    .page-header {
+      display: flex;
+      justify-content: center;
+      padding: clamp(28px, 5vw, 44px) 24px 0;
+    }
+
+    .header-logo-link {
+      opacity: 0.4;
+      transition: opacity 0.28s;
+      line-height: 0;
+    }
+
+    .header-logo-link:hover { opacity: 1; }
+
+    .header-logo-link img { width: 14px; }
+
+    /* ── Main ──────────────────────────────────────────────── */
+    .release-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: clamp(44px, 7vw, 64px) clamp(20px, 6vw, 48px) 80px;
+    }
+
+    /* ── Artwork ───────────────────────────────────────────── */
+    .artwork-wrap {
+      width: min(300px, 72vw);
+      margin-bottom: 32px;
+    }
+
+    .artwork-wrap img {
+      width: 100%;
+      height: auto;
+      box-shadow: 0 16px 56px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    /* ── Release info ──────────────────────────────────────── */
+    .release-info {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .release-title {
+      font-family: var(--font-display);
+      font-weight: 300;
+      font-size: clamp(24px, 5.5vw, 36px);
+      letter-spacing: -0.01em;
+      line-height: 1;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .release-artists {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    /* ── Platform list ─────────────────────────────────────── */
+    .platform-list {
+      list-style: none;
+      width: 100%;
+      max-width: 440px;
+      margin-bottom: 64px;
+    }
+
+    .platform-list li:first-child .platform-link {
+      border-top: 1px solid var(--border);
+    }
+
+    .platform-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 13px;
+      letter-spacing: 0.03em;
+      color: var(--text);
+      transition: color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .platform-link:hover { color: var(--text-muted); }
+
+    .pl-icon {
+      width: 24px;
+      font-size: 17px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pl-name { flex: 1; }
+
+    .pl-arrow {
+      font-size: 11px;
+      color: var(--text-muted);
+      opacity: 0.4;
+      font-family: var(--font-body);
+    }
+
+    /* ── Music Video section ───────────────────────────────── */
+    .mv-section {
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .mv-section-header {
+      display: flex;
+      margin-bottom: clamp(20px, 3vw, 28px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mv-section-label {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: lowercase;
+      color: var(--text);
+      padding: 10px 0;
+      border-bottom: 1.5px solid var(--text);
+      margin-bottom: -1px;
+    }
+
+    .mv-embed {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      background-color: rgba(26, 26, 26, 0.05);
+    }
+
+    .mv-embed iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ── Footer ────────────────────────────────────────────── */
+    .page-footer {
+      text-align: center;
+      padding: 52px 24px 40px;
+    }
+
+    .page-footer a {
+      font-family: var(--font-body);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .page-footer a:hover { color: var(--text); }
+
+    /* ── Fade-in on load ───────────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    .fade-up:nth-child(1) { animation-delay: 0.05s; }
+    .fade-up:nth-child(2) { animation-delay: 0.15s; }
+    .fade-up:nth-child(3) { animation-delay: 0.25s; }
+    .fade-up:nth-child(4) { animation-delay: 0.35s; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up { animation: none; opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <a href="https://phritzmusic.com" class="header-logo-link" aria-label="phritz home">
+      <img src="imgs/phritz_2026_logo-4.png" alt="phritz">
+    </a>
+  </header>
+
+  <main class="release-page">
+
+    <div class="artwork-wrap fade-up">
+      <img
+        src="https://imgs.ototoy.jp/imgs/jacket/3713/00000003.3713510.1778655789.043_320.jpg"
+        alt="Outline — 星宮とと, EAERAN & phritz"
+      >
+    </div>
+
+    <div class="release-info fade-up">
+      <h1 class="release-title">Outline</h1>
+      <p class="release-artists">星宮とと &nbsp;·&nbsp; EAERAN &nbsp;·&nbsp; phritz</p>
+    </div>
+
+    <ul class="platform-list fade-up" aria-label="配信プラットフォーム">
+
+      <li>
+        <a class="platform-link" href="https://www.tunecore.co.jp/to/spotify/1769855" target="_blank" rel="noopener noreferrer">
+          <span class="pl-icon"><i class="fab fa-spotify" aria-hidden="true"></i></span>
+          <span class="pl-name">Spotify</span>
+          <span class="pl-arrow">→</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="platform-link" href="https://www.tunecore.co.jp/to/apple_music/1769855" target="_blank" rel="noopener noreferrer">
+          <span class="pl-icon"><i class="fab fa-apple" aria-hidden="true"></i></span>
+          <span class="pl-name">Apple Music</span>
+          <span class="pl-arrow">→</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="platform-link" href="https://www.tunecore.co.jp/to/youtube_music_key/1769855" target="_blank" rel="noopener noreferrer">
+          <span class="pl-icon"><i class="fab fa-youtube" aria-hidden="true"></i></span>
+          <span class="pl-name">YouTube Music</span>
+          <span class="pl-arrow">→</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="platform-link" href="https://www.tunecore.co.jp/to/amazon_music_unlimited/1769855" target="_blank" rel="noopener noreferrer">
+          <span class="pl-icon"><i class="fab fa-amazon" aria-hidden="true"></i></span>
+          <span class="pl-name">Amazon Music Unlimited</span>
+          <span class="pl-arrow">→</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="platform-link" href="https://www.tunecore.co.jp/to/line/1769855" target="_blank" rel="noopener noreferrer">
+          <span class="pl-icon"><i class="fab fa-line" aria-hidden="true"></i></span>
+          <span class="pl-name">LINE Music</span>
+          <span class="pl-arrow">→</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="platform-link" href="https://www.tunecore.co.jp/to/awa/1769855" target="_blank" rel="noopener noreferrer">
+          <span class="pl-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15" aria-hidden="true">
+              <path d="M12 3C7.03 3 3 7.03 3 12s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 4a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm0 12.5a7.5 7.5 0 0 1-5.25-2.14A4.49 4.49 0 0 1 12 15a4.49 4.49 0 0 1 5.25 2.36A7.5 7.5 0 0 1 12 19.5z"/>
+            </svg>
+          </span>
+          <span class="pl-name">AWA</span>
+          <span class="pl-arrow">→</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="platform-link" href="https://www.tunecore.co.jp/to/itunes/1769855" target="_blank" rel="noopener noreferrer">
+          <span class="pl-icon"><i class="fab fa-apple" aria-hidden="true"></i></span>
+          <span class="pl-name">iTunes</span>
+          <span class="pl-arrow">→</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="platform-link" href="https://www.tunecore.co.jp/to/amazon_music/1769855" target="_blank" rel="noopener noreferrer">
+          <span class="pl-icon"><i class="fab fa-amazon" aria-hidden="true"></i></span>
+          <span class="pl-name">Amazon Music</span>
+          <span class="pl-arrow">→</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="platform-link" href="https://ototoy.jp/top/gh" target="_blank" rel="noopener noreferrer">
+          <span class="pl-icon"><i class="fas fa-compact-disc" aria-hidden="true"></i></span>
+          <span class="pl-name">OTOTOY</span>
+          <span class="pl-arrow">→</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="platform-link" href="https://y.qq.com/portal/search.html?t=album&w=Hoshimiya%20Toto%20Outline" target="_blank" rel="noopener noreferrer">
+          <span class="pl-icon"><i class="fab fa-qq" aria-hidden="true"></i></span>
+          <span class="pl-name">QQ Music</span>
+          <span class="pl-arrow">→</span>
+        </a>
+      </li>
+
+      <li>
+        <a class="platform-link" href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer">
+          <span class="pl-icon"><i class="fab fa-tiktok" aria-hidden="true"></i></span>
+          <span class="pl-name">TikTok</span>
+          <span class="pl-arrow">→</span>
+        </a>
+      </li>
+
+    </ul>
+
+    <section class="mv-section fade-up" aria-label="Music Video">
+      <div class="mv-section-header">
+        <span class="mv-section-label">music video</span>
+      </div>
+      <div class="mv-embed">
+        <iframe
+          src="https://www.youtube.com/embed/gI2aoykWBEY"
+          title="Outline — 星宮とと, EAERAN & phritz (Music Video)"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="page-footer">
+    <a href="https://phritzmusic.com">© phritzmusic</a>
+  </footer>
+
+</body>
+</html>
