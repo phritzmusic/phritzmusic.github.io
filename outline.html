@@ -404,6 +404,7 @@
 
     </ul>
     <button class="show-more-btn" id="show-more-btn" aria-expanded="false">show all platforms +</button>
+    <button class="show-more-btn" id="show-less-btn" style="display:none">show less −</button>
     </div>
 
     <section class="mv-section fade-up" aria-label="Music Video">
@@ -428,11 +429,17 @@
   </footer>
 
   <script>
-    const btn = document.getElementById('show-more-btn');
-    btn.addEventListener('click', () => {
-      const hidden = document.querySelectorAll('.pl-hidden');
-      hidden.forEach(el => el.style.display = 'flex');
-      btn.style.display = 'none';
+    const moreBtn = document.getElementById('show-more-btn');
+    const lessBtn = document.getElementById('show-less-btn');
+    moreBtn.addEventListener('click', () => {
+      document.querySelectorAll('.pl-hidden').forEach(el => el.style.display = 'flex');
+      moreBtn.style.display = 'none';
+      lessBtn.style.display = 'block';
+    });
+    lessBtn.addEventListener('click', () => {
+      document.querySelectorAll('.pl-hidden').forEach(el => el.style.display = '');
+      lessBtn.style.display = 'none';
+      moreBtn.style.display = 'block';
     });
   </script>
 
