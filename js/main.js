@@ -1,9 +1,9 @@
 /* ────────────────────────────────────────────────────────────
    phritz – main.js
-   ──────────────────────────────────────────────────────────── */
+   ────────────────────────────────────────────────────── */
 
-// ── Loader ───────────────────────────────────────────────────
-window.addEventListener('load', () => {
+// ── Loader ───────────────────────────────────────────
+ window.addEventListener('load', () => {
   setTimeout(() => document.getElementById('loader').classList.add('hidden'), 600);
 });
 
@@ -160,6 +160,10 @@ function initDiscography() {
   const releases = mergeReleases();
   if (releases.length === 0) return;
 
+  // Override links for releases that have a dedicated landing page
+  const outline = releases.find(r => r.title === 'Outline' && r.project === 'phritz');
+  if (outline) outline.link = 'https://phritzmusic.com/outline';
+
   // Build filter tabs (only for projects with at least one release)
   const filterBar = document.getElementById('filter-bar');
   let activeProject = 'all';
@@ -199,7 +203,7 @@ function initDiscography() {
 
 initDiscography();
 
-// ── Other Works: fold excess items behind show-more ───────────
+// ── Other Works: fold excess items behind show-more ──────────
 function initOtherWorks() {
   const grid = document.getElementById('works-grid');
   if (!grid) return;
@@ -233,7 +237,7 @@ function initOtherWorks() {
 
 initOtherWorks();
 
-// ── Live section: prune past shows · marquee · fold ───────────
+// ── Live section: prune past shows · marquee · fold ──────────
 function initLive() {
   const panel = document.getElementById('panel-live');
   if (!panel) return;
@@ -328,7 +332,7 @@ initLive();
 
 // (live and clients are now separate sections — no tab switching needed)
 
-// ── Slide-in social menu (mobile/tablet) ─────────────────────
+// ── Slide-in social menu (mobile/tablet) ─────────────────
 const menuToggle  = document.getElementById('menu-toggle');
 const socialMenu  = document.getElementById('social-menu');
 const menuOverlay = document.getElementById('menu-overlay');
