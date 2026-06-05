@@ -864,6 +864,17 @@ img {
 }
 .show-tickets:hover { color: var(--text); }
 
+.show-sold-out {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: lowercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+  opacity: 0.55;
+}
+
 /* Mobile: stack title above the details row */
 @media (max-width: 600px) {
   .show-row {
