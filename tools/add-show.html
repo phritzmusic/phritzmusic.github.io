@@ -234,6 +234,38 @@
     .btn-copy:hover { border-color: var(--text); color: var(--text); }
     .btn-copy.copied { color: var(--text); border-color: var(--text); }
 
+    /* ── Checkbox ───────────────────────────────────────────────── */
+    .check-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+      padding: 4px 0;
+    }
+    .check-label span {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: lowercase;
+      color: var(--muted);
+    }
+    input[type="checkbox"] {
+      width: 14px;
+      height: 14px;
+      accent-color: var(--text);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .preview-sold-out {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: lowercase;
+      color: var(--muted);
+      opacity: 0.7;
+      white-space: nowrap;
+    }
+
     .action-row { display: flex; gap: 12px; align-items: center; }
 
     .btn-push {
@@ -385,6 +417,13 @@
       <input type="url" id="f-tickets" placeholder="https://...">
     </div>
 
+    <div class="field">
+      <label class="check-label">
+        <input type="checkbox" id="f-soldout">
+        <span>sold out</span>
+      </label>
+    </div>
+
     <div class="btn-group">
       <button class="btn-primary" onclick="generate()">generate snippet</button>
       <button class="btn-ghost"   onclick="clearAdd()">clear</button>
@@ -405,7 +444,8 @@
         <div class="preview-details">
           <span class="preview-date"    id="p-date"></span>
           <span class="preview-venue"   id="p-venue"></span>
-          <a    class="preview-tickets" id="p-tickets" style="display:none" href="#" target="_blank" rel="noopener">tickets →</a>
+          <a    class="preview-tickets"  id="p-tickets"  style="display:none" href="#" target="_blank" rel="noopener">tickets →</a>
+          <span class="preview-sold-out" id="p-soldout" style="display:none">sold out</span>
         </div>
       </div>
 
@@ -531,9 +571,11 @@
       const titleLine  = show.title
         ? `\n    <span class="show-title">— ${esc(show.title)}</span>`
         : '';
-      const ticketLine = show.tickets
-        ? `\n    <a class="show-tickets" href="${esc(show.tickets)}" target="_blank" rel="noopener noreferrer">tickets →</a>`
-        : '';
+      const ticketLine = show.soldOut
+        ? `\n    <span class="show-sold-out">sold out</span>`
+        : show.tickets
+          ? `\n    <a class="show-tickets" href="${esc(show.tickets)}" target="_blank" rel="noopener noreferrer">tickets →</a>`
+          : '';
       return [
         '<div class="show-row">',
         '  <div class="show-main">',
@@ -571,6 +613,7 @@
         date:    parseDate(row.querySelector('.show-date')?.textContent.trim() || ''),
         venue:   row.querySelector('.show-venue')?.textContent.trim() || '',
         tickets: row.querySelector('.show-tickets')?.getAttribute('href') || '',
+        soldOut: !!row.querySelector('.show-sold-out'),
       }));
 
       // Merge with existing shows and sort ascending (closest date first)
@@ -614,6 +657,7 @@
         date:    parseDate(row.querySelector('.show-date')?.textContent.trim() || ''),
         venue:   row.querySelector('.show-venue')?.textContent.trim() || '',
         tickets: row.querySelector('.show-tickets')?.getAttribute('href') || '',
+        soldOut: !!row.querySelector('.show-sold-out'),
       }));
     }
 
@@ -643,8 +687,17 @@
       document.getElementById('p-date').textContent  = formatDate(show.date);
       document.getElementById('p-venue').textContent = show.venue;
       const pt = document.getElementById('p-tickets');
-      if (show.tickets) { pt.style.display = 'inline'; pt.href = show.tickets; }
-      else               { pt.style.display = 'none'; }
+      const ps = document.getElementById('p-soldout');
+      if (show.soldOut) {
+        pt.style.display = 'none';
+        ps.style.display = 'inline';
+      } else if (show.tickets) {
+        pt.style.display = 'inline'; pt.href = show.tickets;
+        ps.style.display = 'none';
+      } else {
+        pt.style.display = 'none';
+        ps.style.display = 'none';
+      }
 
       // Snippet
       document.getElementById('code-output').textContent = buildSnippet(show);
@@ -667,6 +720,7 @@
         date:    document.getElementById('f-date').value,
         venue:   document.getElementById('f-venue').value.trim(),
         tickets: document.getElementById('f-tickets').value.trim(),
+        soldOut: document.getElementById('f-soldout').checked,
       };
     }
 
@@ -711,11 +765,12 @@
     }
 
     function clearAdd() {
-      document.getElementById('f-act').value     = 'phritz';
-      document.getElementById('f-title').value   = '';
-      document.getElementById('f-date').value    = '';
-      document.getElementById('f-venue').value   = '';
-      document.getElementById('f-tickets').value = '';
+      document.getElementById('f-act').value      = 'phritz';
+      document.getElementById('f-title').value    = '';
+      document.getElementById('f-date').value     = '';
+      document.getElementById('f-venue').value    = '';
+      document.getElementById('f-tickets').value  = '';
+      document.getElementById('f-soldout').checked = false;
       document.getElementById('output-section').classList.remove('visible');
       setAddStatus('');
     }
@@ -795,6 +850,12 @@
             <label>ticket url <span style="opacity:.5;letter-spacing:1px">(optional)</span></label>
             <input type="url"   class="m-tickets" value="${esc(show.tickets)}">
           </div>
+          <div class="field">
+            <label class="check-label">
+              <input type="checkbox" class="m-soldout" ${show.soldOut ? 'checked' : ''}>
+              <span>sold out</span>
+            </label>
+          </div>
         </div>
       `).join('');
     }
@@ -836,6 +897,7 @@
           date:    card.querySelector('.m-date').value,
           venue:   card.querySelector('.m-venue').value.trim(),
           tickets: card.querySelector('.m-tickets').value.trim(),
+          soldOut: card.querySelector('.m-soldout').checked,
         })).filter(s => s.act && s.date && s.venue);
 
         const newInner  = buildPanelHtml(shows);
