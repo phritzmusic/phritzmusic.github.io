@@ -31,15 +31,12 @@ if (siteHeader && hero) {
   setOnHero(true); // start on-hero
 }
 
-// ── Scroll-based fades: scroll-hint + hero logo + on-hero state ─
-const scrollHint  = document.querySelector('.scroll-hint');
+// ── Scroll-based fades: hero logo + on-hero state ─
 const heroLogoEl  = document.getElementById('hero-logo');
 
 function onScroll() {
   const s  = window.scrollY;
   const vh = window.innerHeight;
-  // Scroll hint: gone by ~22% of viewport
-  if (scrollHint) scrollHint.style.opacity = Math.max(0, 1 - s / (vh * 0.22));
   // Hero logo: dissolves by ~40% of viewport (well before main content)
   if (heroLogoEl)  heroLogoEl.style.opacity  = Math.max(0, 1 - s / (vh * 0.40));
   // Header/notch: flip off-hero the moment the hero's bottom edge
