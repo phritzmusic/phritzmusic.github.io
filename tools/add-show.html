@@ -433,9 +433,58 @@
     }
     .btn-save:not(:disabled):hover { background: #333; border-color: #333; }
     .btn-save.success { background: #3a7a55; border-color: #3a7a55; }
+
+    /* ── Auth overlay ─────────────────────────────────────────── */
+    .auth-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 24px;
+    }
+    .auth-box {
+      width: 100%;
+      max-width: 320px;
+    }
+    .auth-title {
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: lowercase;
+      color: var(--muted);
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    .auth-error {
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: lowercase;
+      color: #a04040;
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
+
+  <!-- ── Auth overlay ──────────────────────────────────────── -->
+  <div class="auth-overlay" id="auth-overlay">
+    <div class="auth-box">
+      <p class="auth-title">phritz · shows</p>
+      <div class="field">
+        <label for="auth-pw">password</label>
+        <input type="password" id="auth-pw" autocomplete="current-password"
+               onkeydown="if(event.key==='Enter') checkAuth()">
+      </div>
+      <p class="auth-error" id="auth-error" style="display:none">incorrect password</p>
+      <div class="btn-group" style="margin-top:28px">
+        <button class="btn-primary" onclick="checkAuth()">enter →</button>
+      </div>
+    </div>
+  </div>
 
   <h1>phritz · shows</h1>
 
@@ -613,6 +662,37 @@ PAS TASTA 「秋の大感謝祭」
   </div>
 
   <script>
+    /* ══════════════════════════════════════════════════════════
+       AUTH
+       ══════════════════════════════════════════════════════════ */
+    const _AK  = 'cGhyaXR6LWxpdmVhZG1pbg=='; // btoa of access phrase
+    const _ASK = 'phritz_tool_auth';
+
+    function checkAuth() {
+      const val = document.getElementById('auth-pw').value;
+      if (btoa(val) === _AK) {
+        try { localStorage.setItem(_ASK, _AK); } catch {}
+        document.getElementById('auth-overlay').remove();
+        document.getElementById('f-token').focus && updateTokenDot();
+      } else {
+        document.getElementById('auth-error').style.display = '';
+        document.getElementById('auth-pw').value = '';
+        document.getElementById('auth-pw').focus();
+      }
+    }
+
+    // Check saved auth on load
+    (function () {
+      try {
+        if (localStorage.getItem(_ASK) === _AK) {
+          document.getElementById('auth-overlay').remove();
+          return;
+        }
+      } catch {}
+      // Overlay stays — focus the password field
+      document.getElementById('auth-pw').focus();
+    })();
+
     /* ══════════════════════════════════════════════════════════
        CONFIG
        ══════════════════════════════════════════════════════════ */
